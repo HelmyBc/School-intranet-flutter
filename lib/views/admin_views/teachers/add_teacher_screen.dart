@@ -3,9 +3,6 @@ import 'package:enetcom_app/models/teacher.dart';
 import 'package:enetcom_app/services/http_service.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
 class AddTeacherScreen extends StatefulWidget {
   AddTeacherScreen({Key? key}) : super(key: key);
 
@@ -220,24 +217,6 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
               ],
             )),
       ),
-      // body: const CustomScrollView(
-      //   physics: ClampingScrollPhysics(),
-      //   slivers: <Widget>[
-      //     SliverPadding(
-      //       padding: EdgeInsets.only(left: 20.0),
-      //       sliver: SliverToBoxAdapter(
-      //         child: Text(
-      //           'Add a new student',
-      //           style: TextStyle(
-      //             color: Colors.white,
-      //             fontSize: 20.0,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

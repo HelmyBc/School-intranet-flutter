@@ -1,19 +1,20 @@
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/controllers/student_controller.dart';
-import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/views/admin_views/students/add_student_screen.dart';
-import 'package:enetcom_app/views/admin_views/widgets/student_card.dart';
+import 'package:enetcom_app/controllers/department_controller.dart';
+import 'package:enetcom_app/models/department.dart';
+import 'package:enetcom_app/views/admin_views/department/add_department_screen.dart';
+import 'package:enetcom_app/views/admin_views/widgets/department_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StudentDashboard extends StatelessWidget {
-  final StudentController studentController = Get.put(StudentController());
+class DepartmentDashboard extends StatelessWidget {
+  final DepartmentController departmentController =
+      Get.put(DepartmentController());
 
-  StudentDashboard({Key? key}) : super(key: key);
+  DepartmentDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return studentController.studentList == null
+    return departmentController.departmentList == null
         ? Scaffold(
             backgroundColor: Palette.adminBg,
             appBar: AppBar(
@@ -25,7 +26,7 @@ class StudentDashboard extends StatelessWidget {
                   icon: const Icon(Icons.refresh),
                   iconSize: 28.0,
                   onPressed: () {
-                    studentController.fetchStudents();
+                    departmentController.fetchDepartments();
                   },
                 ),
                 IconButton(
@@ -35,7 +36,7 @@ class StudentDashboard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddStudentScreen()),
+                          builder: (context) => AddDepartmentScreen()),
                     );
                   },
                 ),
@@ -56,7 +57,7 @@ class StudentDashboard extends StatelessWidget {
                   icon: const Icon(Icons.refresh),
                   iconSize: 28.0,
                   onPressed: () {
-                    studentController.fetchStudents();
+                    departmentController.fetchDepartments();
                   },
                 ),
                 IconButton(
@@ -66,7 +67,7 @@ class StudentDashboard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddStudentScreen()),
+                          builder: (context) => AddDepartmentScreen()),
                     );
                   },
                 ),
@@ -81,7 +82,7 @@ class StudentDashboard extends StatelessWidget {
                   sliver: SliverToBoxAdapter(
                     child: Obx(
                       () => Text(
-                        'Students (${studentController.studentList.length})',
+                        'Students (${departmentController.departmentList.length})',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
@@ -98,11 +99,11 @@ class StudentDashboard extends StatelessWidget {
                   () => SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final Student student =
-                            studentController.studentList[index];
-                        return StudentCard(student: student);
+                        final Department department =
+                            departmentController.departmentList[index];
+                        return DepartmentCard(department: department);
                       },
-                      childCount: studentController.studentList.length,
+                      childCount: departmentController.departmentList.length,
                     ),
                   ),
                 ),

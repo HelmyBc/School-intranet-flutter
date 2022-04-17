@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           slivers: [
             SliverAppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: Colors.white,
+              backgroundColor: Palette.scaffold,
               // ignore: prefer_const_constructors
               title: Image(
                   image: const ExactAssetImage("assets/images/enetcom_logo.png"),

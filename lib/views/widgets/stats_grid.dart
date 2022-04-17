@@ -1,5 +1,7 @@
+import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
+import 'package:enetcom_app/views/admin_views/department/department_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/students/student_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/teachers/teacher_dashboard.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ import 'package:get/get.dart';
 class StatsGrid extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
   final StudentController studentController = Get.put(StudentController());
+  final DepartmentController departmentController =
+      Get.put(DepartmentController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -109,7 +113,49 @@ class StatsGrid extends StatelessWidget {
           Flexible(
             child: Row(
               children: <Widget>[
-                _buildStatCard('Departments', '4', Colors.green),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DepartmentDashboard()),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Text(
+                            'Departments',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Obx(
+                            () => Text(
+                              '${departmentController.departmentList.length}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 _buildStatCard('Classes', '25', Colors.lightBlue),
                 _buildStatCard('Subjects', '68', Colors.purple),
               ],
