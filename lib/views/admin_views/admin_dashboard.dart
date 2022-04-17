@@ -18,14 +18,17 @@ class AdminDashboard extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Palette.adminBg,
+      backgroundColor: Palette.scaffold,
       appBar: AppBar(
-        backgroundColor: const Color(0x99003153),
+        backgroundColor: Palette.scaffold,
         elevation: 0.0,
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.black87,
+            ),
             iconSize: 28.0,
             onPressed: () {
               studentController.fetchStudents();
@@ -62,7 +65,7 @@ SliverPadding _buildHeader() {
       child: Text(
         'Admin Dashboard',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black87,
           fontSize: 25.0,
           fontWeight: FontWeight.bold,
         ),
@@ -79,7 +82,7 @@ SliverToBoxAdapter _buildRegionTabBar() {
         margin: const EdgeInsets.symmetric(horizontal: 20.0),
         height: 50.0,
         decoration: BoxDecoration(
-          color: Colors.white24,
+          color: Colors.grey[400],
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: TabBar(
@@ -90,7 +93,7 @@ SliverToBoxAdapter _buildRegionTabBar() {
           ),
           labelStyle: Styles.tabTextStyle,
           labelColor: Colors.black,
-          unselectedLabelColor: Colors.black,
+          unselectedLabelColor: Colors.white,
           tabs: const [
             Text('Enities'),
             Text('Features'),

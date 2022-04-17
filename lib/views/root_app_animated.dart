@@ -1,3 +1,4 @@
+import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/views/admin_views/admin_dashboard.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/home_screen.dart';
@@ -25,6 +26,7 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Palette.scaffold,
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(
             horizontal: displayWidth * .05, vertical: 10.0),

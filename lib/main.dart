@@ -1,9 +1,18 @@
 
+import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Palette.scaffold, // navigation bar color
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+    // Color(0xFFF3F5F7), // status bar color
+  ));
   runApp(const MyApp());
 }
 
