@@ -13,117 +13,108 @@ class StudentDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return studentController.studentList == null
-        ? Scaffold(
-            backgroundColor: Palette.adminBg,
-            appBar: AppBar(
-              backgroundColor: const Color(0x99003153),
-              elevation: 0.0,
-              automaticallyImplyLeading: true,
-              actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.refresh),
-                  iconSize: 28.0,
-                  onPressed: () {
-                    studentController.fetchStudents();
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add),
-                  iconSize: 28.0,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddStudentScreen()),
-                    );
-                  },
-                ),
-              ],
-            ),
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-        : Scaffold(
-            backgroundColor: Palette.adminBg,
-            appBar: AppBar(
-              backgroundColor: const Color(0x99003153),
-              elevation: 0.0,
-              automaticallyImplyLeading: true,
-              actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.refresh),
-                  iconSize: 28.0,
-                  onPressed: () {
-                    studentController.fetchStudents();
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add),
-                  iconSize: 28.0,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddStudentScreen()),
-                    );
-                  },
-                ),
-              ],
-            ),
-            body: CustomScrollView(
-              physics: const ClampingScrollPhysics(),
-              slivers: <Widget>[
-                _buildHeader(),
-                SliverPadding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  sliver: SliverToBoxAdapter(
-                    child: Obx(
-                      () => Text(
-                        'Students (${studentController.studentList.length})',
-                        style: const TextStyle(
-                          color: Colors.white,
+    return Scaffold(
+      backgroundColor: Palette.scaffold,
+      appBar: AppBar(
+        brightness: Brightness.light,
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: true,
+        title: const Text(
+          'Admin Dashboard',
+          style: TextStyle(
+            fontSize: 22.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            iconSize: 28.0,
+            onPressed: () {
+              studentController.fetchStudents();
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            iconSize: 28.0,
+            
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddStudentScreen()),
+              );
+            },
+          ),
+        ],
+      ),
+      body: RefreshIndicator(
+        onRefresh: () async => loadData(),
+        child: Column(
+          children: [
+            Obx(
+              () {
+                if (studentController.isLoading.value) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+                      child: const Text(
+                        'Students (N/A)',
+                        style: TextStyle(
+                          color: Colors.black,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ),
-                ),
-                const SliverPadding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                ),
-                Obx(
-                  () => SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
+                  );
+                } else {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+                      child: Text(
+                        'Students (${studentController.studentList.length})',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: Obx(
+                () {
+                  if (studentController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return ListView.builder(
+                      itemBuilder: (BuildContext context, int index) {
                         final Student student =
                             studentController.studentList[index];
                         return StudentCard(student: student);
                       },
-                      childCount: studentController.studentList.length,
-                    ),
-                  ),
-                ),
-              ],
+                      itemCount: studentController.studentList.length,
+                    );
+                  }
+                },
+              ),
             ),
-          );
-  }
-
-  SliverPadding _buildHeader() {
-    return const SliverPadding(
-      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      sliver: SliverToBoxAdapter(
-        child: Text(
-          'Admin Dashboard',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-          ),
+          ],
         ),
       ),
     );
+  }
+
+  Future loadData() async {
+    await Future.delayed(const Duration(milliseconds: 600));
+    studentController.fetchStudents();
   }
 }

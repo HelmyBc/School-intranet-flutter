@@ -30,7 +30,7 @@ class StudentScreen extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: RefreshIndicator(
-        onRefresh: () async => studentController.refresh(),
+        onRefresh: () async => loadData(),
         child: Column(
           children: [
             const SizedBox(height: 16),
@@ -61,5 +61,8 @@ class StudentScreen extends StatelessWidget {
     );
   }
 
-  
+  Future loadData() async {
+    await Future.delayed(const Duration(milliseconds: 600));
+    studentController.fetchStudents();
+  }
 }

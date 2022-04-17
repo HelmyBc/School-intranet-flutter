@@ -20,8 +20,10 @@ class StudentCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
         gradient: const LinearGradient(
           colors: [
-            Color.fromRGBO(215, 227, 252, 1),
+            Color.fromRGBO(255, 255, 255, 1),
             Color.fromRGBO(171, 196, 255, 0.5),
+            // Color.fromRGBO(215, 227, 252, 1),
+            // Color.fromRGBO(171, 196, 255, 0.5),
           ],
         ),
         color: Colors.white,
