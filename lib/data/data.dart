@@ -1,3 +1,4 @@
+import 'package:enetcom_app/models/feature.dart';
 import 'package:enetcom_app/models/models.dart';
 
 User currentUser = onlineUsers[0];
@@ -89,6 +90,32 @@ final List<User> onlineUsers = [
       university: 'enetcom'),
 ];
 
+final List<Feature> features = [
+   const Feature(
+    title: 'Cisco voucher',
+    description:
+        'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+    imageUrl: 'assets/images/cisco.jpg',
+  ),
+  const Feature(
+    title: 'Huawei voucher',
+    description:
+        'We want to say congratulations for the students selected to win a Huawei certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+    imageUrl: 'assets/images/huawei.png',
+  ),
+  const Feature(
+    title: 'Election',
+    description:
+        'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+    imageUrl: 'assets/images/elections.jpeg',
+  ),
+  const Feature(
+    title: 'OFFICE 365',
+    description:
+        'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+    imageUrl: 'assets/images/office.png',
+  ),
+];
 final List<Post> posts = [
   Post(
     user: currentUser,
@@ -160,4 +187,3 @@ List categories = [
   {"name": "absence", "icon": "assets/category/absence.svg"},
   {"name": "Finance", "icon": "assets/category/finance.svg"},
 ];
-

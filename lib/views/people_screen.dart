@@ -1,13 +1,9 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
-import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/data/data.dart';
-import 'package:enetcom_app/models/models.dart';
 import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/views/root_app.dart';
-import 'package:enetcom_app/views/screens.dart';
+import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:enetcom_app/views/widgets/student_card_container.dart';
-import 'package:enetcom_app/views/widgets/student_tile.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +29,7 @@ class PeopleScreen extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const RootApp(),
+                    builder: (_) => const RootAppAnimated(),
                   ),
                 ),
               ),

@@ -26,7 +26,8 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: displayWidth * .05,vertical: 10.0),
+        margin: EdgeInsets.symmetric(
+            horizontal: displayWidth * .05, vertical: 10.0),
         height: displayWidth * .155,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -88,8 +89,9 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
-                            width:
-                                index == currentIndex ? displayWidth * .13 : 0,
+                            width: index == currentIndex
+                                ? displayWidth * .13
+                                : 0,
                           ),
                           AnimatedOpacity(
                             opacity: index == currentIndex ? 1 : 0,
@@ -113,8 +115,9 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
-                            width:
-                                index == currentIndex ? displayWidth * .03 : 20,
+                            width: index == currentIndex
+                                ? displayWidth * .03
+                                : 20,
                           ),
                           Icon(
                             listOfIcons[index],

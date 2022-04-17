@@ -1,6 +1,4 @@
 
-import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/views/root_app.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';

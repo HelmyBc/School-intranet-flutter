@@ -2,7 +2,7 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/models.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
-import 'package:enetcom_app/views/root_app.dart';
+import 'package:enetcom_app/views/root_app_animated.dart';
 
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,7 +43,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => RootApp(),
+                builder: (_) => RootAppAnimated(),
               ),
             ),
           ),
@@ -54,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           CircleButton(
             icon: Icons.done,
             iconColor: Palette.mainBlack,
-            toScreen: const RootApp(),
+            toScreen: const RootAppAnimated(),
           )
         ],
       ),
