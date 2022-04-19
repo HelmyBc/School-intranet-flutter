@@ -17,14 +17,14 @@ class AddStudentScreen extends StatefulWidget {
 
 class _AddStudentScreenState extends State<AddStudentScreen> {
   final minimumPadding = 5.0;
-  
+
   final StudentController studentController = Get.put(StudentController());
 
   TextEditingController nameController = TextEditingController();
   TextEditingController cinController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController imageController = TextEditingController();
+  //TextEditingController imageController = TextEditingController();
 
   Student? student;
 
@@ -34,36 +34,40 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
     cinController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    imageController.dispose();
+    //imageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
-    return Scaffold(
-      backgroundColor: Palette.scaffold,
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        title: const Text(
-          'Admin Dashboard',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Palette.scaffold,
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          title: const Text(
+            'Admin Dashboard',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          backgroundColor: Palette.adminBg,
+          elevation: 0.0,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.done),
+            ),
+          ],
         ),
-        backgroundColor: Palette.adminBg,
-        elevation: 0.0,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.done),
-          ),
-        ],
-      ),
-      body: Form(
-        child: Padding(
+        body: Form(
+          child: Padding(
             padding: EdgeInsets.all(minimumPadding * 2),
             child: ListView(
               children: <Widget>[
@@ -162,26 +166,26 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         )),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: minimumPadding),
-                  child: TextFormField(
-                    keyboardType: TextInputType.url,
-                    style: textStyle,
-                    controller: imageController,
-                    validator: (value) {
-                      if (value == null) {
-                        return "Please enter your photo URL";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Photo URL',
-                        hintText: 'Enter your photo URL',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        )),
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                //   child: TextFormField(
+                //     keyboardType: TextInputType.url,
+                //     style: textStyle,
+                //     controller: imageController,
+                //     validator: (value) {
+                //       if (value == null) {
+                //         return "Please enter your photo URL";
+                //       }
+                //       return null;
+                //     },
+                //     decoration: InputDecoration(
+                //         labelText: 'Photo URL',
+                //         hintText: 'Enter your photo URL',
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5.0),
+                //         )),
+                //   ),
+                // ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                   child: const Text('Submit'),
@@ -190,14 +194,16 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                     int cin = int.parse(cinController.text);
                     String email = emailController.text;
                     int phone = int.parse(phoneController.text);
-                    String imageUrl = imageController.text;
+                    String imageUrl =
+                        "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
+                    // String imageUrl = imageController.text;
                     Student students = await HttpService.addStudent(
                         name, email, cin, phone, imageUrl);
                     nameController.text = '';
                     cinController.text = '';
                     emailController.text = '';
                     phoneController.text = '';
-                    imageController.text = '';
+                    //imageController.text = '';
                     setState(() {
                       student = students;
                       Navigator.pop(context);
@@ -206,26 +212,10 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   },
                 ),
               ],
-            )),
+            ),
+          ),
+        ),
       ),
-      // body: const CustomScrollView(
-      //   physics: ClampingScrollPhysics(),
-      //   slivers: <Widget>[
-      //     SliverPadding(
-      //       padding: EdgeInsets.only(left: 20.0),
-      //       sliver: SliverToBoxAdapter(
-      //         child: Text(
-      //           'Add a new student',
-      //           style: TextStyle(
-      //             color: Colors.white,
-      //             fontSize: 20.0,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

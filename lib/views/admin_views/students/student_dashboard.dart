@@ -27,7 +27,6 @@ class StudentDashboard extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -39,7 +38,6 @@ class StudentDashboard extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add),
             iconSize: 28.0,
-            
             onPressed: () {
               Navigator.push(
                 context,
@@ -53,41 +51,22 @@ class StudentDashboard extends StatelessWidget {
         onRefresh: () async => loadData(),
         child: Column(
           children: [
-            Obx(
-              () {
-                if (studentController.isLoading.value) {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                      child: const Text(
-                        'Students (N/A)',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+            Obx(() {
+              return Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+                  child: Text(
+                    'Students (${studentController.studentList.length})',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                  );
-                } else {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                      child: Text(
-                        'Students (${studentController.studentList.length})',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
+                  ),
+                ),
+              );
+            }),
             const SizedBox(height: 10),
             Expanded(
               child: Obx(

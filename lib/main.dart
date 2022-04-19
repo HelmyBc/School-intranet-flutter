@@ -1,4 +1,3 @@
-
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';

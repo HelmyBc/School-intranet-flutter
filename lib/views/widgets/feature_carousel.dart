@@ -14,20 +14,6 @@ class FeatureCarousel extends StatefulWidget {
 class _FeatureCarouselState extends State<FeatureCarousel> {
   int _current = 0;
 
-  // final List<String> images = [
-  //   'assets/images/cisco.jpg',
-  //   'assets/images/huawei.png',
-  //   'assets/images/elections.jpeg',
-  //   'assets/images/office.png',
-  // ];
-
-  // final List<String> titles = [
-  //   'Cisco voucher',
-  //   'Huawei voucher',
-  //   'Election',
-  //   'OFFICE 365',
-  // ];
-
   List<Widget> generateImagesTiles() {
     return features
         .map(
@@ -129,10 +115,10 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                     children: [
                       Image.asset(feature.imageUrl),
                       Positioned(
-                        top: 25,
+                        top: 5,
                         right: -50,
                         child: Container(
-                          margin: EdgeInsets.only(right: 40.0),
+                          margin: const EdgeInsets.only(right: 40.0),
                           child: MaterialButton(
                             shape: const CircleBorder(),
                             color: Colors.black54.withOpacity(0.4),
@@ -151,7 +137,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Container(
-                          padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                          padding: const EdgeInsets.only(top: 8.0, left: 10.0),
                           child: Text(
                             feature.title,
                             style: TextStyle(

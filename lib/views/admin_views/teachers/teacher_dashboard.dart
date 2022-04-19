@@ -54,37 +54,20 @@ class TeacherDashboard extends StatelessWidget {
           children: [
             Obx(
               () {
-                if (teacherController.isLoading.value) {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                      child: const Text(
-                        'Teachers (N/A)',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+                    child: Text(
+                      'Teachers (${teacherController.teacherList.length})',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  );
-                } else {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                      child: Text(
-                        'Teachers (${teacherController.teacherList.length})',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  );
-                }
+                  ),
+                );
               },
             ),
             const SizedBox(height: 10),
