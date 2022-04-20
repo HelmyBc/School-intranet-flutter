@@ -1,11 +1,9 @@
-import 'package:enetcom_app/models/student.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets.dart';
-
 class ProfileInfoTile extends StatelessWidget {
+  const ProfileInfoTile({Key? key}) : super(key: key);
+
   // final Student student;
   // const ProfileInfoTile({required this.student});
 
@@ -66,7 +64,6 @@ class ProfileInfoTile extends StatelessWidget {
               ],
             ),
             const Divider(),
-            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [

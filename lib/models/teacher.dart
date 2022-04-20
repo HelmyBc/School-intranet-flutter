@@ -8,7 +8,7 @@ String teacherToJson(List<Teacher> data) =>
 
 class Teacher {
   Teacher({
-    required this.teacherId,
+    required this.id,
     required this.cin,
     required this.name,
     required this.email,
@@ -17,7 +17,7 @@ class Teacher {
     required this.chefDep,
   });
 
-  int teacherId;
+  int id;
   int cin;
   String name;
   String email;
@@ -26,7 +26,7 @@ class Teacher {
   bool chefDep;
 
   factory Teacher.fromJson(Map<String, dynamic> json) => Teacher(
-        teacherId: json["teacherId"],
+        id: json["id"],
         cin: json["cin"],
         name: json["name"],
         email: json["email"],
@@ -36,7 +36,7 @@ class Teacher {
       );
 
   Map<String, dynamic> toJson() => {
-        "teacherId": teacherId,
+        "id": id,
         "cin": cin,
         "name": name,
         "email": email,

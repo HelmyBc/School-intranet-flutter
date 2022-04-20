@@ -1,36 +1,41 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
+import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/models/student.dart';
+import 'package:enetcom_app/services/http_post_service.dart';
 import 'package:enetcom_app/services/http_student_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddStudentScreen extends StatefulWidget {
-  const AddStudentScreen({Key? key}) : super(key: key);
+class CreatePostScreen extends StatefulWidget {
+  const CreatePostScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddStudentScreen> createState() => _AddStudentScreenState();
+  State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
-class _AddStudentScreenState extends State<AddStudentScreen> {
+class _CreatePostScreenState extends State<CreatePostScreen> {
   final minimumPadding = 5.0;
 
-  final StudentController studentController = Get.put(StudentController());
+  final PostController postController = Get.put(PostController());
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController cinController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController uidController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController profImageController = TextEditingController();
+  TextEditingController imageUrlController = TextEditingController();
+
   //TextEditingController imageController = TextEditingController();
 
-  Student? student;
+  Post? post;
 
   @override
   void dispose() {
-    nameController.dispose();
-    cinController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
+    descriptionController.dispose();
+    uidController.dispose();
+    usernameController.dispose();
+    profImageController.dispose();
     //imageController.dispose();
     super.dispose();
   }
@@ -47,7 +52,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: true,
           title: const Text(
-            'Admin Dashboard',
+            'Create post',
             style: TextStyle(
               color: Colors.white,
               fontSize: 28.0,
@@ -73,7 +78,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   padding: EdgeInsets.only(
                       top: minimumPadding, bottom: minimumPadding),
                   child: const Text(
-                    "Add a new student",
+                    "Add a new post",
                     style: TextStyle(
                       color: Palette.adminBg,
                       fontWeight: FontWeight.bold,
@@ -86,7 +91,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.name,
                     style: textStyle,
-                    controller: nameController,
+                    controller: descriptionController,
                     validator: (value) {
                       if (value == null) {
                         return "Please enter your full name";
@@ -94,8 +99,8 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      labelText: 'Full name',
-                      hintText: 'Enter your full name',
+                      labelText: 'description',
+                      hintText: 'description',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -107,7 +112,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     style: textStyle,
-                    controller: cinController,
+                    controller: uidController,
                     validator: (value) {
                       if (value == null) {
                         return "Please enter your CIN";
@@ -115,8 +120,8 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      labelText: 'CIN',
-                      hintText: 'Enter your CIN',
+                      labelText: 'UID',
+                      hintText: 'Enter your UID',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -126,18 +131,18 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: minimumPadding),
                   child: TextFormField(
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.name,
                     style: textStyle,
-                    controller: emailController,
+                    controller: usernameController,
                     validator: (value) {
                       if (value == null) {
-                        return "Please enter your email";
+                        return "Please enter your username";
                       }
                       return null;
                     },
                     decoration: InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'Enter your email',
+                        labelText: 'username',
+                        hintText: 'Enter your username',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         )),
@@ -148,7 +153,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.phone,
                     style: textStyle,
-                    controller: phoneController,
+                    controller: profImageController,
                     validator: (value) {
                       if (value == null) {
                         return "Please enter your phone number";
@@ -156,8 +161,28 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                       return null;
                     },
                     decoration: InputDecoration(
-                        labelText: 'Phone number',
-                        hintText: 'Enter your first phone number',
+                        labelText: 'profImage',
+                        hintText: 'profImage',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                  child: TextFormField(
+                    keyboardType: TextInputType.phone,
+                    style: textStyle,
+                    controller: imageUrlController,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please enter your phone number";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'imageUrl',
+                        hintText: 'imageUrl',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         )),
@@ -187,32 +212,29 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                   child: const Text('Submit'),
                   onPressed: () async {
-                    String name = nameController.text;
-                    int cin = int.parse(cinController.text);
-                    String email = emailController.text;
-                    int phone = int.parse(phoneController.text);
-                    String classe = "2GII2";
+                    String description = descriptionController.text;
+                    int uid = int.parse(uidController.text);
+                    String username = usernameController.text;
+                    String profImage = profImageController.text;
+                    String imageUrl = imageUrlController.text;
 
-                    String imageUrl =
-                        "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
-                    // String imageUrl = imageController.text;
-                    Student students = await HttpStudentService.addStudent(
-                      name,
-                      email,
-                      cin,
-                      phone,
+                    Post posts = await HttpPostService.addPost(
+                      description,
+                      username,
+                      uid,
                       imageUrl,
-                      classe,
+                      profImage,
                     );
-                    nameController.text = '';
-                    cinController.text = '';
-                    emailController.text = '';
-                    phoneController.text = '';
+                    descriptionController.text = '';
+                    uidController.text = '';
+                    usernameController.text = '';
+                    profImageController.text = '';
+                    imageUrlController.text = '';
                     //imageController.text = '';
                     setState(() {
-                      student = students;
+                      post = posts;
                       Navigator.pop(context);
-                      studentController.fetchStudents();
+                      postController.fetchPosts();
                     });
                   },
                 ),

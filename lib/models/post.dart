@@ -1,46 +1,49 @@
-// class Post {
-//   final String description;
-//   final String uid;
-//   final String username;
-//   final likes;
-//   final String postId;
-//   final DateTime datePublished;
-//   final String postUrl;
-//   final String profImage;
+import 'dart:convert';
 
-//   const Post({
-//     required this.description,
-//     required this.uid,
-//     required this.username,
-//     required this.likes,
-//     required this.postId,
-//     required this.datePublished,
-//     required this.postUrl,
-//     required this.profImage,
-//   });
+List<Post> postFromJson(String str) =>
+    List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
 
-//   // static Post fromSnap(DocumentSnapshot snap) {
-//   //   var snapshot = snap.data() as Map<String, dynamic>;
+String postToJson(List<Post> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-//   //   return Post(
-//   //       description: snapshot["description"],
-//   //       uid: snapshot["uid"],
-//   //       likes: snapshot["likes"],
-//   //       postId: snapshot["postId"],
-//   //       datePublished: snapshot["datePublished"],
-//   //       username: snapshot["username"],
-//   //       postUrl: snapshot['postUrl'],
-//   //       profImage: snapshot['profImage']);
-//   // }
+class Post {
+  final String description;
+  final int uid;
+  final String username;
+  //final likes;
+  final int id;
+  final String createdTime;
+  final String imageUrl;
+  final String profImage;
 
-//   Map<String, dynamic> toJson() => {
-//         "description": description,
-//         "uid": uid,
-//         "likes": likes,
-//         "username": username,
-//         "postId": postId,
-//         "datePublished": datePublished,
-//         'postUrl': postUrl,
-//         'profImage': profImage,
-//       };
-// }
+  const Post({
+    required this.description,
+    required this.uid,
+    required this.username,
+    //required this.likes,
+    required this.id,
+    required this.createdTime,
+    required this.imageUrl,
+    required this.profImage,
+  });
+
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
+        id: json["id"],
+        uid: json["uid"],
+        description: json["description"],
+        imageUrl: json["imageUrl"],
+        username: json["username"],
+        profImage: json["profImage"],
+        createdTime: json["createdTime"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "uid": uid,
+        "description": description,
+        "imageUrl": imageUrl,
+        "username": username,
+        "profImage": profImage,
+        "createdTime": createdTime,
+      };
+}

@@ -1,5 +1,5 @@
 import 'package:enetcom_app/models/teacher.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:get/state_manager.dart';
 
 class TeacherController extends GetxController {
@@ -17,7 +17,7 @@ class TeacherController extends GetxController {
   void fetchTeachers() async {
     try {
       isLoading(true);
-      var teachers = await HttpService.fetchTeachers();
+      var teachers = await HttpTeacherService.fetchTeachers();
       if (teachers != null) {
         teacherList.value = teachers;
       }

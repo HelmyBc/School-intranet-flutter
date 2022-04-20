@@ -1,5 +1,5 @@
 import 'package:enetcom_app/models/department.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_department_service.dart';
 import 'package:get/state_manager.dart';
 
 class DepartmentController extends GetxController {
@@ -17,7 +17,7 @@ class DepartmentController extends GetxController {
   void fetchDepartments() async {
     try {
       isLoading(true);
-      var departments = await HttpService.fetchDepartments();
+      var departments = await HttpDepartmentService.fetchDepartments();
       if (departments != null) {
         departmentList.value = departments;
       }

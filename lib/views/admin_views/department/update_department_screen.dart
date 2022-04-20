@@ -1,9 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
-import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/models/department.dart';
-import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_department_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,7 +87,7 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: nameController..text = "${department.name}",
+                      controller: nameController..text = department.name,
                       validator: (value) {
                         if (value == null) {
                           return "Please enter the department name";
@@ -111,7 +109,7 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                       keyboardType: TextInputType.number,
                       style: textStyle,
                       controller: shortNameController
-                        ..text = "${department.shortName}",
+                        ..text = department.shortName,
                       validator: (value) {
                         if (value == null) {
                           return "Please enter department short name";
@@ -138,8 +136,9 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                         id: department.id,
                         name: name,
                         shortName: shortName,
+                        
                       );
-                      await HttpService.updateDepartment(
+                      await HttpDepartmentService.updateDepartment(
                           department.id, updatedDepartment);
                       nameController.text = '';
                       shortNameController.text = '';

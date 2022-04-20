@@ -1,6 +1,6 @@
 import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_student_service.dart';
 import 'package:enetcom_app/views/admin_views/students/update_student_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +103,7 @@ class StudentCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              HttpService.deleteStudent(student.id);
+              HttpStudentService.deleteStudent(student.id);
               studentController.fetchStudents();
               const snackBar =
                   SnackBar(content: Text("Student removed succefully!"));

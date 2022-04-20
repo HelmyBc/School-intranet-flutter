@@ -1,16 +1,19 @@
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/controllers/teacher_controller.dart';
-import 'package:enetcom_app/models/teacher.dart';
-import 'package:enetcom_app/views/admin_views/teachers/add_teacher_screen.dart';
-import 'package:enetcom_app/views/admin_views/widgets/teacher_card.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/controllers/post_controller.dart';
+import 'package:enetcom_app/controllers/student_controller.dart';
+import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/models/student.dart';
+import 'package:enetcom_app/views/admin_views/posts/create_post_screen.dart';
+import 'package:enetcom_app/views/admin_views/students/add_student_screen.dart';
+import 'package:enetcom_app/views/admin_views/widgets/student_card.dart';
+import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TeacherDashboard extends StatelessWidget {
-  final TeacherController teacherController = Get.put(TeacherController());
+class PostDashboard extends StatelessWidget {
+  final PostController postController = Get.put(PostController());
 
-  TeacherDashboard({Key? key}) : super(key: key);
+  PostDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class TeacherDashboard extends StatelessWidget {
             icon: const Icon(Icons.refresh),
             iconSize: 28.0,
             onPressed: () {
-              teacherController.fetchTeachers();
+              postController.fetchPosts();
             },
           ),
           IconButton(
@@ -42,7 +45,8 @@ class TeacherDashboard extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddTeacherScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const CreatePostScreen()),
               );
             },
           ),
@@ -52,38 +56,35 @@ class TeacherDashboard extends StatelessWidget {
         onRefresh: () async => loadData(),
         child: Column(
           children: [
-            Obx(
-              () {
-                return Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
-                    child: Text(
-                      'Teachers (${teacherController.teacherList.length})',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+            Obx(() {
+              return Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 0.0),
+                  child: Text(
+                    'Posts (${postController.postList.length})',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            }),
             const SizedBox(height: 10),
             Expanded(
               child: Obx(
                 () {
-                  if (teacherController.isLoading.value) {
+                  if (postController.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     return ListView.builder(
                       itemBuilder: (BuildContext context, int index) {
-                        final Teacher teacher =
-                            teacherController.teacherList[index];
-                        return TeacherCard(teacher: teacher);
+                        final Post post = postController.postList[index];
+                        return NewPostContainer(post: post);
                       },
-                      itemCount: teacherController.teacherList.length,
+                      itemCount: postController.postList.length,
                     );
                   }
                 },
@@ -97,6 +98,6 @@ class TeacherDashboard extends StatelessWidget {
 
   Future loadData() async {
     await Future.delayed(const Duration(milliseconds: 600));
-    teacherController.fetchTeachers();
+    postController.fetchPosts();
   }
 }

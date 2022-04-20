@@ -9,8 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'screens.dart';
-
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
 
@@ -43,7 +41,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => RootAppAnimated(),
+                builder: (_) => const RootAppAnimated(),
               ),
             ),
           ),
@@ -59,8 +57,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ],
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32.0),
-        physics: BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        physics: const BouncingScrollPhysics(),
         children: [
           ProfileImage(
             imageUrl: user.imageUrl,

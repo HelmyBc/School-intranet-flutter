@@ -13,21 +13,19 @@ class CircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ClipOval(
-        child: Material(
-          color: Colors.transparent, // Button color
-          child: InkWell(
-            splashColor: Colors.grey[200], // Splash color
-            onTap: () => null,
-            child: SizedBox(
-                width: 56,
-                height: 56,
-                child: Icon(
-                  icon,
-                  color: iconColor,
-                )),
-          ),
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent, // Button color
+        child: InkWell(
+          splashColor: Colors.grey[200], // Splash color
+          onTap: () {},
+          child: SizedBox(
+              width: 56,
+              height: 56,
+              child: Icon(
+                icon,
+                color: iconColor,
+              )),
         ),
       ),
     );

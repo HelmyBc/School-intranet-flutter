@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PostContainer extends StatelessWidget {
-  final Post post;
+  final PostModel post;
 
   const PostContainer({
     Key? key,
@@ -19,22 +19,22 @@ class PostContainer extends StatelessWidget {
       showCupertinoModalPopup(
         context: context,
         builder: (BuildContext context) => CupertinoActionSheet(
-          title: Text('Select An Option'),
+          title: const Text('Select An Option'),
           actions: <Widget>[
             CupertinoActionSheetAction(
-              child: Text('One'),
+              child: const Text('One'),
               onPressed: () {
                 Navigator.pop(context, 'One');
               },
             ),
             CupertinoActionSheetAction(
-              child: Text('Two'),
+              child: const Text('Two'),
               onPressed: () {
                 Navigator.pop(context, 'Two');
               },
             ),
             CupertinoActionSheetAction(
-              child: Text('Three'),
+              child: const Text('Three'),
               onPressed: () {
                 Navigator.pop(context, 'Three');
               },
@@ -99,7 +99,7 @@ class PostContainer extends StatelessWidget {
 }
 
 class _PostHeader extends StatelessWidget {
-  final Post post;
+  final PostModel post;
 
   const _PostHeader({
     Key? key,
@@ -144,7 +144,7 @@ class _PostHeader extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.more_horiz),
           // ignore: avoid_print
-          onPressed: () => null,
+          onPressed: () {},
         ),
       ],
     );
@@ -152,7 +152,7 @@ class _PostHeader extends StatelessWidget {
 }
 
 class _PostStats extends StatelessWidget {
-  final Post post;
+  final PostModel post;
 
   const _PostStats({
     Key? key,

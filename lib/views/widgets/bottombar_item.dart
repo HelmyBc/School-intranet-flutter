@@ -33,7 +33,7 @@ class BottomBarItem extends StatelessWidget {
                 color: shadowColor.withOpacity(0.1),
                 spreadRadius: 2,
                 blurRadius: 2,
-                offset: Offset(0, 0), // changes position of shadow
+                offset: const Offset(0, 0), // changes position of shadow
               ),
           ],
         ),

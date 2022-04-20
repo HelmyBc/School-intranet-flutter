@@ -1,10 +1,12 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/teacher.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddTeacherScreen extends StatefulWidget {
-  AddTeacherScreen({Key? key}) : super(key: key);
+  const AddTeacherScreen({Key? key}) : super(key: key);
 
   @override
   State<AddTeacherScreen> createState() => _AddTeacherScreenState();
@@ -13,6 +15,8 @@ class AddTeacherScreen extends StatefulWidget {
 class _AddTeacherScreenState extends State<AddTeacherScreen> {
   final minimumPadding = 5.0;
   bool value = false;
+
+  final TeacherController teacherController = Get.put(TeacherController());
 
   TextEditingController nameController = TextEditingController();
   TextEditingController cinController = TextEditingController();
@@ -53,12 +57,12 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
           ),
           backgroundColor: Palette.adminBg,
           elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.done),
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(Icons.done),
+          //   ),
+          // ],
         ),
         body: Form(
           child: Padding(
@@ -207,7 +211,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                       String imageUrl =
                           "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
                       bool chefDep = value;
-                      Teacher teachers = await HttpService.addTeacher(
+                      Teacher teachers = await HttpTeacherService.addTeacher(
                           name, email, cin, phone, imageUrl, chefDep);
                       nameController.text = '';
                       cinController.text = '';
@@ -217,6 +221,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                       setState(() {
                         teacher = teachers;
                         Navigator.pop(context);
+                        teacherController.fetchTeachers();
                       });
                     },
                   ),

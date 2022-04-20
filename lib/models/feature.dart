@@ -1,5 +1,3 @@
-import 'user_model.dart';
-
 class Feature {
   final String title;
   final String description;

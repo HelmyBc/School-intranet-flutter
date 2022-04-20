@@ -41,7 +41,7 @@ class StudentDashboard extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddStudentScreen()),
+                MaterialPageRoute(builder: (context) => const AddStudentScreen()),
               );
             },
           ),

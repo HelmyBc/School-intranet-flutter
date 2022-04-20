@@ -116,8 +116,8 @@ final List<Feature> features = [
     imageUrl: 'assets/images/office.png',
   ),
 ];
-final List<Post> posts = [
-  Post(
+final List<PostModel> posts = [
+  PostModel(
     user: currentUser,
     caption:
         'Dear Microsoft members, much work is awaiting for you this year, WORK HARD.',
@@ -127,7 +127,7 @@ final List<Post> posts = [
     comments: 184,
     shares: 96,
   ),
-  Post(
+  PostModel(
     user: onlineUsers[5],
     caption:
         'Please enjoy this placeholder text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -137,7 +137,7 @@ final List<Post> posts = [
     comments: 79,
     shares: 18,
   ),
-  Post(
+  PostModel(
     user: onlineUsers[4],
     caption: 'This is a very good boi.',
     timeAgo: '8hr',
@@ -146,7 +146,7 @@ final List<Post> posts = [
     comments: 201,
     shares: 27,
   ),
-  Post(
+  PostModel(
     user: onlineUsers[3],
     caption: 'Adventure 🏔',
     timeAgo: '15hr',
@@ -155,7 +155,7 @@ final List<Post> posts = [
     comments: 183,
     shares: 42,
   ),
-  Post(
+  PostModel(
     user: onlineUsers[0],
     caption:
         'More placeholder text for the soul: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -165,7 +165,7 @@ final List<Post> posts = [
     comments: 37,
     shares: 9,
   ),
-  Post(
+  PostModel(
     user: onlineUsers[9],
     caption: 'A classic.',
     timeAgo: '1d',

@@ -18,7 +18,7 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
   List barItems = [
     HomeScreen(),
     StudentScreen(),
-    CurrentProfileScreen(),
+    const CurrentProfileScreen(),
     AdminDashboard(),
   ];
 

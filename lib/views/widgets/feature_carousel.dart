@@ -5,7 +5,7 @@ import 'package:enetcom_app/models/feature.dart';
 import 'package:flutter/material.dart';
 
 class FeatureCarousel extends StatefulWidget {
-  FeatureCarousel({Key? key}) : super(key: key);
+  const FeatureCarousel({Key? key}) : super(key: key);
 
   @override
   State<FeatureCarousel> createState() => _FeatureCarouselState();
@@ -110,7 +110,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
               children: [
                 ClipRRect(
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20.0)),
+                      const BorderRadius.vertical(top: Radius.circular(20.0)),
                   child: Stack(
                     children: [
                       Image.asset(feature.imageUrl),

@@ -43,7 +43,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => RootAppAnimated(),
+                builder: (_) => const RootAppAnimated(),
               ),
             ),
           ),

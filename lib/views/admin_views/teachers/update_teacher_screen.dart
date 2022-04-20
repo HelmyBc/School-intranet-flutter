@@ -1,13 +1,11 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/teacher.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UpdateTeacherScreen extends StatefulWidget {
-  const UpdateTeacherScreen({Key? key}) : super(key: key);
-
   @override
   State<UpdateTeacherScreen> createState() => _UpdateTeacherScreenState();
 }
@@ -219,16 +217,19 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                       int phone = int.parse(phoneController.text);
                       String imageUrl = imageController.text;
                       Teacher updatedteacher = Teacher(
-                        teacherId: teacher.teacherId,
+                        id: teacher.id,
                         cin: cin,
                         name: name,
                         email: email,
                         phone: phone,
                         imageUrl: imageUrl,
                         chefDep: value,
+                        // createdTime: teacher.createdTime,
+                        // deleted: teacher.deleted,
+                        // lastModifiedTime: teacher.lastModifiedTime,
                       );
-                      await HttpService.updateTeacher(
-                          teacher.teacherId, updatedteacher);
+                      await HttpTeacherService.updateTeacher(
+                          teacher.id, updatedteacher);
                       nameController.text = '';
                       cinController.text = '';
                       emailController.text = '';

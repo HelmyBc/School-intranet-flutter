@@ -36,7 +36,7 @@ class DepartmentDashboard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddDepartmentScreen()),
+                          builder: (context) => const AddDepartmentScreen()),
                     );
                   },
                 ),
@@ -67,7 +67,7 @@ class DepartmentDashboard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddDepartmentScreen()),
+                          builder: (context) => const AddDepartmentScreen()),
                     );
                   },
                 ),
@@ -82,7 +82,7 @@ class DepartmentDashboard extends StatelessWidget {
                   sliver: SliverToBoxAdapter(
                     child: Obx(
                       () => Text(
-                        'Students (${departmentController.departmentList.length})',
+                        'Departments (${departmentController.departmentList.length})',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,

@@ -1,12 +1,12 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/models/department.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_department_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddDepartmentScreen extends StatefulWidget {
-  AddDepartmentScreen({Key? key}) : super(key: key);
+  const AddDepartmentScreen({Key? key}) : super(key: key);
 
   @override
   State<AddDepartmentScreen> createState() => _AddDepartmentScreenState();
@@ -51,12 +51,12 @@ class _AddDepartmentScreenState extends State<AddDepartmentScreen> {
           ),
           backgroundColor: Palette.adminBg,
           elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.done),
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(Icons.done),
+          //   ),
+          // ],
         ),
         body: Form(
           child: Padding(
@@ -124,9 +124,12 @@ class _AddDepartmentScreenState extends State<AddDepartmentScreen> {
                     onPressed: () async {
                       String name = nameController.text;
                       String shortName = shortNameController.text;
-
+                      
                       Department departments =
-                          await HttpService.addDepartment(name, shortName);
+                          await HttpDepartmentService.addDepartment(
+                        name,
+                        shortName,
+                      );
                       nameController.text = '';
                       shortNameController.text = '';
                       setState(() {

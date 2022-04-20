@@ -1,6 +1,6 @@
 import 'user_model.dart';
 
-class Post {
+class PostModel {
   final User user;
   final String caption;
   final String timeAgo;
@@ -9,7 +9,7 @@ class Post {
   final int comments;
   final int shares;
 
-  const Post({
+  const PostModel({
     required this.user,
     required this.caption,
     required this.timeAgo,

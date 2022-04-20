@@ -1,7 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_student_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -200,13 +200,18 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                       int phone = int.parse(phoneController.text);
                       String imageUrl = imageController.text;
                       Student updatedStudent = Student(
-                          id: student.id,
-                          cin: cin,
-                          name: name,
-                          email: email,
-                          phone: phone,
-                          imageUrl: imageUrl);
-                      await HttpService.updateStudent(
+                        id: student.id,
+                        cin: cin,
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        imageUrl: imageUrl,
+                        classe: student.classe,
+                        // createdTime: student.createdTime,
+                        // deleted: student.deleted,
+                        // lastModifiedTime: DateTime.now(),
+                      );
+                      await HttpStudentService.updateStudent(
                           student.id, updatedStudent);
                       nameController.text = '';
                       cinController.text = '';

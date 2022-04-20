@@ -1,13 +1,13 @@
-
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/models/department.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_department_service.dart';
 import 'package:enetcom_app/views/admin_views/department/update_department_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DepartmentCard extends StatelessWidget {
-  final DepartmentController departmentController = Get.put(DepartmentController());
+  final DepartmentController departmentController =
+      Get.put(DepartmentController());
   Department department;
   DepartmentCard({required this.department});
 
@@ -63,7 +63,8 @@ class DepartmentCard extends StatelessWidget {
               departmentController.editingDepartment.add(department);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => UpdateDepartmentScreen()),
+                MaterialPageRoute(
+                    builder: (context) => UpdateDepartmentScreen()),
               );
             },
             child: const Icon(
@@ -79,7 +80,7 @@ class DepartmentCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              HttpService.deleteDepartment(department.id);
+              HttpDepartmentService.deleteDepartment(department.id);
               departmentController.fetchDepartments();
               const snackBar =
                   SnackBar(content: Text("Department removed succefully!"));

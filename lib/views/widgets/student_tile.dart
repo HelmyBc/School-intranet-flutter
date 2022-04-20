@@ -1,10 +1,9 @@
-
 import 'package:enetcom_app/models/student.dart';
 import 'package:flutter/material.dart';
 
 class StudentTile extends StatelessWidget {
   final Student student;
-  const StudentTile(this.student);
+  const StudentTile(this.student, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class StudentTile extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '${student.email}',
+              student.email,
               style: const TextStyle(fontSize: 32, fontFamily: 'avenir'),
             ),
             const SizedBox(height: 8),

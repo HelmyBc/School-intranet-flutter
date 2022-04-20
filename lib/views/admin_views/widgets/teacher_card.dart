@@ -1,6 +1,6 @@
 import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/teacher.dart';
-import 'package:enetcom_app/services/http_service.dart';
+import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:enetcom_app/views/admin_views/teachers/update_teacher_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +101,7 @@ class TeacherCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              HttpService.deleteTeacher(teacher.teacherId);
+              HttpTeacherService.deleteTeacher(teacher.id);
               teacherController.fetchTeachers();
               const snackBar =
                   SnackBar(content: Text("Teacher removed succefully!"));
