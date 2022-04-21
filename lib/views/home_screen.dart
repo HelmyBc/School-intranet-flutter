@@ -6,6 +6,7 @@ import 'package:enetcom_app/views/widgets/feature_carousel.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   // const HomeScreen({Key? key}) : super(key: key);
@@ -83,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: FeatureCarousel(),
+                child: Obx(()=> FeatureCarousel()),
               ),
               SliverToBoxAdapter(
                 child: CreatePostContainer(currentUser: currentUser),
