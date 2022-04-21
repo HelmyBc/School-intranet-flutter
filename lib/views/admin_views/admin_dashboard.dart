@@ -45,9 +45,7 @@ class AdminDashboard extends StatelessWidget {
             ),
             iconSize: 28.0,
             onPressed: () {
-              studentController.fetchStudents();
-              teacherController.fetchTeachers();
-              departmentController.fetchDepartments();
+              loadData();
             },
           ),
         ],

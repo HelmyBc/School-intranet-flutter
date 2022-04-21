@@ -1,4 +1,5 @@
-import 'package:enetcom_app/models/models.dart';
+import 'package:enetcom_app/models/user_model.dart';
+import 'package:enetcom_app/views/create_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,9 +34,13 @@ class CreatePostContainer extends StatelessWidget {
             children: [
               ProfileAvatar(imageUrl: currentUser.imageUrl),
               const SizedBox(width: 10.0),
-              const Expanded(
+              Expanded(
                 child: TextField(
-                  decoration: InputDecoration.collapsed(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CreatePostScreen()),
+                  ),
+                  decoration: const InputDecoration.collapsed(
                     hintText: "Hey, what's on your mind?",
                   ),
                 ),

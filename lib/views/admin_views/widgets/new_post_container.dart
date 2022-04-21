@@ -1,7 +1,12 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/services/http_post_service.dart';
+import 'package:enetcom_app/views/admin_views/posts/edit_post_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -9,14 +14,13 @@ import 'package:timeago/timeago.dart' as timeago;
 class NewPostContainer extends StatelessWidget {
   final Post post;
 
-  const NewPostContainer({
+  NewPostContainer({
     Key? key,
     required this.post,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -80,8 +84,8 @@ class _PostHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime createdTime = DateTime.parse(post.createdTime);
-    
-    final difference =  DateTime.now().difference(createdTime);
+
+    final difference = DateTime.now().difference(createdTime);
     final dateTime = DateTime.now().subtract(difference);
     final timeAgo = timeago.format(dateTime);
 
@@ -121,9 +125,58 @@ class _PostHeader extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.more_horiz),
           // ignore: avoid_print
-          onPressed: () {},
+          onPressed: () => showActions(context),
         ),
       ],
+    );
+  }
+
+  void showActions(BuildContext context) {
+    PostController postController = Get.put(PostController());
+    showCupertinoModalPopup(
+      barrierColor: Colors.black26.withOpacity(0.5),
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        title: const Text('Select An Option'),
+        actions: <Widget>[
+          CupertinoActionSheetAction(
+            child: const Text('Edit description'),
+            onPressed: () {
+              Navigator.pop(context, 'Edit description');
+              postController.editingPost.clear();
+              postController.editingPost.add(post);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditPostScreen(
+                          post: post,
+                        )),
+              );
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: const Text('delete post'),
+            onPressed: () {
+              Navigator.pop(context, 'delete post');
+              HttpPostService.deletePost(post.id);
+              postController.fetchPosts();
+              const snackBar =
+                  SnackBar(content: Text("Post removed succefully!"));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.red),
+            ),
+            onPressed: () {
+              Navigator.pop(context, 'Cancel');
+            },
+          ),
+        ],
+      ),
     );
   }
 }

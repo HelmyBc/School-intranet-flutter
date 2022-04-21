@@ -1,6 +1,6 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/data/data.dart';
-import 'package:enetcom_app/models/models.dart';
+import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/views/widgets/category_list.dart';
 import 'package:enetcom_app/views/widgets/feature_carousel.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';

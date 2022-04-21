@@ -1,6 +1,6 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/data/data.dart';
-import 'package:enetcom_app/models/models.dart';
+import 'package:enetcom_app/models/user_model.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 

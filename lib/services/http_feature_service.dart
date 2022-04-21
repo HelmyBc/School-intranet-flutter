@@ -1,41 +1,37 @@
-import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/models/feature.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class HttpPostService {
+class HttpFeatureService {
   static var client = http.Client();
   static Map<String, String> headers = {"Content-Type": "application/json"};
 
-  static Future<List<Post>> fetchPosts() async {
+  static Future<List<Feature>> fetchFeatures() async {
     var response =
-        await client.get(Uri.parse('http://192.168.56.1:9191/api/post'));
+        await client.get(Uri.parse('http://192.168.56.1:9191/api/feature'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
-      return postFromJson(jsonString);
+      return featureFromJson(jsonString);
     } else {
       //show error message
       return [];
     }
   }
 
-  static Future<Post> addPost(
+  static Future<Feature> addFeature(
     String description,
-    String username,
-    int uid,
+    String title,
     String imageUrl,
-    String profImage,
     //DateTime createdTime,
   ) async {
     Map data = {
       "description": description,
-      "uid": uid,
-      "username": username,
+      "username": title,
       "imageUrl": imageUrl,
-      "profImage": profImage,
       //"createdTime": createdTime,
     };
     var body = json.encode(data);
-    var url = Uri.parse('http://192.168.56.1:9191/api/post');
+    var url = Uri.parse('http://192.168.56.1:9191/api/feature');
 
     http.Response response = await http.post(
       url,
@@ -44,15 +40,17 @@ class HttpPostService {
     );
     print(response.body);
     Map responseMap = jsonDecode(response.body);
-    Post post = Post.fromJson(responseMap as Map<String, dynamic>);
-    return post;
+    Feature feature = Feature.fromJson(responseMap as Map<String, dynamic>);
+    return feature;
   }
 
-  static Future<http.Response> updatePost(int id, Post post) async {
-    var url = Uri.parse('http://192.168.56.1:9191/api/post/$id');
+  static Future<http.Response> updateFeature(int id, Feature feature) async {
+    var url = Uri.parse('http://192.168.56.1:9191/api/feature/$id');
 
     Map data = {
-      "description": post.description,
+      "title": feature.description,
+      "description": feature.title,
+      "imageUrl": feature.imageUrl,
     };
     var body = json.encode(data);
     http.Response response = await http.put(
@@ -64,8 +62,8 @@ class HttpPostService {
     return response;
   }
 
-  static Future<http.Response> getPost(int id) async {
-    var url = Uri.parse('http://192.168.56.1:9191/api/post/$id');
+  static Future<http.Response> getFeature(int id) async {
+    var url = Uri.parse('http://192.168.56.1:9191/api/feature/$id');
     http.Response response = await http.get(
       url,
       headers: headers,
@@ -74,8 +72,8 @@ class HttpPostService {
     return response;
   }
 
-  static Future<http.Response> deletePost(int id) async {
-    var url = Uri.parse('http://192.168.56.1:9191/api/post/$id');
+  static Future<http.Response> deleteFeature(int id) async {
+    var url = Uri.parse('http://192.168.56.1:9191/api/feature/$id');
     http.Response response = await http.delete(
       url,
       headers: headers,

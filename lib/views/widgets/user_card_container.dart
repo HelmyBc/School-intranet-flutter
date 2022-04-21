@@ -1,4 +1,4 @@
-import 'package:enetcom_app/models/models.dart';
+import 'package:enetcom_app/models/user_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

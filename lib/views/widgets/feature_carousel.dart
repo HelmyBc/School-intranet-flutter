@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/feature.dart';
+import 'package:enetcom_app/models/feature_model.dart';
 import 'package:flutter/material.dart';
 
 class FeatureCarousel extends StatefulWidget {
@@ -29,6 +30,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       padding: const EdgeInsets.all(8.0),
       color: Palette.scaffold,
@@ -93,7 +95,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
     );
   }
 
-  Widget buildSheet(Feature feature) {
+  Widget buildSheet(FeatureModel feature) {
     return makeDismissible(
       child: DraggableScrollableSheet(
         initialChildSize: 0.5,

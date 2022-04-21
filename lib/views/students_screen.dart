@@ -6,6 +6,7 @@ import 'package:enetcom_app/views/widgets/student_card_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
+import 'package:enetcom_app/data/data.dart';
 
 class StudentScreen extends StatelessWidget {
   // final GlobalKey<RefreshIndicatorState> _refreshIndacatorKey =
