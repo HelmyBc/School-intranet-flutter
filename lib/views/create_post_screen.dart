@@ -83,7 +83,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.close),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           title: const Text("New post"),
           actions: [
