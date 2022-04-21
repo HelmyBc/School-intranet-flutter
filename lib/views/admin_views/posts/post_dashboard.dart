@@ -1,11 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
-import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/models/post.dart';
-import 'package:enetcom_app/models/student.dart';
 import 'package:enetcom_app/views/admin_views/posts/create_post_screen.dart';
-import 'package:enetcom_app/views/admin_views/students/add_student_screen.dart';
-import 'package:enetcom_app/views/admin_views/widgets/student_card.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -90,6 +86,7 @@ class PostDashboard extends StatelessWidget {
                 },
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

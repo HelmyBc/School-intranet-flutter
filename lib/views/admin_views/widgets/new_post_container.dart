@@ -1,6 +1,10 @@
+import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'package:timeago/timeago.dart' as timeago;
 
 class NewPostContainer extends StatelessWidget {
   final Post post;
@@ -12,6 +16,7 @@ class NewPostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -53,8 +58,10 @@ class NewPostContainer extends StatelessWidget {
             )
           else
             const SizedBox.shrink(),
-          const SizedBox(
-            height: 8.0,
+          const SizedBox(height: 8.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: _PostStats(post: post),
           ),
         ],
       ),
@@ -65,13 +72,19 @@ class NewPostContainer extends StatelessWidget {
 class _PostHeader extends StatelessWidget {
   final Post post;
 
-  const _PostHeader({
+  _PostHeader({
     Key? key,
     required this.post,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime createdTime = DateTime.parse(post.createdTime);
+    
+    final difference =  DateTime.now().difference(createdTime);
+    final dateTime = DateTime.now().subtract(difference);
+    final timeAgo = timeago.format(dateTime);
+
     return Row(
       children: [
         ProfileAvatar(imageUrl: post.profImage),
@@ -89,7 +102,7 @@ class _PostHeader extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '${post.createdTime} • ',
+                    '$timeAgo • ',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12.0,
@@ -109,6 +122,96 @@ class _PostHeader extends StatelessWidget {
           icon: const Icon(Icons.more_horiz),
           // ignore: avoid_print
           onPressed: () {},
+        ),
+      ],
+    );
+  }
+}
+
+class _PostStats extends StatelessWidget {
+  final Post post;
+
+  const _PostStats({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(4.0),
+              decoration: const BoxDecoration(
+                color: Palette.facebookBlue,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.thumb_up,
+                size: 10.0,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(width: 4.0),
+            Expanded(
+              child: Text(
+                '125',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                ),
+              ),
+            ),
+            Text(
+              '${70} Comments',
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(width: 8.0),
+            Text(
+              '18 Shares',
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            )
+          ],
+        ),
+        const Divider(),
+        Row(
+          children: [
+            _PostButton(
+              icon: Icon(
+                MdiIcons.thumbUpOutline,
+                color: Colors.grey[600],
+                size: 20.0,
+              ),
+              label: 'Like',
+              // ignore: avoid_print
+              onTap: () => print('Like'),
+            ),
+            _PostButton(
+              icon: Icon(
+                MdiIcons.commentOutline,
+                color: Colors.grey[600],
+                size: 20.0,
+              ),
+              label: 'Comment',
+              // ignore: avoid_print
+              onTap: () => print('Comment'),
+            ),
+            _PostButton(
+              icon: Icon(
+                MdiIcons.shareOutline,
+                color: Colors.grey[600],
+                size: 25.0,
+              ),
+              label: 'Share',
+              // ignore: avoid_print
+              onTap: () => print('Share'),
+            )
+          ],
         ),
       ],
     );

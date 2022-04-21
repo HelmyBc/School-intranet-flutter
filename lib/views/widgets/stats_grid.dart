@@ -12,6 +12,7 @@ class StatsGrid extends StatelessWidget {
   final StudentController studentController = Get.put(StudentController());
   final DepartmentController departmentController =
       Get.put(DepartmentController());
+      
 
   StatsGrid({Key? key}) : super(key: key);
   @override
