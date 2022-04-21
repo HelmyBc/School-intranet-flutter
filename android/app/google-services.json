@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235192672135",
+    "project_id": "enetcom-app",
+    "storage_bucket": "enetcom-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235192672135:android:b31ff00ef3beb345837d22",
+        "android_client_info": {
+          "package_name": "com.example.enetcom_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235192672135-qp65clhii6rh4itkeps5e4at1aohl41q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByNUz50shY5rP94PpXw05d7iZeTxStdtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235192672135-qp65clhii6rh4itkeps5e4at1aohl41q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

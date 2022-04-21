@@ -1,17 +1,20 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/views/admin_views/posts/post_dashboard.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Palette.scaffold,
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.light,
   ));
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
