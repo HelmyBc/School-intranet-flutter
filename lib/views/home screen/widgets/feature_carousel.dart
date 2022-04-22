@@ -4,7 +4,9 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/models/feature.dart';
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class FeatureCarousel extends StatefulWidget {
   @override
@@ -105,6 +107,13 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
   }
 
   Widget buildSheet(Feature feature) {
+    DateTime createdTime = DateTime.parse(feature.createdTime);
+    final difference = DateTime.now().difference(createdTime);
+    final dateTime = DateTime.now().subtract(difference);
+    final timeAgo = timeago.format(dateTime);
+
+    final date = DateFormat.yMd().add_jm().format(createdTime);
+
     return makeDismissible(
       child: DraggableScrollableSheet(
         initialChildSize: 0.5,
@@ -161,20 +170,40 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                         alignment: Alignment.topLeft,
                         child: Container(
                           padding: const EdgeInsets.only(top: 8.0, left: 10.0),
-                          child: Text(
-                            feature.title,
-                            style: TextStyle(
-                              shadows: [
-                                Shadow(
-                                  color: Colors.black.withOpacity(0.9),
-                                  offset: const Offset(1, 1),
-                                  blurRadius: 12,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                feature.title,
+                                style: TextStyle(
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black.withOpacity(0.9),
+                                      offset: const Offset(1, 1),
+                                      blurRadius: 12,
+                                    ),
+                                  ],
+                                  decoration: TextDecoration.none,
+                                  color: Colors.white,
+                                  fontSize: 30.0,
                                 ),
-                              ],
-                              decoration: TextDecoration.none,
-                              color: Colors.white,
-                              fontSize: 30.0,
-                            ),
+                              ),
+                              Text(
+                                timeAgo,
+                                style: TextStyle(
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black54.withOpacity(0.9),
+                                      offset: const Offset(1, 1),
+                                      blurRadius: 12,
+                                    ),
+                                  ],
+                                  decoration: TextDecoration.none,
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -183,9 +212,25 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    feature.description,
-                    style: const TextStyle(fontSize: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Published at: $date",
+                        style: const TextStyle(
+                          decoration: TextDecoration.none,
+                          color: Colors.black,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      const SizedBox(height: 5.0),
+                      const Divider(thickness: 2.0,),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        feature.description,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
                   ),
                 ),
               ],

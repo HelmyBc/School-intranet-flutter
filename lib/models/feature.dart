@@ -10,8 +10,8 @@ class Feature {
   final String description;
   final String title;
   final int id;
-  //final String createdTime;
-  //final String lastModifiedTime;
+  final String createdTime;
+  final String lastModifiedTime;
   final String imageUrl;
   // DateTime createdTime;
   // int id;
@@ -24,9 +24,9 @@ class Feature {
     required this.description,
     required this.title,
     required this.id,
-    //required this.createdTime,
+    required this.createdTime,
     required this.imageUrl,
-   // required this.lastModifiedTime,
+    required this.lastModifiedTime,
     // required this.id,
     // required this.title,
     // required this.description,
@@ -39,8 +39,8 @@ class Feature {
         description: json["description"],
         imageUrl: json["imageUrl"],
         title: json["title"],
-        // createdTime: json["createdTime"],
-        // lastModifiedTime: json["lastModifiedTime"],
+         createdTime: json["createdTime"],
+         lastModifiedTime: json["lastModifiedTime"],
         // createdTime: DateTime.parse(json["createdTime"]),
         // id: json["id"],
         // title: json["title"],
@@ -60,7 +60,7 @@ class Feature {
         "title": title,
         "description": description,
         "imageUrl": imageUrl,
-        // "createdTime": createdTime,
-        // "lastModifiedTime": lastModifiedTime,
+         "createdTime": createdTime,
+        "lastModifiedTime": lastModifiedTime,
       };
 }
