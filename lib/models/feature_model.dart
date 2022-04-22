@@ -1,11 +1,11 @@
-class FeatureModel {
-  final String title;
-  final String description;
-  final String imageUrl;
+// class FeatureModel {
+//   final String title;
+//   final String description;
+//   final String imageUrl;
 
-  const FeatureModel({
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-  });
-}
+//   const FeatureModel({
+//     required this.title,
+//     required this.description,
+//     required this.imageUrl,
+//   });
+// }

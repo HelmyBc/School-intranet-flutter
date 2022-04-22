@@ -1,18 +1,28 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/post_model.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/carousel_slider_data_found.dart';
 import 'package:enetcom_app/views/widgets/category_list.dart';
-import 'package:enetcom_app/views/widgets/feature_carousel.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/feature_carousel.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  // const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  FeatureController featureController = Get.put(FeatureController());
 
+  bool _isLoading = true;
   @override
   Widget build(BuildContext context) {
+    featureController.fetchFeatures();
+    if (featureController.featureList != null ||
+        featureController.featureList != []) {
+      _isLoading = false;
+    }
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -83,8 +93,24 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              
               SliverToBoxAdapter(
-                child: Obx(()=> FeatureCarousel()),
+                child: GetBuilder<FeatureController>(
+                  builder: (_c) {
+                    if (_c.isLoading.isTrue) {
+                      if (_c.featureList.isNotEmpty) {
+                        return FeatureCarousel();
+                      } else {
+                        return const CarouselLoading();
+                      }
+                    } else if (_c.featureList.isNotEmpty) {
+                      return FeatureCarousel();
+                    }
+                    else {
+                      return Container();
+                    }
+                  },
+                ),
               ),
               SliverToBoxAdapter(
                 child: CreatePostContainer(currentUser: currentUser),

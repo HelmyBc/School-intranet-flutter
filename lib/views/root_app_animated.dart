@@ -1,7 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/views/admin_views/admin_dashboard.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
-import 'package:enetcom_app/views/home_screen.dart';
+import 'package:enetcom_app/views/home%20screen/home_screen.dart';
 import 'package:enetcom_app/views/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

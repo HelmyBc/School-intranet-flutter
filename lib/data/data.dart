@@ -1,10 +1,7 @@
-import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/models/feature.dart';
 import 'package:enetcom_app/models/feature_model.dart';
 import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/models/user_model.dart';
-import 'package:enetcom_app/services/http_feature_service.dart';
-import 'package:get/get.dart';
 
 User currentUser = onlineUsers[0];
 
@@ -94,34 +91,61 @@ final List<User> onlineUsers = [
       imageUrl: 'assets/images/user1.jpg',
       university: 'enetcom'),
 ];
+
+// final List<FeatureModel> features = [
+//   const FeatureModel(
+//     title: '',
+//     description:
+//         'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/image_loading.png',
+//   ),
+//   const FeatureModel(
+//     title: '',
+//     description:
+//         'We want to say congratulations for the students selected to win a Huawei certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/image_loading.png',
+//   ),
+//   const FeatureModel(
+//     title: '',
+//     description:
+//         'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/image_loading.png',
+//   ),
+//   const FeatureModel(
+//     title: '',
+//     description:
+//         'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/image_loading.png',
+//   ),
+// ];
 // final FeatureController featureController = Get.put(FeatureController());
 // final List features = featureController.featureList;
-final List<FeatureModel> features = [
-   const FeatureModel(
-    title: 'Cisco voucher',
-    description:
-        'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
-    imageUrl: 'assets/images/cisco.jpg',
-  ),
-  const FeatureModel(
-    title: 'Huawei voucher',
-    description:
-        'We want to say congratulations for the students selected to win a Huawei certification voucher, after having good scores in their exams, you will get more training before passing the exam',
-    imageUrl: 'assets/images/huawei.png',
-  ),
-  const FeatureModel(
-    title: 'Election',
-    description:
-        'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
-    imageUrl: 'assets/images/elections.jpeg',
-  ),
-  const FeatureModel(
-    title: 'OFFICE 365',
-    description:
-        'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
-    imageUrl: 'assets/images/office.png',
-  ),
-];
+// final List<FeatureModel> features = [
+//    const FeatureModel(
+//     title: 'Cisco voucher',
+//     description:
+//         'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/cisco.jpg',
+//   ),
+//   const FeatureModel(
+//     title: 'Huawei voucher',
+//     description:
+//         'We want to say congratulations for the students selected to win a Huawei certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/huawei.png',
+//   ),
+//   const FeatureModel(
+//     title: 'Election',
+//     description:
+//         'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/elections.jpeg',
+//   ),
+//   const FeatureModel(
+//     title: 'OFFICE 365',
+//     description:
+//         'We want to say congratulations for the students selected to win a cisco certification voucher, after having good scores in their exams, you will get more training before passing the exam',
+//     imageUrl: 'assets/images/office.png',
+//   ),
+// ];
 final List<PostModel> posts = [
   PostModel(
     user: currentUser,

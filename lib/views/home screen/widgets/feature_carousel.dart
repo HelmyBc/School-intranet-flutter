@@ -1,28 +1,38 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/data/data.dart';
+import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/models/feature.dart';
-import 'package:enetcom_app/models/feature_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FeatureCarousel extends StatefulWidget {
-  const FeatureCarousel({Key? key}) : super(key: key);
-
   @override
   State<FeatureCarousel> createState() => _FeatureCarouselState();
 }
 
 class _FeatureCarouselState extends State<FeatureCarousel> {
+  FeatureController featureController = Get.put(FeatureController());
   int _current = 0;
-
   List<Widget> generateImagesTiles() {
-    return features
+    return featureController.featureList
         .map(
           (feature) => ClipRRect(
-              child: Image.asset(
-                feature.imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: feature.imageUrl,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                  child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  ),
+                ),
                 fit: BoxFit.cover,
               ),
+              // Image.network(
+              //   feature.imageUrl,
+              //   fit: BoxFit.cover,
+              // ),
               borderRadius: BorderRadius.circular(15.0)),
         )
         .toList();
@@ -30,7 +40,6 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       padding: const EdgeInsets.all(8.0),
       color: Palette.scaffold,
@@ -40,7 +49,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
           isScrollControlled: true,
           context: context,
           builder: (BuildContext context) {
-            return buildSheet(features[_current]);
+            return buildSheet(featureController.featureList[_current]);
           },
         ),
         child: Stack(
@@ -64,7 +73,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                 child: Container(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    features[_current].title,
+                    featureController.featureList[_current].title,
                     style: TextStyle(
                       shadows: [
                         Shadow(
@@ -95,7 +104,7 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
     );
   }
 
-  Widget buildSheet(FeatureModel feature) {
+  Widget buildSheet(Feature feature) {
     return makeDismissible(
       child: DraggableScrollableSheet(
         initialChildSize: 0.5,
@@ -115,7 +124,19 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                       const BorderRadius.vertical(top: Radius.circular(20.0)),
                   child: Stack(
                     children: [
-                      Image.asset(feature.imageUrl),
+                      // Image.network(feature.imageUrl),
+                      CachedNetworkImage(
+                        imageUrl: feature.imageUrl,
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Center(
+                          child: CircularProgressIndicator(
+                            value: downloadProgress.progress,
+                          ),
+                        ),
+                        fit: BoxFit.cover,
+                      ),
                       Positioned(
                         top: 5,
                         right: -50,

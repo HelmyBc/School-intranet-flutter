@@ -3,11 +3,11 @@ import 'package:enetcom_app/services/http_feature_service.dart';
 import 'package:get/get.dart';
 
 class FeatureController extends GetxController {
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var current = 0.obs;
   var featureList = <Feature>[].obs;
   //this list MUST HAVE ONLY ONE ELEMENT
-  var editingFeature = <Feature>[].obs;
+  //var editingFeature = <Feature>[].obs;
 
   @override
   void onInit() {
@@ -18,12 +18,14 @@ class FeatureController extends GetxController {
   void fetchFeatures() async {
     try {
       isLoading(true);
-      var posts = await HttpFeatureService.fetchFeatures();
-      if (posts != null) {
-        featureList.value = posts;
+      var features = await HttpFeatureService.fetchFeatures();
+      if (features != []) {
+        featureList.value = features;
       }
     } finally {
       isLoading(false);
+      update();
+      print('feature fetch done');
     }
   }
 }
