@@ -46,7 +46,7 @@ class CreatePostContainer extends StatelessWidget {
                     hintText: "Hey, what's on your mind?",
                   ),
                 ),
-              ),
+               ),
             ],
           ),
           const Divider(height: 10.0, thickness: 0.5),

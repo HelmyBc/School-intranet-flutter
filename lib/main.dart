@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'ENETCom',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        //primarySwatch: Colors.blue,
+        // primarySwatch: Colors.blue,
         //primaryColor: const Color(0xFF3EBACE),
         //accentColor: const Color(0xFFD8ECF1),
         scaffoldBackgroundColor: const Color(0xFFF3F5F7),

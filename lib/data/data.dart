@@ -147,8 +147,6 @@ final List<User> onlineUsers = [
 //   ),
 // ];
 
-
-
 final List<PostModel> posts = [
   PostModel(
     user: currentUser,
@@ -210,13 +208,15 @@ final List<PostModel> posts = [
 ];
 
 List categories = [
-  {"name": "All", "icon": "assets/category/all.svg"},
-  {"name": "Timetable", "icon": "assets/category/timetable.svg"},
-  {"name": "TPs", "icon": "assets/category/coding.svg"},
-  {"name": "Courses", "icon": "assets/category/education.svg"},
-  {"name": "Stages", "icon": "assets/category/business.svg"},
-  {"name": "Exams", "icon": "assets/category/exam.svg"},
-  {"name": "catch-up", "icon": "assets/category/catchup.svg"},
+  {"name": "All", "icon": "assets/category/menu0.svg"},
+  {"name": "Class", "icon": "assets/category/class.svg"},
+  {"name": "Timetable", "icon": "assets/category/time.svg"},
   {"name": "absence", "icon": "assets/category/absence.svg"},
+  {"name": "Courses", "icon": "assets/category/course.svg"},
+  {"name": "Stages", "icon": "assets/category/stage.svg"},
+  {"name": "Exams", "icon": "assets/category/exams.svg"},
+  {"name": "TPs", "icon": "assets/category/tp.svg"},
+  {"name": "catch-up", "icon": "assets/category/catchup.svg"},
+ 
   {"name": "Finance", "icon": "assets/category/finance.svg"},
 ];

@@ -16,15 +16,18 @@ class _CategoryListState extends State<CategoryList> {
       padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
       scrollDirection: Axis.horizontal,
       child: Row(
-          children: List.generate(
-              categories.length,
-              (index) => Padding(
-                  padding: const EdgeInsets.only(right: 15),
-                  child: CategoryBox(
-                    selectedColor: Colors.white,
-                    data: categories[index],
-                    onTap: () {},
-                  )))),
+        children: List.generate(
+          categories.length,
+          (index) => Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: CategoryBox(
+              selectedColor: Colors.white,
+              data: categories[index],
+              onTap: () {},
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

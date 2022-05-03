@@ -24,7 +24,7 @@ class CategoryBox extends StatelessWidget {
           AnimatedContainer(
             duration: const Duration(milliseconds: 500),
             curve: Curves.fastOutSlowIn,
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: isSelected ? red : Colors.white,
                 boxShadow: [
@@ -38,9 +38,9 @@ class CategoryBox extends StatelessWidget {
                 shape: BoxShape.circle),
             child: SvgPicture.asset(
               data["icon"],
-              color: isSelected ? selectedColor : textColor,
-              width: 30,
-              height: 30,
+              // color: isSelected ? selectedColor : textColor,
+              width: 40,
+              height: 40,
             ),
           ),
           const SizedBox(
