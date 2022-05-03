@@ -28,6 +28,8 @@ class User {
   DateTime lastModifiedTime;
   DateTime createdTime;
   bool deleted;
+  //list of posts
+  //
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],

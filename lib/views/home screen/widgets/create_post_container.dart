@@ -1,9 +1,9 @@
 import 'package:enetcom_app/models/user_model.dart';
-import 'package:enetcom_app/views/create_post_screen.dart';
+import 'package:enetcom_app/views/home%20screen/create_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets.dart';
+import '../../widgets/widgets.dart';
 
 class CreatePostContainer extends StatelessWidget {
   final User currentUser;
@@ -36,25 +36,16 @@ class CreatePostContainer extends StatelessWidget {
               const SizedBox(width: 10.0),
               Expanded(
                 child: TextField(
+                  readOnly: true,
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CreatePostScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const CreatePostScreen()),
                   ),
                   decoration: const InputDecoration.collapsed(
                     hintText: "Hey, what's on your mind?",
                   ),
                 ),
-                // child: CupertinoTextField(
-                //   maxLines: 2,
-                //   ////////////////////a verifier
-                //   // decoration: BoxDecoration(color: Colors.black26),
-                //   padding: EdgeInsets.all(16.0),
-                //   placeholder: 'créer un statut afin de trouver un binome',
-
-                //   // decoration: InputDecoration.collapsed(
-                //   //   hintText: 'What\'s on your mind?',
-                //   // ),
-                // ),
               ),
             ],
           ),

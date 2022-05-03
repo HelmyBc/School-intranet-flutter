@@ -2,7 +2,7 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/views/edit_profile_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
-import 'package:enetcom_app/views/widgets/create_post_container.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
 import 'package:enetcom_app/views/widgets/post_container.dart';
 import 'package:enetcom_app/views/widgets/profile_image_widget.dart';
 import 'package:enetcom_app/views/widgets/profile_info_tile.dart';

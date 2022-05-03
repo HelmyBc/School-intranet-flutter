@@ -1,5 +1,5 @@
 export 'circle_button.dart';
-export 'create_post_container.dart';
+export '../home screen/widgets/create_post_container.dart';
 export 'profile_avatar.dart';
 export 'profile_image_widget.dart';
 export 'post_container.dart';

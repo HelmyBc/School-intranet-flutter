@@ -146,6 +146,9 @@ final List<User> onlineUsers = [
 //     imageUrl: 'assets/images/office.png',
 //   ),
 // ];
+
+
+
 final List<PostModel> posts = [
   PostModel(
     user: currentUser,

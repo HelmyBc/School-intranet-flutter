@@ -14,7 +14,8 @@ class Student {
     required this.email,
     required this.phone,
     required this.imageUrl,
-    required this.classe,
+    required this.classeId,
+    required this.depId,
     // required this.lastModifiedTime,
     // required this.createdTime,
     // required this.deleted,
@@ -26,7 +27,8 @@ class Student {
   String email;
   int phone;
   String imageUrl;
-  String classe;
+  int classeId;
+  int depId;
   // DateTime lastModifiedTime;
   // DateTime createdTime;
   // bool deleted;
@@ -36,7 +38,8 @@ class Student {
         cin: json["cin"],
         name: json["name"],
         email: json["email"],
-        classe: json["classe"],
+        classeId: json["classeId"],
+        depId: json["depId"],
         phone: json["phone"],
         imageUrl: json["imageUrl"],
         // lastModifiedTime: json["lastModifiedTime"],
@@ -49,7 +52,8 @@ class Student {
         "cin": cin,
         "name": name,
         "email": email,
-        "classe": classe,
+        "classeId": classeId,
+        "depId": depId,
         "phone": phone,
         "imageUrl": imageUrl,
         // "lastModifiedTime": lastModifiedTime,
