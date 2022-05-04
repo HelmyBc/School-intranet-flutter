@@ -49,7 +49,7 @@ class PostContainer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
-        color: Colors.white,
+        color: Palette.secondLevelLight,
         boxShadow: const [
           BoxShadow(
             color: Colors.black12,
@@ -257,7 +257,7 @@ class _PostButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Material(
-        color: Colors.white,
+        color: Palette.secondLevelLight,
         child: InkWell(
           // ignore: avoid_returning_null_for_void
           onTap: () => null,

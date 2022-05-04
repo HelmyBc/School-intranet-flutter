@@ -1,4 +1,6 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/views/home%20screen/menu/classroom_student_screen.dart';
+import 'package:enetcom_app/views/home%20screen/menu/menu_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.blue,
         //primaryColor: const Color(0xFF3EBACE),
         //accentColor: const Color(0xFFD8ECF1),
-        scaffoldBackgroundColor: const Color(0xFFF3F5F7),
+        scaffoldBackgroundColor: Palette.scaffold,
       ),
       //home: const RootAppAnimated(),
       home: RootAppAnimated(),

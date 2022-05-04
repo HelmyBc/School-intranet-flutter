@@ -208,15 +208,48 @@ final List<PostModel> posts = [
 ];
 
 List categories = [
-  {"name": "All", "icon": "assets/category/menu0.svg"},
-  {"name": "Class", "icon": "assets/category/class.svg"},
-  {"name": "Timetable", "icon": "assets/category/time.svg"},
-  {"name": "absence", "icon": "assets/category/absence.svg"},
-  {"name": "Courses", "icon": "assets/category/course.svg"},
-  {"name": "Stages", "icon": "assets/category/stage.svg"},
-  {"name": "Exams", "icon": "assets/category/exams.svg"},
-  {"name": "TPs", "icon": "assets/category/tp.svg"},
-  {"name": "catch-up", "icon": "assets/category/catchup.svg"},
- 
-  {"name": "Finance", "icon": "assets/category/finance.svg"},
+  {"name": "All", "icon": "assets/category/menu0.svg", "description": ""},
+  {
+    "name": "Classroom",
+    "icon": "assets/category/class.svg",
+    "description":
+        "Your classroom space, where you can find all the subjects and your classmates."
+  },
+  {
+    "name": "Timetable",
+    "icon": "assets/category/time.svg",
+    "description": "You can find your class timetable here."
+  },
+  {
+    "name": "absence",
+    "icon": "assets/category/absence.svg",
+    "description": "Here u can see your absence counter for each subject."
+  },
+  {
+    "name": "Courses",
+    "icon": "assets/category/course.svg",
+    "description": "Here you can find all your courses in PDF."
+  },
+  {
+    "name": "Internship",
+    "icon": "assets/category/stage.svg",
+    "description":
+        "The space where u can find all the needed sheets and information about internships."
+  },
+  {
+    "name": "Exams",
+    "icon": "assets/category/exams.svg",
+    "description": "Here you can find all your grades in every subject."
+  },
+  {
+    "name": "TPs",
+    "icon": "assets/category/tp.svg",
+    "description":
+        "Here you can see your upcoming TPs and where u can file your reports."
+  },
+  // {
+  //   "name": "catch-up",
+  //   "icon": "assets/category/catchup.svg",
+  //   "description": ""
+  // },
 ];
