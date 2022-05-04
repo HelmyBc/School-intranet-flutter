@@ -1,10 +1,10 @@
-import 'dart:typed_data';
+import 'dart:io';
+
 import 'package:enetcom_app/data/data.dart';
-import 'package:enetcom_app/utils/utils.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({Key? key}) : super(key: key);
@@ -15,52 +15,99 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   TextEditingController descriptionController = TextEditingController();
-  Uint8List? _file;
-  bool isLoading = false;
+  PickedFile? _imageFile;
+  final String uploadUrl = 'http://192.168.56.1:9191/api/upload/';
+  final ImagePicker _picker = ImagePicker();
 
-  _selectImage(BuildContext parentContext) async {
-    return showDialog(
-      context: parentContext,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: const Text('Create a Post'),
-          children: <Widget>[
-            SimpleDialogOption(
-                padding: const EdgeInsets.all(20),
-                child: const Text('Take a photo'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  Uint8List file = await pickImage(ImageSource.camera);
-                  setState(() {
-                    _file = file;
-                  });
-                }),
-            SimpleDialogOption(
-                padding: const EdgeInsets.all(20),
-                child: const Text('Choose from Gallery'),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Uint8List file = await pickImage(ImageSource.gallery);
-                  setState(() {
-                    _file = file;
-                  });
-                }),
-            SimpleDialogOption(
-              padding: const EdgeInsets.all(20),
-              child: const Text("Cancel"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
+  Future<String> uploadImage(filepath, url) async {
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.files.add(await http.MultipartFile.fromPath('file', filepath));
+    var res = await request.send();
+    return res.reasonPhrase as String;
+  }
+
+  Future<void> retriveLostData() async {
+    final LostData response = await _picker.getLostData();
+    if (response.isEmpty) {
+      return;
+    }
+    if (response.file != null) {
+      setState(() {
+        _imageFile = response.file!;
+      });
+    } else {
+      print('Retrieve error ' + response.exception!.code);
+    }
+  }
+
+  Widget _previewImage() {
+    if (_imageFile != null) {
+      return
+          //child: Image.file(File(_imageFile!.path)),
+          ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              // height: 45.0,
+              // width: 45.0,
+              child: AspectRatio(
+                aspectRatio: 487 / 451,
+                child: Container(
+                  child: Image.file(
+                    File(_imageFile!.path),
+                    fit: BoxFit.cover,
+                    alignment: FractionalOffset.topCenter,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 5,
+              right: -20,
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                child: MaterialButton(
+                  shape: const CircleBorder(),
+                  color: Colors.black54.withOpacity(0.4),
+                  padding: const EdgeInsets.all(8.0),
+                  onPressed: () {
+                    clearImage();
+                  },
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 20.0,
+                  ),
+                ),
+              ),
+            ),
           ],
-        );
-      },
-    );
+        ),
+      );
+    } else {
+      return const Text(
+        'You have not yet picked an image.',
+        textAlign: TextAlign.center,
+      );
+    }
+  }
+
+  void _pickImage() async {
+    try {
+      final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+      setState(() {
+        _imageFile = pickedFile!;
+      });
+    } catch (e) {
+      print("Image picker error ");
+    }
   }
 
   void clearImage() {
     setState(() {
-      _file = null;
+      _imageFile = null;
     });
   }
 
@@ -90,9 +137,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           title: const Text("New post"),
           actions: [
             TextButton(
-
               //TODO CREATE A POST SERVICE
-              onPressed: () async {},
+              onPressed: () async {
+                var res = await uploadImage(_imageFile!.path, uploadUrl);
+                print(res);
+              },
               child: const Text(
                 "Save",
                 style: TextStyle(color: Colors.blue, fontSize: 18.0),
@@ -176,72 +225,73 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         ),
                         //Text(widget.post.description),
                         const SizedBox(height: 10.0),
+                        // _file != null
+                        //     ? ClipRRect(
+                        //         borderRadius: const BorderRadius.all(
+                        //             Radius.circular(30.0)),
+                        //         child: Stack(
+                        //           children: [
+                        //             Container(
+                        //               padding: const EdgeInsets.symmetric(
+                        //                   vertical: 8.0),
+                        //               // height: 45.0,
+                        //               // width: 45.0,
+                        //               child: AspectRatio(
+                        //                 aspectRatio: 487 / 451,
+                        //                 child: Container(
+                        //                   decoration: BoxDecoration(
+                        //                       image: DecorationImage(
+                        //                     fit: BoxFit.cover,
+                        //                     alignment:
+                        //                         FractionalOffset.topCenter,
+                        //                     image: MemoryImage(_file!),
+                        //                   )),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //             Positioned(
+                        //               top: 5,
+                        //               right: -20,
+                        //               child: Container(
+                        //                 margin: const EdgeInsets.all(10.0),
+                        //                 child: MaterialButton(
+                        //                   shape: const CircleBorder(),
+                        //                   color:
+                        //                       Colors.black54.withOpacity(0.4),
+                        //                   padding: const EdgeInsets.all(8.0),
+                        //                   onPressed: () {
+                        //                     clearImage();
+                        //                   },
+                        //                   child: const Icon(
+                        //                     Icons.close,
+                        //                     color: Colors.white,
+                        //                     size: 20.0,
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       )
+                        //     : const SizedBox.shrink(),
 
-                        TextButton.icon(
-                          style: const ButtonStyle(
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                          onPressed: () {
-                            _selectImage(context);
-                          },
-                          icon: const Icon(
-                            Icons.photo_library,
-                            color: Colors.green,
-                          ),
-                          label: const Text(
-                            "Add photo",
-                            style: TextStyle(color: Colors.black),
+                        Center(
+                          child: FutureBuilder<void>(
+                            future: retriveLostData(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<void> snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none:
+                                case ConnectionState.waiting:
+                                  return const Text('Picked an image');
+                                case ConnectionState.done:
+                                  return _previewImage();
+                                default:
+                                  return const Text('Picked an image');
+                              }
+                            },
                           ),
                         ),
-                        const SizedBox(height: 10.0),
-                        _file != null
-                            ? ClipRRect(
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(30.0)),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      // height: 45.0,
-                                      // width: 45.0,
-                                      child: AspectRatio(
-                                        aspectRatio: 487 / 451,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            alignment:
-                                                FractionalOffset.topCenter,
-                                            image: MemoryImage(_file!),
-                                          )),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 5,
-                                      right: -20,
-                                      child: Container(
-                                        margin: const EdgeInsets.all(10.0),
-                                        child: MaterialButton(
-                                          shape: const CircleBorder(),
-                                          color:
-                                              Colors.black54.withOpacity(0.4),
-                                          padding: const EdgeInsets.all(8.0),
-                                          onPressed: () {
-                                            clearImage();
-                                          },
-                                          child: const Icon(
-                                            Icons.close,
-                                            color: Colors.white,
-                                            size: 20.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : const SizedBox.shrink(),
                       ],
                     ),
                   ),
@@ -253,6 +303,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             )
           ],
         ),
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: _pickImage,
+          tooltip: 'Pick Image from gallery',
+          child: Icon(Icons.photo_library),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }

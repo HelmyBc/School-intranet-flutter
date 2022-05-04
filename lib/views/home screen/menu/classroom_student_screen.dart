@@ -18,6 +18,11 @@ class ClassroomStudentScreen extends StatelessWidget {
             alignment: FractionalOffset.center),
         centerTitle: false,
       ),
+      body: Center(
+        child: Image.network(
+          "http://192.168.56.1:9191/api/download/3",
+        ),
+      ),
     );
   }
 }
