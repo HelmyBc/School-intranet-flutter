@@ -147,7 +147,6 @@ class _EditPostScreenState extends State<EditPostScreen> {
                             ),
                           ),
                         ),
-                        //Text(widget.post.description),
                         const SizedBox(height: 18.0),
                         post.imageUrl != null
                             ? const SizedBox.shrink()

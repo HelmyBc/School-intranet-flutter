@@ -14,6 +14,7 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
+  
   TextEditingController descriptionController = TextEditingController();
   Uint8List? _file;
   bool isLoading = false;

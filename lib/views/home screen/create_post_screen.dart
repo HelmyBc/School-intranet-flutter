@@ -14,6 +14,10 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
+  TextEditingController uidController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController profImageController = TextEditingController();
+
   TextEditingController descriptionController = TextEditingController();
   XFile? _imageFile;
   final String uploadUrl = 'http://192.168.56.1:9191/api/upload/';
@@ -117,6 +121,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   @override
   void dispose() {
     descriptionController.dispose();
+    usernameController.dispose();
+    profImageController.dispose();
+    uidController.dispose();
     super.dispose();
   }
 
@@ -211,6 +218,67 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 10.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            keyboardType: TextInputType.name,
+                            controller: usernameController,
+                            validator: (value) {
+                              if (value == null) {
+                                return "Please enter your username";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'username',
+                              hintText: 'username',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: uidController,
+                            validator: (value) {
+                              if (value == null) {
+                                return "Please enter your uid";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'uid',
+                              hintText: 'uid',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            keyboardType: TextInputType.url,
+                            controller: profImageController,
+                            validator: (value) {
+                              if (value == null) {
+                                return "Please enter your profImage";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'prof Image',
+                              hintText: 'prof Image',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 18.0),
                         TextFormField(
                           minLines: 3,
@@ -228,55 +296,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         ),
                         //Text(widget.post.description),
                         const SizedBox(height: 10.0),
-                        // _file != null
-                        //     ? ClipRRect(
-                        //         borderRadius: const BorderRadius.all(
-                        //             Radius.circular(30.0)),
-                        //         child: Stack(
-                        //           children: [
-                        //             Container(
-                        //               padding: const EdgeInsets.symmetric(
-                        //                   vertical: 8.0),
-                        //               // height: 45.0,
-                        //               // width: 45.0,
-                        //               child: AspectRatio(
-                        //                 aspectRatio: 487 / 451,
-                        //                 child: Container(
-                        //                   decoration: BoxDecoration(
-                        //                       image: DecorationImage(
-                        //                     fit: BoxFit.cover,
-                        //                     alignment:
-                        //                         FractionalOffset.topCenter,
-                        //                     image: MemoryImage(_file!),
-                        //                   )),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //             Positioned(
-                        //               top: 5,
-                        //               right: -20,
-                        //               child: Container(
-                        //                 margin: const EdgeInsets.all(10.0),
-                        //                 child: MaterialButton(
-                        //                   shape: const CircleBorder(),
-                        //                   color:
-                        //                       Colors.black54.withOpacity(0.4),
-                        //                   padding: const EdgeInsets.all(8.0),
-                        //                   onPressed: () {
-                        //                     clearImage();
-                        //                   },
-                        //                   child: const Icon(
-                        //                     Icons.close,
-                        //                     color: Colors.white,
-                        //                     size: 20.0,
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       )
-                        //     : const SizedBox.shrink(),
 
                         Center(
                           child: FutureBuilder<void>(

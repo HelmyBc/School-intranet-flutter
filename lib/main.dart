@@ -1,4 +1,5 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/views/home%20screen/create_post_screen.dart';
 import 'package:enetcom_app/views/admin_views/posts/post_dashboard.dart';
 import 'package:enetcom_app/views/home%20screen/menu/classroom_student_screen.dart';
 import 'package:enetcom_app/views/home%20screen/menu/menu_screen.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Palette.scaffold,
       ),
       //home: const RootAppAnimated(),
-      home: PostDashboard(),
+      home: CreatePostScreen(),
     );
   }
 }
