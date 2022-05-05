@@ -22,8 +22,8 @@ class HttpPostService {
     String description,
     String username,
     int uid,
-    int imageId,
     String imageUrl,
+    int imageId,
     String profImage,
     //DateTime createdTime,
   ) async {

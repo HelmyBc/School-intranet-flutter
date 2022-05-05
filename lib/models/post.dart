@@ -14,7 +14,7 @@ class Post {
   final int id;
   final String createdTime;
   final String? imageUrl;
-  final int imageId;
+  final int? imageId;
   final String profImage;
 
   const Post({

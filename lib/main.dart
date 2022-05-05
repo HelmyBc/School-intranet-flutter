@@ -1,10 +1,5 @@
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/views/home%20screen/create_post_screen.dart';
-import 'package:enetcom_app/views/admin_views/posts/post_dashboard.dart';
-import 'package:enetcom_app/views/home%20screen/menu/classroom_student_screen.dart';
-import 'package:enetcom_app/views/home%20screen/menu/menu_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -16,8 +11,8 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.light,
   ));
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -36,7 +31,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Palette.scaffold,
       ),
       //home: const RootAppAnimated(),
-      home: CreatePostScreen(),
+      home: RootAppAnimated(),
     );
   }
 }

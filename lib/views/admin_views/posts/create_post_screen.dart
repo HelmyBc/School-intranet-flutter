@@ -176,7 +176,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     controller: imageUrlController,
                     validator: (value) {
                       if (value == null) {
-                        return "Please enter your phone number";
+                        return "Please enter your imageUrl";
                       }
                       return null;
                     },
@@ -223,8 +223,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       description,
                       username,
                       uid,
-                      imageId,
                       imageUrl,
+                      imageId,
                       profImage,
                     );
                     descriptionController.text = '';

@@ -1,8 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/data/data.dart';
+import 'package:enetcom_app/models/attachment.dart';
+import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/services/http_post_service.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,20 +20,31 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
+  final PostController postController = Get.put(PostController());
+
   TextEditingController uidController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController profImageController = TextEditingController();
 
   TextEditingController descriptionController = TextEditingController();
+  Post? post;
   XFile? _imageFile;
+  String imageUrl = "";
+  int imageId = 0;
   final String uploadUrl = 'http://192.168.56.1:9191/api/upload/';
   final ImagePicker _picker = ImagePicker();
 
-  Future<String> uploadImage(filepath, url) async {
+  Future<Attachment> uploadImage(filepath, url) async {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.files.add(await http.MultipartFile.fromPath('file', filepath));
     var res = await request.send();
-    return res.reasonPhrase as String;
+    var response = await http.Response.fromStream(res);
+    Map responseMap = jsonDecode(response.body);
+    Attachment attachment =
+        Attachment.fromJson(responseMap as Map<String, dynamic>);
+    // imageUrl = "http://192.168.56.1:9191/api/download/${attachment.id}";
+    print(response.body);
+    return attachment;
   }
 
   Future<void> retriveLostData() async {
@@ -147,10 +164,66 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           title: const Text("New post"),
           actions: [
             TextButton(
-              //TODO CREATE A POST SERVICE
               onPressed: () async {
-                var res = await uploadImage(_imageFile!.path, uploadUrl);
-                print(res);
+                if (_imageFile != null) {
+                  Attachment attachment =
+                      await uploadImage(_imageFile!.path, uploadUrl);
+                  if (_imageFile != null) {
+                    imageUrl =
+                        "http://192.168.56.1:9191/api/download/${attachment.id}";
+                    imageId = attachment.id;
+                  } else {
+                    imageUrl = "";
+                    imageId = 0;
+                  }
+                  String description = descriptionController.text;
+                  int uid = int.parse(uidController.text);
+                  String username = usernameController.text;
+                  String profImage = profImageController.text;
+
+                  Post posts = await HttpPostService.addPost(
+                    description,
+                    username,
+                    uid,
+                    imageUrl,
+                    imageId,
+                    profImage,
+                  );
+                  descriptionController.text = '';
+                  uidController.text = '';
+                  usernameController.text = '';
+                  profImageController.text = '';
+                  setState(() {
+                    post = posts;
+                    Navigator.pop(context);
+                    postController.fetchPosts();
+                  });
+                } else {
+                  String description = descriptionController.text;
+                  int uid = int.parse(uidController.text);
+                  String username = usernameController.text;
+                  String profImage = profImageController.text;
+                  String imageUrl = "";
+                  int imageId = 0;
+
+                  Post posts = await HttpPostService.addPost(
+                    description,
+                    username,
+                    uid,
+                    imageUrl,
+                    imageId,
+                    profImage,
+                  );
+                  descriptionController.text = '';
+                  uidController.text = '';
+                  usernameController.text = '';
+                  profImageController.text = '';
+                  setState(() {
+                    post = posts;
+                    Navigator.pop(context);
+                    postController.fetchPosts();
+                  });
+                }
               },
               child: const Text(
                 "Save",
@@ -159,171 +232,173 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             )
           ],
         ),
-        body: ListView(
-          children: [
-            const SizedBox(height: 20.0),
-            Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: Offset(0.0, 2.0),
-                    blurRadius: 6.0,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Row(
-                          children: [
-                            ProfileAvatar(imageUrl: currentUser.imageUrl),
-                            const SizedBox(width: 8.0),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    currentUser.name,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Public • ',
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 12.0,
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.public,
-                                        color: Colors.grey[600],
-                                        size: 12.0,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10.0),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.name,
-                            controller: usernameController,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please enter your username";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'username',
-                              hintText: 'username',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            controller: uidController,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please enter your uid";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'uid',
-                              hintText: 'uid',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.url,
-                            controller: profImageController,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please enter your profImage";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'prof Image',
-                              hintText: 'prof Image',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 18.0),
-                        TextFormField(
-                          minLines: 3,
-                          maxLines: 7,
-                          controller: descriptionController,
-                          keyboardType: TextInputType.multiline,
-                          decoration: const InputDecoration(
-                            hintText: "Hey, what's on your mind?",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
-                            ),
-                          ),
-                        ),
-                        //Text(widget.post.description),
-                        const SizedBox(height: 10.0),
-
-                        Center(
-                          child: FutureBuilder<void>(
-                            future: retriveLostData(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<void> snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.none:
-                                case ConnectionState.waiting:
-                                  return const Text('Picked an image');
-                                case ConnectionState.done:
-                                  return _previewImage();
-                                default:
-                                  return const Text('Picked an image');
-                              }
-                            },
-                          ),
-                        ),
-                      ],
+        body: Form(
+          child: ListView(
+            children: [
+              const SizedBox(height: 20.0),
+              Container(
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0.0, 2.0),
+                      blurRadius: 6.0,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 8.0,
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Row(
+                            children: [
+                              ProfileAvatar(imageUrl: currentUser.imageUrl),
+                              const SizedBox(width: 8.0),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      currentUser.name,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Public • ',
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 12.0,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.public,
+                                          color: Colors.grey[600],
+                                          size: 12.0,
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10.0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.name,
+                              controller: usernameController,
+                              validator: (value) {
+                                if (value == null) {
+                                  return "Please enter your username";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'username',
+                                hintText: 'username',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: uidController,
+                              validator: (value) {
+                                if (value == null) {
+                                  return "Please enter your uid";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'uid',
+                                hintText: 'uid',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.url,
+                              controller: profImageController,
+                              validator: (value) {
+                                if (value == null) {
+                                  return "Please enter your profImage";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'prof Image',
+                                hintText: 'prof Image',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 18.0),
+                          TextFormField(
+                            minLines: 3,
+                            maxLines: 7,
+                            controller: descriptionController,
+                            keyboardType: TextInputType.multiline,
+                            decoration: const InputDecoration(
+                              hintText: "Hey, what's on your mind?",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                              ),
+                            ),
+                          ),
+                          //Text(widget.post.description),
+                          const SizedBox(height: 10.0),
+
+                          Center(
+                            child: FutureBuilder<void>(
+                              future: retriveLostData(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<void> snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                  case ConnectionState.waiting:
+                                    return const Text('Picked an image');
+                                  case ConnectionState.done:
+                                    return _previewImage();
+                                  default:
+                                    return const Text('Picked an image');
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
 
         floatingActionButton: FloatingActionButton(
