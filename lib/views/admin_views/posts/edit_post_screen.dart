@@ -49,6 +49,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                   description: description,
                   createdTime: post.createdTime,
                   imageUrl: post.imageUrl,
+                  imageId: post.imageId,
                   profImage: post.profImage,
                   uid: post.uid,
                   username: post.username,
@@ -154,19 +155,16 @@ class _EditPostScreenState extends State<EditPostScreen> {
                       ],
                     ),
                   ),
-                  // ignore: unnecessary_null_comparison
-                  if (post.imageUrl != '')
+                  if (post.imageUrl == null || post.imageUrl!.isEmpty)
+                    const SizedBox.shrink()
+                  else
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Image(
-                        image: NetworkImage(widget.post.imageUrl),
+                        image: NetworkImage(post.imageUrl!),
                       ),
-                    )
-                  else
-                    const SizedBox.shrink(),
-                  const SizedBox(
-                    height: 8.0,
-                  ),
+                    ),
+                  const SizedBox(height: 10.0),
                 ],
               ),
             )

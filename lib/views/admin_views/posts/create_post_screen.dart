@@ -214,6 +214,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   onPressed: () async {
                     String description = descriptionController.text;
                     int uid = int.parse(uidController.text);
+                    int imageId = 0;
                     String username = usernameController.text;
                     String profImage = profImageController.text;
                     String imageUrl = imageUrlController.text;
@@ -222,6 +223,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       description,
                       username,
                       uid,
+                      imageId,
                       imageUrl,
                       profImage,
                     );

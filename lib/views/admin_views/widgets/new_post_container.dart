@@ -45,24 +45,21 @@ class NewPostContainer extends StatelessWidget {
                 _PostHeader(post: post),
                 const SizedBox(height: 4.0),
                 Text(post.description),
-                // ignore: unnecessary_null_comparison
-                post.imageUrl != null
-                    ? const SizedBox.shrink()
-                    : const SizedBox(height: 6.0),
               ],
             ),
           ),
           // ignore: unnecessary_null_comparison
-          if (post.imageUrl != '')
+          if (post.imageUrl == null || post.imageUrl!.isEmpty)
+            const SizedBox.shrink()
+          else
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Image(
-                image: NetworkImage(post.imageUrl),
+                image: NetworkImage(post.imageUrl!),
               ),
-            )
-          else
-            const SizedBox.shrink(),
-          const SizedBox(height: 8.0),
+            ),
+
+          const SizedBox(height: 10.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: _PostStats(post: post),

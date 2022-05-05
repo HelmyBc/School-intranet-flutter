@@ -15,7 +15,7 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   TextEditingController descriptionController = TextEditingController();
-  PickedFile? _imageFile;
+  XFile? _imageFile;
   final String uploadUrl = 'http://192.168.56.1:9191/api/upload/';
   final ImagePicker _picker = ImagePicker();
 
@@ -27,7 +27,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   Future<void> retriveLostData() async {
-    final LostData response = await _picker.getLostData();
+    final LostDataResponse response = await _picker.retrieveLostData();
     if (response.isEmpty) {
       return;
     }
@@ -96,7 +96,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   void _pickImage() async {
     try {
-      final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 100,
+      );
       setState(() {
         _imageFile = pickedFile!;
       });
@@ -307,7 +310,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: _pickImage,
           tooltip: 'Pick Image from gallery',
-          child: Icon(Icons.photo_library),
+          child: const Icon(Icons.photo_library),
         ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );

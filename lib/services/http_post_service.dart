@@ -22,6 +22,7 @@ class HttpPostService {
     String description,
     String username,
     int uid,
+    int imageId,
     String imageUrl,
     String profImage,
     //DateTime createdTime,
@@ -31,6 +32,7 @@ class HttpPostService {
       "uid": uid,
       "username": username,
       "imageUrl": imageUrl,
+      "imageId": imageId,
       "profImage": profImage,
       //"createdTime": createdTime,
     };

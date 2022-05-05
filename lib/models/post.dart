@@ -13,7 +13,8 @@ class Post {
   //final likes;
   final int id;
   final String createdTime;
-  final String imageUrl;
+  final String? imageUrl;
+  final int imageId;
   final String profImage;
 
   const Post({
@@ -24,6 +25,7 @@ class Post {
     required this.id,
     required this.createdTime,
     required this.imageUrl,
+    required this.imageId,
     required this.profImage,
   });
 
@@ -32,6 +34,7 @@ class Post {
         uid: json["uid"],
         description: json["description"],
         imageUrl: json["imageUrl"],
+        imageId: json["imageId"],
         username: json["username"],
         profImage: json["profImage"],
         createdTime: json["createdTime"],
@@ -42,6 +45,7 @@ class Post {
         "uid": uid,
         "description": description,
         "imageUrl": imageUrl,
+        "imageId": imageId,
         "username": username,
         "profImage": profImage,
         "createdTime": createdTime,
