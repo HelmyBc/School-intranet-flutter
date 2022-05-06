@@ -1,23 +1,25 @@
 import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
+import 'package:enetcom_app/controllers/subject_controller.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/views/admin_views/classes/classe_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/department/department_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/students/student_dashboard.dart';
+import 'package:enetcom_app/views/admin_views/subjects/subject_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/teachers/teacher_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StatsGrid extends StatelessWidget {
+class AdminGrid extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
   final StudentController studentController = Get.put(StudentController());
+  final SubjectController subjectController = Get.put(SubjectController());
   final ClasseController classeController = Get.put(ClasseController());
   final DepartmentController departmentController =
       Get.put(DepartmentController());
-      
 
-  StatsGrid({Key? key}) : super(key: key);
+  AdminGrid({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -205,47 +207,53 @@ class StatsGrid extends StatelessWidget {
                     ),
                   ),
                 ),
-                
-                _buildStatCard('Subjects', '68', Colors.purple),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SubjectDashboard()),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.purple,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Text(
+                            'Subjects',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Obx(
+                            () => Text(
+                              '${subjectController.subjectList.length}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Expanded _buildStatCard(String title, String count, MaterialColor color) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15.0,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Text(
-              count,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

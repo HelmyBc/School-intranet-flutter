@@ -92,7 +92,9 @@ class DepartmentDashboard extends StatelessWidget {
             body: CustomScrollView(
               physics: const ClampingScrollPhysics(),
               slivers: <Widget>[
-                _buildHeader(),
+                const SliverPadding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                ),
                 SliverPadding(
                   padding: const EdgeInsets.only(left: 20.0),
                   sliver: SliverToBoxAdapter(
@@ -126,21 +128,5 @@ class DepartmentDashboard extends StatelessWidget {
               ],
             ),
           );
-  }
-
-  SliverPadding _buildHeader() {
-    return const SliverPadding(
-      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      sliver: SliverToBoxAdapter(
-        child: Text(
-          'Admin Dashboard',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
   }
 }

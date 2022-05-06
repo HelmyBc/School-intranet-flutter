@@ -1,23 +1,19 @@
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/controllers/classe_controller.dart';
-import 'package:enetcom_app/controllers/department_controller.dart';
-import 'package:enetcom_app/models/classe.dart';
-import 'package:enetcom_app/models/department.dart';
-import 'package:enetcom_app/views/admin_views/classes/add_classe_screen.dart';
-import 'package:enetcom_app/views/admin_views/department/add_department_screen.dart';
-import 'package:enetcom_app/views/admin_views/widgets/classe_card.dart';
-import 'package:enetcom_app/views/admin_views/widgets/department_card.dart';
+import 'package:enetcom_app/controllers/subject_controller.dart';
+import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/views/admin_views/subjects/add_subject_screen.dart';
+import 'package:enetcom_app/views/admin_views/widgets/subject_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ClasseDashboard extends StatelessWidget {
-  final ClasseController classeController = Get.put(ClasseController());
+class SubjectDashboard extends StatelessWidget {
+  final SubjectController subjectController = Get.put(SubjectController());
 
-  ClasseDashboard({Key? key}) : super(key: key);
+  SubjectDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return classeController.classeList == null
+    return subjectController.subjectList == null
         ? Scaffold(
             backgroundColor: Palette.scaffold,
             appBar: AppBar(
@@ -37,7 +33,7 @@ class ClasseDashboard extends StatelessWidget {
                   icon: const Icon(Icons.refresh),
                   iconSize: 28.0,
                   onPressed: () {
-                    classeController.fetchClasses();
+                    subjectController.fetchSubjects();
                   },
                 ),
                 IconButton(
@@ -47,7 +43,7 @@ class ClasseDashboard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddClasseScreen()),
+                          builder: (context) => const AddSubjectScreen()),
                     );
                   },
                 ),
@@ -76,7 +72,7 @@ class ClasseDashboard extends StatelessWidget {
                   icon: const Icon(Icons.refresh),
                   iconSize: 28.0,
                   onPressed: () {
-                    classeController.fetchClasses();
+                    subjectController.fetchSubjects();
                   },
                 ),
                 IconButton(
@@ -86,7 +82,7 @@ class ClasseDashboard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddClasseScreen()),
+                          builder: (context) => const AddSubjectScreen()),
                     );
                   },
                 ),
@@ -103,7 +99,7 @@ class ClasseDashboard extends StatelessWidget {
                   sliver: SliverToBoxAdapter(
                     child: Obx(
                       () => Text(
-                        'Classes (${classeController.classeList.length})',
+                        'subjects (${subjectController.subjectList.length})',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20.0,
@@ -120,11 +116,11 @@ class ClasseDashboard extends StatelessWidget {
                   () => SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final Classe classe =
-                            classeController.classeList[index];
-                        return ClasseCard(classe: classe);
+                        final Subject subject =
+                            subjectController.subjectList[index];
+                        return SubjectCard(subject: subject);
                       },
-                      childCount: classeController.classeList.length,
+                      childCount: subjectController.subjectList.length,
                     ),
                   ),
                 ),

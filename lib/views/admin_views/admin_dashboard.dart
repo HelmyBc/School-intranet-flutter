@@ -8,7 +8,7 @@ import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
-import 'package:enetcom_app/views/widgets/stats_grid.dart';
+import 'package:enetcom_app/views/admin_views/admin_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -66,7 +66,7 @@ class AdminDashboard extends StatelessWidget {
                 const SizedBox(height: 10.0),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: StatsGrid(),
+                  child: AdminGrid(),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(
