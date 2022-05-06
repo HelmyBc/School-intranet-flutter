@@ -10,54 +10,50 @@ class Student {
   Student({
     required this.id,
     required this.cin,
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.email,
+    required this.password,
     required this.phone,
     required this.imageUrl,
     required this.classeId,
     required this.depId,
-    // required this.lastModifiedTime,
-    // required this.createdTime,
-    // required this.deleted,
   });
 
   int id;
   int cin;
-  String name;
+  String firstName;
+  String lastName;
   String email;
+  String password;
   int phone;
   String imageUrl;
   int classeId;
   int depId;
-  // DateTime lastModifiedTime;
-  // DateTime createdTime;
-  // bool deleted;
 
   factory Student.fromJson(Map<String, dynamic> json) => Student(
         id: json["id"],
         cin: json["cin"],
-        name: json["name"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
         email: json["email"],
+        password: json["password"],
         classeId: json["classeId"],
         depId: json["depId"],
         phone: json["phone"],
         imageUrl: json["imageUrl"],
-        // lastModifiedTime: json["lastModifiedTime"],
-        // createdTime: json["createdTime"],
-        // deleted: json["deleted"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "cin": cin,
-        "name": name,
+        "firstName": firstName,
+        "lastName": lastName,
         "email": email,
+        "password": password,
         "classeId": classeId,
         "depId": depId,
         "phone": phone,
         "imageUrl": imageUrl,
-        // "lastModifiedTime": lastModifiedTime,
-        // "createdTime": createdTime,
-        // "deleted": deleted,
       };
 }

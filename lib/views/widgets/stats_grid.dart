@@ -1,6 +1,8 @@
+import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
+import 'package:enetcom_app/views/admin_views/classes/classe_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/department/department_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/students/student_dashboard.dart';
 import 'package:enetcom_app/views/admin_views/teachers/teacher_dashboard.dart';
@@ -10,6 +12,7 @@ import 'package:get/get.dart';
 class StatsGrid extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
   final StudentController studentController = Get.put(StudentController());
+  final ClasseController classeController = Get.put(ClasseController());
   final DepartmentController departmentController =
       Get.put(DepartmentController());
       
@@ -159,7 +162,50 @@ class StatsGrid extends StatelessWidget {
                     ),
                   ),
                 ),
-                _buildStatCard('Classes', '25', Colors.lightBlue),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ClasseDashboard()),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.lightBlue,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Text(
+                            'Classes',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Obx(
+                            () => Text(
+                              '${classeController.classeList.length}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                
                 _buildStatCard('Subjects', '68', Colors.purple),
               ],
             ),

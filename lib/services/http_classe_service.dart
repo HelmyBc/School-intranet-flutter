@@ -1,35 +1,37 @@
-import 'package:enetcom_app/models/department.dart';
-import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/models/classe.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class HttpDepartmentService {
+class HttpClasseService {
   static var client = http.Client();
   static Map<String, String> headers = {"Content-Type": "application/json"};
 
-
-  static Future<List<Department>> fetchDepartments() async {
+  static Future<List<Classe>> fetchClasses() async {
     var response =
-        await client.get(Uri.parse('http://192.168.56.1:9191/api/department'));
+        await client.get(Uri.parse('http://192.168.56.1:9191/api/classe'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
-      return departmentFromJson(jsonString);
+      return classeFromJson(jsonString);
     } else {
       //show error message
       return [];
     }
   }
 
-  static Future<Department> addDepartment(
+  static Future<Classe> addClasse(
+    int level,
+    int groupe,
+    int depId,
     String name,
-    String shortName,
   ) async {
     Map data = {
       "name": name,
-      "shortName": shortName,
+      "level": level,
+      "groupe": groupe,
+      "depId": depId,
     };
     var body = json.encode(data);
-    var url = Uri.parse('http://192.168.56.1:9191/api/department');
+    var url = Uri.parse('http://192.168.56.1:9191/api/classe');
 
     http.Response response = await http.post(
       url,
@@ -38,18 +40,18 @@ class HttpDepartmentService {
     );
     print(response.body);
     Map responseMap = jsonDecode(response.body);
-    Department department =
-        Department.fromJson(responseMap as Map<String, dynamic>);
-    return department;
+    Classe classe = Classe.fromJson(responseMap as Map<String, dynamic>);
+    return classe;
   }
 
-  static Future<http.Response> updateDepartment(
-      int id, Department department) async {
-    var url = Uri.parse('http://192.168.56.1:9191/api/department/$id');
+  static Future<http.Response> updateClasse(int id, Classe classe) async {
+    var url = Uri.parse('http://192.168.56.1:9191/api/classe/$id');
 
     Map data = {
-      "name": department.name,
-      "shortName": department.shortName,
+      "name": classe.name,
+      "level": classe.level,
+      "groupe": classe.groupe,
+      "depId": classe.depId,
     };
     var body = json.encode(data);
     http.Response response = await http.put(
@@ -61,8 +63,8 @@ class HttpDepartmentService {
     return response;
   }
 
-  static Future<http.Response> getDepartment(int id) async {
-    var url = Uri.parse('http://192.168.56.1:9191/api/department/$id');
+  static Future<http.Response> getClasse(int id) async {
+    var url = Uri.parse('http://192.168.56.1:9191/api/classe/$id');
     http.Response response = await http.get(
       url,
       headers: headers,
@@ -71,8 +73,8 @@ class HttpDepartmentService {
     return response;
   }
 
-  static Future<http.Response> deleteDepartment(int id) async {
-    var url = Uri.parse('http://192.168.56.1:9191/api/department/$id');
+  static Future<http.Response> deleteClasse(int id) async {
+    var url = Uri.parse('http://192.168.56.1:9191/api/classe/$id');
     http.Response response = await http.delete(
       url,
       headers: headers,

@@ -10,7 +10,8 @@ class HttpUserService {
     var url = Uri.parse('http://192.168.56.1:9191/api/user/$id');
 
     Map data = {
-      "name": user.name,
+      "firstName": user.firstName,
+      "lastName": user.lastName,
       "email": user.email,
       "phone": user.phone,
       "cin": user.cin,
@@ -59,9 +60,10 @@ class HttpUserService {
   }
 
   static Future<User> addUser(
-      String name, String email, int cin, int phone, String imageUrl) async {
+      String firstName, String lastName, String email, int cin, int phone, String imageUrl) async {
     Map data = {
-      "name": name,
+      "firstName": firstName,
+      "lastName": lastName,
       "email": email,
       "cin": cin,
       "phone": phone,

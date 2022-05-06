@@ -13,7 +13,8 @@ class UpdateStudentScreen extends StatefulWidget {
 class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
   final minimumPadding = 5.0;
 
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 
   TextEditingController cinController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -22,7 +23,8 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
 
   @override
   void dispose() {
-    nameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     cinController.dispose();
     emailController.dispose();
     phoneController.dispose();
@@ -80,7 +82,7 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                     ),
                   ),
                   Text(
-                    student.name,
+                    "${student.firstName} ${student.lastName}",
                     style: const TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
@@ -93,16 +95,37 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: nameController..text = "${student.name}",
+                      controller: firstNameController..text = student.firstName,
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter your full name";
+                          return "Please enter your first name";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Full name',
-                        hintText: 'Enter your full name',
+                        labelText: 'First name',
+                        hintText: 'Enter your first name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.name,
+                      style: textStyle,
+                      controller: lastNameController..text = student.lastName,
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter your last name";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Last name',
+                        hintText: 'Enter your last name',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -194,7 +217,8 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                     style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                     child: const Text('Submit'),
                     onPressed: () async {
-                      String name = nameController.text;
+                      String firstName = firstNameController.text;
+                      String lastName = lastNameController.text;
                       int cin = int.parse(cinController.text);
                       String email = emailController.text;
                       int phone = int.parse(phoneController.text);
@@ -202,8 +226,10 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                       Student updatedStudent = Student(
                         id: student.id,
                         cin: cin,
-                        name: name,
+                        firstName: firstName,
+                        lastName: lastName,
                         email: email,
+                        password: student.password,
                         phone: phone,
                         imageUrl: imageUrl,
                         classeId: student.classeId,
@@ -214,7 +240,8 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                       );
                       await HttpStudentService.updateStudent(
                           student.id, updatedStudent);
-                      nameController.text = '';
+                      firstNameController.text = '';
+                      lastNameController.text = '';
                       cinController.text = '';
                       emailController.text = '';
                       phoneController.text = '';

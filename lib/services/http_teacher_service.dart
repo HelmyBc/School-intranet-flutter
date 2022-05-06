@@ -10,12 +10,15 @@ class HttpTeacherService {
     var url = Uri.parse('http://192.168.56.1:9191/api/teacher/$id');
 
     Map data = {
-      "name": teacher.name,
+      "firstName": teacher.firstName,
+      "lastName": teacher.lastName,
       "email": teacher.email,
+      "password": teacher.password,
       "phone": teacher.phone,
       "cin": teacher.cin,
       "imageUrl": teacher.imageUrl,
       "chefDep": teacher.chefDep,
+      "depId": teacher.depId,
     };
     var body = json.encode(data);
     http.Response response = await http.put(
@@ -59,15 +62,29 @@ class HttpTeacherService {
     }
   }
 
-  static Future<Teacher> addTeacher(String name, String email, int cin,
-      int phone, String imageUrl, bool chefDep) async {
+  static Future<Teacher> addTeacher(
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+    int cin,
+    int phone,
+    int depId,
+    String imageUrl,
+    bool chefDep,
+    List<int> classesId,
+  ) async {
     Map data = {
-      "name": name,
+      "firstName": firstName,
+      "lastName": lastName,
       "email": email,
+      "password": password,
       "cin": cin,
       "phone": phone,
       "imageUrl": imageUrl,
+      "depId": depId,
       "chefDep": chefDep,
+      "classesId": classesId,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/teacher');

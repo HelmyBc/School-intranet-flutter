@@ -1,34 +1,44 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
+import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/department.dart';
+import 'package:enetcom_app/services/http_classe_service.dart';
 import 'package:enetcom_app/services/http_department_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UpdateDepartmentScreen extends StatefulWidget {
+class AddClasseScreen extends StatefulWidget {
+  const AddClasseScreen({Key? key}) : super(key: key);
+
   @override
-  State<UpdateDepartmentScreen> createState() => _UpdateDepartmentScreenState();
+  State<AddClasseScreen> createState() => _AddClasseScreenState();
 }
 
-class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
+class _AddClasseScreenState extends State<AddClasseScreen> {
   final minimumPadding = 5.0;
 
+  final ClasseController classeController = Get.put(ClasseController());
+
   TextEditingController nameController = TextEditingController();
-  TextEditingController shortNameController = TextEditingController();
+  TextEditingController levelController = TextEditingController();
+  TextEditingController depIdController = TextEditingController();
+  TextEditingController groupeController = TextEditingController();
+
+  Classe? classe;
 
   @override
   void dispose() {
     nameController.dispose();
-    shortNameController.dispose();
+    levelController.dispose();
+    depIdController.dispose();
+    groupeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
-    final DepartmentController departmentController =
-        Get.put(DepartmentController());
-    Department department = departmentController.editingDepartment[0];
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -47,12 +57,12 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
           ),
           backgroundColor: Palette.adminBg,
           elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.done),
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(Icons.done),
+          //   ),
+          // ],
         ),
         body: Form(
           child: Padding(
@@ -64,8 +74,7 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                     padding: EdgeInsets.only(
                         top: minimumPadding, bottom: minimumPadding),
                     child: const Text(
-                      // "Update the student ${student!.name}",
-                      "Update department",
+                      "Add a new classe",
                       style: TextStyle(
                         color: Palette.adminBg,
                         fontWeight: FontWeight.bold,
@@ -73,30 +82,21 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                       ),
                     ),
                   ),
-                  Text(
-                    department.name,
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
                       keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: nameController..text = department.name,
+                      controller: nameController,
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter the department name";
+                          return "Please enter classe name";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Department name',
-                        hintText: 'Enter the department name',
+                        labelText: 'classe name',
+                        hintText: 'Enter the classe name',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -106,19 +106,61 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.number,
                       style: textStyle,
-                      controller: shortNameController
-                        ..text = department.shortName,
+                      controller: levelController,
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter department short name";
+                          return "Please enter the department level";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Short name',
-                        hintText: 'Enter the department short name',
+                        labelText: 'level',
+                        hintText: 'Enter the department level',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      style: textStyle,
+                      controller: depIdController,
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter the department depId";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'depId',
+                        hintText: 'Enter the department depId',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      style: textStyle,
+                      controller: groupeController,
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter the department groupe";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'groupe',
+                        hintText: 'Enter the department groupe',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -130,25 +172,24 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                     child: const Text('Submit'),
                     onPressed: () async {
                       String name = nameController.text;
-                      String shortName = shortNameController.text;
+                      int level = int.parse(levelController.text);
+                      int depId = int.parse(depIdController.text);
+                      int groupe = int.parse(groupeController.text);
 
-                      Department updatedDepartment = Department(
-                        id: department.id,
-                        name: name,
-                        shortName: shortName,
-                        
+                      Classe classes = await HttpClasseService.addClasse(
+                        level,
+                        groupe,
+                        depId,
+                        name,
                       );
-                      await HttpDepartmentService.updateDepartment(
-                          department.id, updatedDepartment);
                       nameController.text = '';
-                      shortNameController.text = '';
-
-                      departmentController.fetchDepartments();
+                      groupeController.text = '';
+                      depIdController.text = '';
+                      levelController.text = '';
                       setState(() {
-                        const snackBar = SnackBar(
-                            content: Text("Department updated succefully!"));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        classe = classes;
                         Navigator.pop(context);
+                        classeController.fetchClasses();
                       });
                     },
                   ),

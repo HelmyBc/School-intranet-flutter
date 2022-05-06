@@ -14,7 +14,8 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
   final minimumPadding = 5.0;
   bool value = false;
 
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 
   TextEditingController cinController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -23,7 +24,8 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
 
   @override
   void dispose() {
-    nameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     cinController.dispose();
     emailController.dispose();
     phoneController.dispose();
@@ -36,7 +38,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
     final TeacherController teacherController = Get.put(TeacherController());
     Teacher teacher = teacherController.editingTeacher[0];
-    value = teacher.chefDep;
+    // value = teacher.chefDep;
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -82,7 +84,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                     ),
                   ),
                   Text(
-                    teacher.name,
+                    "${teacher.firstName} ${teacher.lastName}",
                     style: const TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
@@ -95,16 +97,39 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: nameController..text = "${teacher.name}",
+                      controller: firstNameController
+                        ..text = "${teacher.firstName}",
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter your full name";
+                          return "Please enter your first name";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Full name',
-                        hintText: 'Enter your full name',
+                        labelText: 'First name',
+                        hintText: 'Enter your first name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.name,
+                      style: textStyle,
+                      controller: lastNameController
+                        ..text = "${teacher.lastName}",
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter your last name";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Last name',
+                        hintText: 'Enter your last name',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -203,7 +228,13 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                             this.value = value!;
                           }),
                         ),
-                        const Text("Department boss ?")
+                        teacher.chefDep
+                            ? const Text(
+                                "Department boss ? (Currently department boss)")
+                            : const Expanded(
+                                child: Text(
+                                    "Department boss ? (Currently not the department boss)"),
+                              )
                       ],
                     ),
                   ),
@@ -211,26 +242,31 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                     style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                     child: const Text('Submit'),
                     onPressed: () async {
-                      String name = nameController.text;
+                      String firstName = firstNameController.text;
+                      String lastName = lastNameController.text;
                       int cin = int.parse(cinController.text);
                       String email = emailController.text;
+                      String password = cinController.text;
                       int phone = int.parse(phoneController.text);
+                      int depId = teacher.depId;
                       String imageUrl = imageController.text;
                       Teacher updatedteacher = Teacher(
                         id: teacher.id,
                         cin: cin,
-                        name: name,
+                        firstName: firstName,
+                        lastName: lastName,
                         email: email,
+                        password: password,
                         phone: phone,
                         imageUrl: imageUrl,
                         chefDep: value,
-                        // createdTime: teacher.createdTime,
-                        // deleted: teacher.deleted,
-                        // lastModifiedTime: teacher.lastModifiedTime,
+                        depId: depId,
+                        classesId: teacher.classesId,
                       );
                       await HttpTeacherService.updateTeacher(
                           teacher.id, updatedteacher);
-                      nameController.text = '';
+                      firstNameController.text = '';
+                      lastNameController.text = '';
                       cinController.text = '';
                       emailController.text = '';
                       phoneController.text = '';

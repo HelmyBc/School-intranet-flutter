@@ -32,7 +32,7 @@ class StudentTile extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              student.name,
+              "${student.firstName} ${student.lastName}",
               maxLines: 2,
               style: const TextStyle(
                   fontFamily: 'avenir', fontWeight: FontWeight.w800),

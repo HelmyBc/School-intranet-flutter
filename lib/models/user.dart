@@ -10,7 +10,8 @@ class User {
   User({
     required this.id,
     required this.cin,
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.email,
     required this.phone,
     required this.imageUrl,
@@ -21,7 +22,8 @@ class User {
 
   int id;
   int cin;
-  String name;
+  String firstName;
+  String lastName;
   String email;
   int phone;
   String imageUrl;
@@ -34,7 +36,8 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         cin: json["cin"],
-        name: json["name"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
         email: json["email"],
         phone: json["phone"],
         imageUrl: json["imageUrl"],
@@ -46,7 +49,8 @@ class User {
   Map<String, dynamic> toJson() => {
         "id": id,
         "cin": cin,
-        "name": name,
+        "firstName": firstName,
+        "lastName": lastName,
         "email": email,
         "phone": phone,
         "imageUrl": imageUrl,

@@ -1,15 +1,18 @@
-import 'package:enetcom_app/controllers/teacher_controller.dart';
-import 'package:enetcom_app/models/teacher.dart';
-import 'package:enetcom_app/services/http_teacher_service.dart';
-import 'package:enetcom_app/views/admin_views/teachers/update_teacher_screen.dart';
-import 'package:enetcom_app/views/widgets/profile_avatar.dart';
+import 'package:enetcom_app/controllers/classe_controller.dart';
+import 'package:enetcom_app/controllers/department_controller.dart';
+import 'package:enetcom_app/models/classe.dart';
+import 'package:enetcom_app/models/department.dart';
+import 'package:enetcom_app/services/http_classe_service.dart';
+import 'package:enetcom_app/services/http_department_service.dart';
+import 'package:enetcom_app/views/admin_views/classes/update_classe_screen.dart';
+import 'package:enetcom_app/views/admin_views/department/update_department_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TeacherCard extends StatelessWidget {
-  final TeacherController teacherController = Get.put(TeacherController());
-  Teacher teacher;
-  TeacherCard({required this.teacher});
+class ClasseCard extends StatelessWidget {
+  final ClasseController classeController = Get.put(ClasseController());
+  Classe classe;
+  ClasseCard({required this.classe});
 
   @override
   Widget build(BuildContext context) {
@@ -36,44 +39,14 @@ class TeacherCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileAvatar(imageUrl: teacher.imageUrl),
-          const SizedBox(width: 10.0),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${teacher.firstName} ${teacher.lastName}",
+                  classe.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
-                  'Email: ${teacher.email} ',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 12.0,
-                  ),
-                ),
-                Text(
-                  "Cin: ${teacher.cin}",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 12.0,
-                  ),
-                ),
-                Text(
-                  "phone: ${teacher.phone}",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 12.0,
-                  ),
-                ),
-                Text(
-                  "email: ${teacher.email}",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 12.0,
                   ),
                 ),
               ],
@@ -81,11 +54,11 @@ class TeacherCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              teacherController.editingTeacher.clear();
-              teacherController.editingTeacher.add(teacher);
+              classeController.editingClasse.clear();
+              classeController.editingClasse.add(classe);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => UpdateTeacherScreen()),
+                MaterialPageRoute(builder: (context) => UpdateClasseScreen()),
               );
             },
             child: const Icon(
@@ -101,10 +74,10 @@ class TeacherCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              HttpTeacherService.deleteTeacher(teacher.id);
-              teacherController.fetchTeachers();
+              HttpClasseService.deleteClasse(classe.id);
+              classeController.fetchClasses();
               const snackBar =
-                  SnackBar(content: Text("Teacher removed succefully!"));
+                  SnackBar(content: Text("Classe removed succefully!"));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
             child: const Icon(

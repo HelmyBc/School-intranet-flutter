@@ -45,7 +45,7 @@ class StudentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  student.name,
+                  "${student.firstName} ${student.lastName}",
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                   ),

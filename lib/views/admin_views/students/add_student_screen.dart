@@ -17,21 +17,25 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
 
   final StudentController studentController = Get.put(StudentController());
 
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController cinController = TextEditingController();
+  TextEditingController depIdController = TextEditingController();
+  TextEditingController classeIdController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  //TextEditingController imageController = TextEditingController();
 
   Student? student;
 
   @override
   void dispose() {
-    nameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     cinController.dispose();
+    depIdController.dispose();
+    classeIdController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    //imageController.dispose();
     super.dispose();
   }
 
@@ -56,12 +60,6 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
           ),
           backgroundColor: Palette.adminBg,
           elevation: 0.0,
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Icons.done),
-          //   ),
-          // ],
         ),
         body: Form(
           child: Padding(
@@ -86,16 +84,37 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.name,
                     style: textStyle,
-                    controller: nameController,
+                    controller: firstNameController,
                     validator: (value) {
                       if (value == null) {
-                        return "Please enter your full name";
+                        return "Please enter your first name";
                       }
                       return null;
                     },
                     decoration: InputDecoration(
-                      labelText: 'Full name',
-                      hintText: 'Enter your full name',
+                      labelText: 'First name',
+                      hintText: 'Enter your first name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                  child: TextFormField(
+                    keyboardType: TextInputType.name,
+                    style: textStyle,
+                    controller: lastNameController,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please enter your Last name";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Last name',
+                      hintText: 'Enter your Last name',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -117,6 +136,48 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                     decoration: InputDecoration(
                       labelText: 'CIN',
                       hintText: 'Enter your CIN',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: textStyle,
+                    controller: depIdController,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please enter your depId";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'depId',
+                      hintText: 'Enter your depId',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: textStyle,
+                    controller: classeIdController,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please enter your classeId";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'classeId',
+                      hintText: 'Enter your classeId',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -163,52 +224,38 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         )),
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(vertical: minimumPadding),
-                //   child: TextFormField(
-                //     keyboardType: TextInputType.url,
-                //     style: textStyle,
-                //     controller: imageController,
-                //     validator: (value) {
-                //       if (value == null) {
-                //         return "Please enter your photo URL";
-                //       }
-                //       return null;
-                //     },
-                //     decoration: InputDecoration(
-                //         labelText: 'Photo URL',
-                //         hintText: 'Enter your photo URL',
-                //         border: OutlineInputBorder(
-                //           borderRadius: BorderRadius.circular(5.0),
-                //         )),
-                //   ),
-                // ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                   child: const Text('Submit'),
                   onPressed: () async {
-                    String name = nameController.text;
+                    String firstName = firstNameController.text;
+                    String lastName = lastNameController.text;
                     int cin = int.parse(cinController.text);
+                    int depId = int.parse(depIdController.text);
+                    int classeId = int.parse(classeIdController.text);
                     String email = emailController.text;
+                    String password = cinController.text;
                     int phone = int.parse(phoneController.text);
-                    String classe = "2GII2";
 
                     String imageUrl =
                         "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
                     // String imageUrl = imageController.text;
                     Student students = await HttpStudentService.addStudent(
-                      name,
+                      firstName,
+                      lastName,
                       email,
+                      password,
                       cin,
                       phone,
                       imageUrl,
-                      classe,
+                      classeId,
+                      depId,
                     );
-                    nameController.text = '';
+                    firstNameController.text = '';
+                    lastNameController.text = '';
                     cinController.text = '';
                     emailController.text = '';
                     phoneController.text = '';
-                    //imageController.text = '';
                     setState(() {
                       student = students;
                       Navigator.pop(context);

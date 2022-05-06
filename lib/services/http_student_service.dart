@@ -18,16 +18,26 @@ class HttpStudentService {
     }
   }
 
-  static Future<Student> addStudent(String name, String email, int cin,
-      int phone, String imageUrl, String classe) async {
+  static Future<Student> addStudent(
+      String firstName,
+      String lastName,
+      String email,
+      String password,
+      int cin,
+      int phone,
+      String imageUrl,
+      int classeId,
+      int depId) async {
     Map data = {
-      "name": name,
+      "firstName": firstName,
+      "lastName": lastName,
       "email": email,
+      "password": password,
       "phone": phone,
       "cin": cin,
-      "classe": classe,
+      "classeId": classeId,
+      "depId": depId,
       "imageUrl": imageUrl,
-     
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/student');
@@ -43,18 +53,16 @@ class HttpStudentService {
     return student;
   }
 
-  
-
   static Future<http.Response> updateStudent(int id, Student student) async {
     var url = Uri.parse('http://192.168.56.1:9191/api/student/$id');
 
     Map data = {
-      "name": student.name,
+      "firstName": student.firstName,
+      "lastName": student.lastName,
       "email": student.email,
       "phone": student.phone,
       "cin": student.cin,
       "imageUrl": student.imageUrl,
-      
     };
     var body = json.encode(data);
     http.Response response = await http.put(

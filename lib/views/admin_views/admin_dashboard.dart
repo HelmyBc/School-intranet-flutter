@@ -1,6 +1,7 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/config/styles.dart';
+import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
@@ -17,6 +18,7 @@ class AdminDashboard extends StatelessWidget {
 
   final TeacherController teacherController = Get.put(TeacherController());
   final StudentController studentController = Get.put(StudentController());
+  final ClasseController classeController = Get.put(ClasseController());
   final PostController postController = Get.put(PostController());
   final DepartmentController departmentController =
       Get.put(DepartmentController());
