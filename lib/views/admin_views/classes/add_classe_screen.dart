@@ -99,27 +99,6 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
-                      keyboardType: TextInputType.name,
-                      style: textStyle,
-                      controller: nameController,
-                      validator: (value) {
-                        if (value == null) {
-                          return "Please enter classe name";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'classe name',
-                        hintText: 'Enter the classe name',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
-                    child: TextFormField(
                       keyboardType: TextInputType.number,
                       style: textStyle,
                       controller: levelController,
@@ -132,6 +111,27 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
                       decoration: InputDecoration(
                         labelText: 'level',
                         hintText: 'Enter the department level',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      style: textStyle,
+                      controller: groupeController,
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter the department groupe";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'groupe',
+                        hintText: 'Enter the department groupe',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -202,18 +202,27 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
+                      onTap: () => setState(() {
+                        nameController
+                          .text =
+                              "${levelController.text} $value ${groupeController.text}";
+                      }),
+                      readOnly: true,
+                      keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: groupeController,
+                      controller: nameController
+                        ..text =
+                            "${levelController.text} $value ${groupeController.text}",
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter the department groupe";
+                          return "Please enter classe name";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'groupe',
-                        hintText: 'Enter the department groupe',
+                        suffix: const Icon(Icons.refresh),
+                        labelText: 'classe name',
+                        hintText: 'Enter the classe name',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),

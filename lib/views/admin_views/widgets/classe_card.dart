@@ -47,6 +47,7 @@ class ClasseCard extends StatelessWidget {
                   classe.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
+                    fontSize: 20.0,
                   ),
                 ),
               ],

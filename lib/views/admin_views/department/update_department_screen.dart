@@ -36,23 +36,17 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
       child: Scaffold(
         backgroundColor: Palette.scaffold,
         appBar: AppBar(
+          brightness: Brightness.light,
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: true,
           title: const Text(
             'Admin Dashboard',
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 28.0,
+              fontSize: 22.0,
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Palette.adminBg,
-          elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.done),
-            ),
-          ],
         ),
         body: Form(
           child: Padding(
@@ -81,7 +75,7 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 30.0),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
@@ -136,7 +130,6 @@ class _UpdateDepartmentScreenState extends State<UpdateDepartmentScreen> {
                         id: department.id,
                         name: name,
                         shortName: shortName,
-                        
                       );
                       await HttpDepartmentService.updateDepartment(
                           department.id, updatedDepartment);

@@ -16,11 +16,19 @@ class DepartmentDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return departmentController.departmentList == null
         ? Scaffold(
-            backgroundColor: Palette.adminBg,
+            backgroundColor: Palette.scaffold,
             appBar: AppBar(
-              backgroundColor: const Color(0x99003153),
-              elevation: 0.0,
+              brightness: Brightness.light,
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
               automaticallyImplyLeading: true,
+              title: const Text(
+                'Admin Dashboard',
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               actions: <Widget>[
                 IconButton(
                   icon: const Icon(Icons.refresh),
@@ -47,11 +55,19 @@ class DepartmentDashboard extends StatelessWidget {
             ),
           )
         : Scaffold(
-            backgroundColor: Palette.adminBg,
+            backgroundColor: Palette.scaffold,
             appBar: AppBar(
-              backgroundColor: const Color(0x99003153),
-              elevation: 0.0,
+              brightness: Brightness.light,
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
               automaticallyImplyLeading: true,
+              title: const Text(
+                'Admin Dashboard',
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               actions: <Widget>[
                 IconButton(
                   icon: const Icon(Icons.refresh),
@@ -84,7 +100,7 @@ class DepartmentDashboard extends StatelessWidget {
                       () => Text(
                         'Departments (${departmentController.departmentList.length})',
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -119,7 +135,7 @@ class DepartmentDashboard extends StatelessWidget {
         child: Text(
           'Admin Dashboard',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 28.0,
             fontWeight: FontWeight.bold,
           ),

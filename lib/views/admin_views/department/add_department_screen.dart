@@ -40,23 +40,17 @@ class _AddDepartmentScreenState extends State<AddDepartmentScreen> {
       child: Scaffold(
         backgroundColor: Palette.scaffold,
         appBar: AppBar(
+          brightness: Brightness.light,
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: true,
           title: const Text(
             'Admin Dashboard',
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 28.0,
+              fontSize: 22.0,
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Palette.adminBg,
-          elevation: 0.0,
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Icons.done),
-          //   ),
-          // ],
         ),
         body: Form(
           child: Padding(
@@ -124,7 +118,7 @@ class _AddDepartmentScreenState extends State<AddDepartmentScreen> {
                     onPressed: () async {
                       String name = nameController.text;
                       String shortName = shortNameController.text;
-                      
+
                       Department departments =
                           await HttpDepartmentService.addDepartment(
                         name,

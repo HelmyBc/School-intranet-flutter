@@ -44,13 +44,14 @@ class DepartmentCard extends StatelessWidget {
                   department.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
+                    fontSize: 16.0,
                   ),
                 ),
                 const SizedBox(height: 6.0),
                 Text(
                   'Short name: ${department.shortName} ',
                   style: TextStyle(
-                    color: Colors.grey[600],
+                    color: Colors.grey[800],
                     fontSize: 16.0,
                   ),
                 ),

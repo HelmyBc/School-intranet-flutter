@@ -241,13 +241,7 @@ List categories = [
     "description": "Here you can find all your courses in PDF.",
     "screen": ComingSoonScreen(),
   },
-  {
-    "name": "Internship",
-    "icon": "assets/category/stage.svg",
-    "description":
-        "The space where u can find all the needed sheets and information about internships.",
-    "screen": ComingSoonScreen(),
-  },
+  
   {
     "name": "Exams",
     "icon": "assets/category/exams.svg",
@@ -261,9 +255,11 @@ List categories = [
         "Here you can see your upcoming TPs and where u can file your reports.",
     "screen": ComingSoonScreen(),
   },
-  // {
-  //   "name": "catch-up",
-  //   "icon": "assets/category/catchup.svg",
-  //   "description": ""
-  // },
+  {
+    "name": "Internship",
+    "icon": "assets/category/stage.svg",
+    "description":
+        "The space where u can find all the needed sheets and information about internships.",
+    "screen": ComingSoonScreen(),
+  },
 ];
