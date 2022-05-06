@@ -1,6 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/views/admin_views/classes/add_classe_screen.dart';
 import 'package:enetcom_app/views/admin_views/test_screen.dart';
+import 'package:enetcom_app/views/coming_soon_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -16,11 +16,18 @@ class _MenuScreenState extends State<MenuScreen> {
     return Scaffold(
       backgroundColor: Palette.scaffold,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         backgroundColor: Palette.scaffold,
-        // ignore: prefer_const_constructors
-        title: Image(
-            image: const ExactAssetImage("assets/images/enetcom_logo.png"),
+        title: const Image(
+            image: ExactAssetImage("assets/images/enetcom_logo.png"),
             //height: 60.0,
             width: 180.0,
             alignment: FractionalOffset.center),

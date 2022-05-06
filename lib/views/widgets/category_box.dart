@@ -18,7 +18,7 @@ class CategoryBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap:  onTap,
       child: Column(
         children: [
           AnimatedContainer(
@@ -57,4 +57,6 @@ class CategoryBox extends StatelessWidget {
       ),
     );
   }
+
+  
 }

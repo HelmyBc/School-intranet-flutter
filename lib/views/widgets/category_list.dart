@@ -23,11 +23,20 @@ class _CategoryListState extends State<CategoryList> {
             child: CategoryBox(
               selectedColor: Colors.white,
               data: categories[index],
-              onTap: () {},
+              onTap: () {
+                getScreen(context,categories[index]["screen"]);
+              },
             ),
           ),
         ),
       ),
+    );
+  }
+
+  getScreen(BuildContext context, data) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => data),
     );
   }
 }
