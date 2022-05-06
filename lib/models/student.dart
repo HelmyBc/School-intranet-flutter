@@ -18,6 +18,7 @@ class Student {
     required this.imageUrl,
     required this.classeId,
     required this.depId,
+    this.postsId,
   });
 
   int id;
@@ -30,6 +31,7 @@ class Student {
   String imageUrl;
   int classeId;
   int depId;
+  List? postsId;
 
   factory Student.fromJson(Map<String, dynamic> json) => Student(
         id: json["id"],
@@ -42,6 +44,7 @@ class Student {
         depId: json["depId"],
         phone: json["phone"],
         imageUrl: json["imageUrl"],
+        postsId: json["postsId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,5 +58,6 @@ class Student {
         "depId": depId,
         "phone": phone,
         "imageUrl": imageUrl,
+        "postsId": postsId,
       };
 }

@@ -17,8 +17,11 @@ class AddClasseScreen extends StatefulWidget {
 
 class _AddClasseScreenState extends State<AddClasseScreen> {
   final minimumPadding = 5.0;
-
+  String? value;
+  int selectedId = 0;
   final ClasseController classeController = Get.put(ClasseController());
+  final DepartmentController departmentController =
+      Get.put(DepartmentController());
 
   TextEditingController nameController = TextEditingController();
   TextEditingController levelController = TextEditingController();
@@ -37,8 +40,25 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    departmentController.fetchDepartments();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
+    departmentController.fetchDepartments();
+    List<String> generateDepartmentNames() {
+      return departmentController.departmentList
+          .map(
+            (dep) => dep.shortName,
+          )
+          .toList();
+    }
+
+    List<String> departmentNames = generateDepartmentNames();
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -57,12 +77,6 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
           ),
           backgroundColor: Palette.adminBg,
           elevation: 0.0,
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Icons.done),
-          //   ),
-          // ],
         ),
         body: Form(
           child: Padding(
@@ -124,27 +138,66 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
                       ),
                     ),
                   ),
-                  
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      style: textStyle,
-                      controller: depIdController,
-                      validator: (value) {
-                        if (value == null) {
-                          return "Please enter the department depId";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'depId',
-                        hintText: 'Enter the department depId',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: minimumPadding),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1.5)),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                hint: const Text("Select a department"),
+                                value: value,
+                                iconSize: 36,
+                                isExpanded: true,
+                                items:
+                                    departmentNames.map(buildMenuItem).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    this.value = value;
+                                    this.selectedId = generateDepartmentId();
+                                    print(selectedId);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      Container(
+                        width: 80.0,
+                        margin: const EdgeInsets.only(left: 10.0),
+                        padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                        child: TextFormField(
+                          enabled: false,
+                          keyboardType: TextInputType.number,
+                          style: textStyle,
+                          controller: depIdController
+                            ..text = selectedId.toString(),
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please enter the department depId";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'depId',
+                            hintText: 'Enter the department depId',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
@@ -173,7 +226,7 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
                     onPressed: () async {
                       String name = nameController.text;
                       int level = int.parse(levelController.text);
-                      int depId = int.parse(depIdController.text);
+                      int depId = selectedId;
                       int groupe = int.parse(groupeController.text);
 
                       Classe classes = await HttpClasseService.addClasse(
@@ -199,6 +252,23 @@ class _AddClasseScreenState extends State<AddClasseScreen> {
       ),
     );
   }
+
+  int generateDepartmentId() {
+    return selectedId = departmentController.departmentList
+        .where((dep) => dep.shortName == value)
+        .map(
+          (dep) => dep.id,
+        )
+        .first;
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      );
 }
 
 class MyAlertDialog extends StatelessWidget {

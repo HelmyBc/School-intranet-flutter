@@ -18,7 +18,8 @@ class Teacher {
     required this.imageUrl,
     required this.chefDep,
     required this.depId,
-    required this.classesId,
+    this.classesId,
+    this.postsId,
   });
 
   int id;
@@ -31,7 +32,8 @@ class Teacher {
   int phone;
   String imageUrl;
   bool chefDep;
-  List<int> classesId;
+  List? classesId;
+  List? postsId;
 
   factory Teacher.fromJson(Map<String, dynamic> json) => Teacher(
         id: json["id"],
@@ -45,6 +47,7 @@ class Teacher {
         chefDep: json["chefDep"],
         depId: json["depId"],
         classesId: json["classesId"],
+        postsId: json["postsId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,5 +62,6 @@ class Teacher {
         "chefDep": chefDep,
         "depId": depId,
         "classesId": classesId,
+        "postsId": postsId,
       };
 }

@@ -72,7 +72,7 @@ class HttpTeacherService {
     int depId,
     String imageUrl,
     bool chefDep,
-    List<int> classesId,
+    //List<int> classesId,
   ) async {
     Map data = {
       "firstName": firstName,
@@ -84,7 +84,7 @@ class HttpTeacherService {
       "imageUrl": imageUrl,
       "depId": depId,
       "chefDep": chefDep,
-      "classesId": classesId,
+      //"classesId": classesId,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/teacher');

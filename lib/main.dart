@@ -1,4 +1,5 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/views/admin_views/classes/add_classe_screen.dart';
 import 'package:enetcom_app/views/admin_views/test_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
         //accentColor: const Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Palette.scaffold,
       ),
-      //home: const RootAppAnimated(),
       home: RootAppAnimated(),
     );
   }

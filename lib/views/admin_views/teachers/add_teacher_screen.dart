@@ -242,7 +242,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                         depId,
                         imageUrl,
                         chefDep,
-                        [],
+                        //[],
                       );
                       firstNameController.text = '';
                       lastNameController.text = '';
