@@ -2,7 +2,6 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
-import 'package:enetcom_app/models/department.dart';
 import 'package:enetcom_app/models/student.dart';
 import 'package:enetcom_app/services/http_student_service.dart';
 import 'package:flutter/material.dart';

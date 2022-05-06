@@ -1,9 +1,12 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/classe_controller.dart';
+import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/teacher.dart';
 import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multiselect/multiselect.dart';
 
 class AddTeacherScreen extends StatefulWidget {
   const AddTeacherScreen({Key? key}) : super(key: key);
@@ -15,8 +18,15 @@ class AddTeacherScreen extends StatefulWidget {
 class _AddTeacherScreenState extends State<AddTeacherScreen> {
   final minimumPadding = 5.0;
   bool value = false;
+  String? depValue;
+  int selectedDepId = 0;
+  List<String> selectedClasses = [];
+  List<int> selectedClasseIds = [];
 
   final TeacherController teacherController = Get.put(TeacherController());
+  final ClasseController classeController = Get.put(ClasseController());
+  final DepartmentController departmentController =
+      Get.put(DepartmentController());
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -42,6 +52,36 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
+    departmentController.fetchDepartments();
+    classeController.fetchClasses();
+
+    List<String> generateDepartmentNames() {
+      return departmentController.departmentList
+          .map(
+            (dep) => dep.shortName,
+          )
+          .toList();
+    }
+
+    List<String> departmentNames = generateDepartmentNames();
+
+    List<String> generateClasseNames() {
+      return classeController.classeList
+          .map(
+            (classe) => classe.name,
+          )
+          .toList();
+    }
+
+    List<int> generateClasseIds() {
+      return classeController.classeList
+          .where((classe) => selectedClasses.contains(classe.name))
+          .map(
+            (classe) => classe.id,
+          )
+          .toList();
+    }
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -182,25 +222,66 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                           )),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
-                    child: TextFormField(
-                      keyboardType: TextInputType.phone,
-                      style: textStyle,
-                      controller: depIdController,
-                      validator: (value) {
-                        if (value == null) {
-                          return "Please enter your depId ";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'depId',
-                          hintText: 'Enter your first depId',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          )),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: minimumPadding),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1.5)),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                hint: const Text("Select a department"),
+                                value: depValue,
+                                iconSize: 36,
+                                isExpanded: true,
+                                items:
+                                    departmentNames.map(buildMenuItem).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    depValue = value;
+                                    selectedDepId = generateDepartmentId();
+                                    print(selectedDepId);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 80.0,
+                        margin: const EdgeInsets.only(left: 10.0),
+                        padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                        child: TextFormField(
+                          enabled: false,
+                          keyboardType: TextInputType.number,
+                          style: textStyle,
+                          controller: depIdController
+                            ..text = selectedDepId.toString(),
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please enter the department depId";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'depId',
+                            hintText: 'Enter the department depId',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
@@ -217,6 +298,17 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                       ],
                     ),
                   ),
+                  DropDownMultiSelect(
+                    whenEmpty: 'Select teacher classes',
+                    options: generateClasseNames(),
+                    selectedValues: selectedClasses,
+                    onChanged: (List<String> x) {
+                      setState(() {
+                        selectedClasses = x;
+                        selectedClasseIds = generateClasseIds();
+                      });
+                    },
+                  ),
                   ElevatedButton(
                     child: const Text('Submit'),
                     style: ElevatedButton.styleFrom(primary: Palette.adminBg),
@@ -227,8 +319,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                       String password = cinController.text;
                       String email = emailController.text;
                       int phone = int.parse(phoneController.text);
-                      int depId = int.parse(depIdController.text);
-                      //String imageUrl = imageController.text;
+                      int depId = selectedDepId;
                       String imageUrl =
                           "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
                       bool chefDep = value;
@@ -242,7 +333,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                         depId,
                         imageUrl,
                         chefDep,
-                        //[],
+                        selectedClasseIds,
                       );
                       firstNameController.text = '';
                       lastNameController.text = '';
@@ -261,6 +352,50 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                 ],
               )),
         ),
+      ),
+    );
+  }
+
+  int generateDepartmentId() {
+    return selectedDepId = departmentController.departmentList
+        .where((dep) => dep.shortName == depValue)
+        .map(
+          (dep) => dep.id,
+        )
+        .first;
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      );
+}
+
+class MyAlertDialog extends StatelessWidget {
+  final String? title;
+  final String? content;
+  final List<Widget> actions;
+  const MyAlertDialog({
+    Key? key,
+    this.title,
+    this.content,
+    this.actions = const [],
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        title!,
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      actions: actions,
+      content: Text(
+        content!,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
