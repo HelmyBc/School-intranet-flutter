@@ -27,30 +27,27 @@ class ComingSoonScreen extends StatelessWidget {
             alignment: FractionalOffset.center),
         centerTitle: false,
       ),
-      body: Center(
-        child: Expanded(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 18.0),
-                child: Image(
-                  image: AssetImage('assets/images/coming_soon.png'),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(18.0),
-                child: Text(
-                  "This feature is coming soon, we are working on it...",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+      body: Column(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 18.0),
+            child: Image(
+              image: AssetImage('assets/images/error.png'),
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.all(18.0),
+            child: Text(
+              "This feature is coming soon, we are working on it...",
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

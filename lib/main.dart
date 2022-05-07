@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         //accentColor: const Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Palette.scaffold,
       ),
-      home: ClassroomStudentScreen(),
+      home: RootAppAnimated(),
     );
   }
 }
