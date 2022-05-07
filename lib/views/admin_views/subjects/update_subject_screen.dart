@@ -14,10 +14,12 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   final minimumPadding = 5.0;
 
   TextEditingController nameController = TextEditingController();
+  TextEditingController levelController = TextEditingController();
 
   @override
   void dispose() {
     nameController.dispose();
+    levelController.dispose();
     super.dispose();
   }
 
@@ -94,19 +96,44 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      style: textStyle,
+                      controller: levelController
+                        ..text = subject.level.toString(),
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter the Subject level";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Subject level',
+                        hintText: 'Enter the Subject level',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                     child: const Text('Submit'),
                     onPressed: () async {
                       String name = nameController.text;
+                      int level = int.parse(levelController.text);
 
                       Subject updatedSubject = Subject(
                         id: subject.id,
                         name: name,
+                        level: level,
                       );
                       await HttpSubjectService.updateSubject(
                           subject.id, updatedSubject);
                       nameController.text = '';
+                      levelController.text = '';
 
                       subjectController.fetchSubjects();
                       setState(() {
