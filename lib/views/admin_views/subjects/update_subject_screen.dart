@@ -1,9 +1,11 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/subject_controller.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/services/http_subject_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multiselect/multiselect.dart';
 
 class UpdateSubjectScreen extends StatefulWidget {
   @override
@@ -12,9 +14,14 @@ class UpdateSubjectScreen extends StatefulWidget {
 
 class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   final minimumPadding = 5.0;
+  List<String> selectedDepartments = [];
+  List<int> selectedDepartmentIds = [];
 
   TextEditingController nameController = TextEditingController();
   TextEditingController levelController = TextEditingController();
+  final SubjectController subjectController = Get.put(SubjectController());
+  final DepartmentController departmentController =
+      Get.put(DepartmentController());
 
   @override
   void dispose() {
@@ -26,8 +33,26 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
-    final SubjectController subjectController = Get.put(SubjectController());
+    departmentController.fetchDepartments();
     Subject subject = subjectController.editingSubject[0];
+
+    List<String> generateDepartmentNames() {
+      return departmentController.departmentList
+          .map(
+            (dep) => dep.shortName,
+          )
+          .toList();
+    }
+
+    List<int> generateDepartmentIds() {
+      return departmentController.departmentList
+          .where((dep) => selectedDepartments.contains(dep.shortName))
+          .map(
+            (dep) => dep.id,
+          )
+          .toList();
+    }
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -118,6 +143,17 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
                       ),
                     ),
                   ),
+                  DropDownMultiSelect(
+                    whenEmpty: 'Select subject departments',
+                    options: generateDepartmentNames(),
+                    selectedValues: selectedDepartments,
+                    onChanged: (List<String> x) {
+                      setState(() {
+                        selectedDepartments = x;
+                        selectedDepartmentIds = generateDepartmentIds();
+                      });
+                    },
+                  ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                     child: const Text('Submit'),
@@ -127,8 +163,11 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
 
                       Subject updatedSubject = Subject(
                         id: subject.id,
-                        name: name,
                         level: level,
+                        name: name,
+                        coursesIds: subject.coursesIds,
+                        tdsIds: subject.tdsIds,
+                        depIds: selectedDepartmentIds,
                       );
                       await HttpSubjectService.updateSubject(
                           subject.id, updatedSubject);
@@ -150,6 +189,14 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
       ),
     );
   }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      );
 }
 
 class MyAlertDialog extends StatelessWidget {

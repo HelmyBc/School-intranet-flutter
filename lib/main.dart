@@ -1,4 +1,5 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/views/home%20screen/menu/classroom_student_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         //accentColor: const Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Palette.scaffold,
       ),
-      home: RootAppAnimated(),
+      home: ClassroomStudentScreen(),
     );
   }
 }

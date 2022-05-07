@@ -128,6 +128,9 @@ class ClasseDashboard extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SliverPadding(
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                ),
               ],
             ),
           );
