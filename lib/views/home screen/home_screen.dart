@@ -4,12 +4,14 @@ import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_slider_data_found.dart';
+import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/widgets/category_list.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/feature_carousel.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -39,10 +41,10 @@ class HomeScreen extends StatelessWidget {
                 title: Hero(
                   tag: "logo",
                   child: const Image(
-                      image: ExactAssetImage("assets/images/enetcom_logo.png"),
-                      //height: 60.0,
-                      width: 180.0,
-                      alignment: FractionalOffset.center),
+                    image: ExactAssetImage("assets/images/enetcom_logo.png"),
+                    width: 180.0,
+                    alignment: FractionalOffset.center,
+                  ),
                 ),
                 centerTitle: false,
                 floating: true,
@@ -52,16 +54,29 @@ class HomeScreen extends StatelessWidget {
                     iconColor: Palette.mainBlack,
                     toScreen: HomeScreen(),
                   ),
-                  CircleButton(
-                    icon: Icons.settings,
-                    iconColor: Palette.mainBlack,
-                    toScreen: HomeScreen(),
-                  ),
                   // CircleButton(
-                  //   icon: MdiIcons.facebookMessenger,
+                  //   icon: Icons.settings,
                   //   iconColor: Palette.mainBlack,
                   //   toScreen: HomeScreen(),
                   // ),
+                  ClipOval(
+                    child: Material(
+                      color: Colors.transparent, // Button color
+                      child: InkWell(
+                        splashColor: Colors.grey[200], // Splash color
+                        onTap: () {
+                          logout(context);
+                        },
+                        child: const SizedBox(
+                            width: 56,
+                            height: 56,
+                            child: Icon(
+                              Icons.logout_rounded,
+                              color: Palette.mainBlack,
+                            )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SliverPadding(
@@ -95,7 +110,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: GetBuilder<FeatureController>(
                   builder: (_c) {
@@ -116,12 +130,6 @@ class HomeScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: CreatePostContainer(currentUser: currentUser),
               ),
-              // SliverPadding(
-              //   padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-              //   sliver: SliverToBoxAdapter(
-              //     child: Rooms(onlineUsers: onlineUsers),
-              //   ),
-              // ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
@@ -136,5 +144,13 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void logout(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        (Route<dynamic> route) => false);
   }
 }
