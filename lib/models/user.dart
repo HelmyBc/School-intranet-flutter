@@ -28,6 +28,12 @@ class User {
   int? phone;
   String? imageUrl;
   String? userType;
+  //inherited
+  // bool? chefDep;
+  // List? classesId;
+  // int? classeId;
+  // int? depId;
+  // List? postsId;
   //list of posts
   //
 

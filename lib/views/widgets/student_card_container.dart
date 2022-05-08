@@ -63,7 +63,7 @@ class StudentCardContainer extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileAvatar(imageUrl: student.imageUrl),
+          ProfileAvatar(imageUrl: student.imageUrl!),
           const SizedBox(width: 10.0),
           Expanded(
             child: Column(

@@ -95,7 +95,7 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: firstNameController..text = student.firstName,
+                      controller: firstNameController..text = student.firstName!,
                       validator: (value) {
                         if (value == null) {
                           return "Please enter your first name";
@@ -116,7 +116,7 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: lastNameController..text = student.lastName,
+                      controller: lastNameController..text = student.lastName!,
                       validator: (value) {
                         if (value == null) {
                           return "Please enter your last name";
@@ -239,7 +239,7 @@ class _UpdateStudentScreenState extends State<UpdateStudentScreen> {
                         // lastModifiedTime: DateTime.now(),
                       );
                       await HttpStudentService.updateStudent(
-                          student.id, updatedStudent);
+                          student.id!, updatedStudent);
                       firstNameController.text = '';
                       lastNameController.text = '';
                       cinController.text = '';

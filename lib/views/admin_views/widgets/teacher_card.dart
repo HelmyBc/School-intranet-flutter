@@ -36,7 +36,7 @@ class TeacherCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileAvatar(imageUrl: teacher.imageUrl),
+          ProfileAvatar(imageUrl: teacher.imageUrl!),
           const SizedBox(width: 10.0),
           Expanded(
             child: Column(
@@ -101,7 +101,7 @@ class TeacherCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              HttpTeacherService.deleteTeacher(teacher.id);
+              HttpTeacherService.deleteTeacher(teacher.id!);
               teacherController.fetchTeachers();
               const snackBar =
                   SnackBar(content: Text("Teacher removed succefully!"));

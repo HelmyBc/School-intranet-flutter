@@ -1,15 +1,14 @@
-import 'package:enetcom_app/controllers/student_controller.dart';
-import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/services/http_student_service.dart';
-import 'package:enetcom_app/views/admin_views/students/update_student_screen.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StudentCard extends StatelessWidget {
-  final StudentController studentController = Get.put(StudentController());
-  Student student;
-  StudentCard({required this.student});
+class UserCard extends StatelessWidget {
+  final UserController userController = Get.put(UserController());
+  User user;
+  UserCard({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,41 +37,41 @@ class StudentCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileAvatar(imageUrl: student.imageUrl as String),
+          ProfileAvatar(imageUrl: user.imageUrl as String),
           const SizedBox(width: 10.0),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${student.firstName} ${student.lastName}",
+                  "${user.firstName} ${user.lastName}",
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 Text(
-                  'Email: ${student.email} ',
+                  'Email: ${user.email} ',
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12.0,
                   ),
                 ),
                 Text(
-                  "Cin: ${student.cin}",
+                  "Cin: ${user.cin}",
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12.0,
                   ),
                 ),
                 Text(
-                  "phone: ${student.phone}",
+                  "phone: ${user.phone}",
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12.0,
                   ),
                 ),
                 Text(
-                  "email: ${student.email}",
+                  "email: ${user.email}",
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 12.0,
@@ -83,12 +82,12 @@ class StudentCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              studentController.editingStudent.clear();
-              studentController.editingStudent.add(student);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UpdateStudentScreen()),
-              );
+              userController.editingUser.clear();
+              userController.editingUser.add(user);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => UpdateuserScreen()),
+              // );
             },
             child: const Icon(
               Icons.edit,
@@ -103,10 +102,10 @@ class StudentCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              HttpStudentService.deleteStudent(student.id as int) ;
-              studentController.fetchStudents();
+              HttpUserService.deleteUser(user.id as int);
+              userController.fetchUsers();
               const snackBar =
-                  SnackBar(content: Text("Student removed succefully!"));
+                  SnackBar(content: Text("user removed succefully!"));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
             child: const Icon(

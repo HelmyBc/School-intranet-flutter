@@ -24,7 +24,7 @@ class StudentTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Image.network(
-                    student.imageUrl,
+                    student.imageUrl!,
                     fit: BoxFit.cover,
                   ),
                 ),

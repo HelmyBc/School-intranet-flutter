@@ -62,7 +62,9 @@ class HttpStudentService {
       "email": student.email,
       "phone": student.phone,
       "cin": student.cin,
-      "imageUrl": student.imageUrl,
+      "password": student.password,
+      "classeId": student.classeId,
+      "depId": student.depId,
     };
     var body = json.encode(data);
     http.Response response = await http.put(

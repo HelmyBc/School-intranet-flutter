@@ -1,36 +1,47 @@
 import 'dart:convert';
 
+import 'package:enetcom_app/models/user.dart';
+
 List<Teacher> teacherFromJson(String str) =>
     List<Teacher>.from(json.decode(str).map((x) => Teacher.fromJson(x)));
 
 String teacherToJson(List<Teacher> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Teacher {
+class Teacher extends User {
   Teacher({
-    required this.id,
-    required this.cin,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.password,
-    required this.phone,
-    required this.imageUrl,
+    required id,
+    required cin,
+    required firstName,
+    required lastName,
+    required email,
+    required password,
+    required phone,
+    required imageUrl,
     required this.chefDep,
     required this.depId,
     this.classesId,
     this.postsId,
-  });
+  }) : super(
+          id: id,
+          firstName: firstName,
+          lastName: lastName,
+          cin: cin,
+          email: email,
+          password: password,
+          phone: phone,
+          imageUrl: imageUrl,
+        );
+  // int id;
+  // int cin;
 
-  int id;
-  int cin;
+  // String firstName;
+  // String lastName;
+  // String email;
+  // String password;
+  // int phone;
+  // String imageUrl;
   int depId;
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  int phone;
-  String imageUrl;
   bool chefDep;
   List? classesId;
   List? postsId;
@@ -50,6 +61,7 @@ class Teacher {
         postsId: json["postsId"],
       );
 
+  @override
   Map<String, dynamic> toJson() => {
         "id": id,
         "cin": cin,

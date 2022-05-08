@@ -21,8 +21,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController imageController = TextEditingController();
-   final TeacherController teacherController = Get.put(TeacherController());
-    
+  final TeacherController teacherController = Get.put(TeacherController());
 
   @override
   void dispose() {
@@ -38,7 +37,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
-   Teacher teacher = teacherController.editingTeacher[0];
+    Teacher teacher = teacherController.editingTeacher[0];
     // value = teacher.chefDep;
     return GestureDetector(
       onTap: () {
@@ -265,7 +264,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                         classesId: teacher.classesId,
                       );
                       await HttpTeacherService.updateTeacher(
-                          teacher.id, updatedteacher);
+                          teacher.id!, updatedteacher);
                       firstNameController.text = '';
                       lastNameController.text = '';
                       cinController.text = '';

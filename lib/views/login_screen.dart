@@ -28,23 +28,25 @@ class _LoginScreenState extends State<LoginScreen> {
     User cu = await HttpUserService.login(user);
     if (cu != null && cu.id != 0) {
       print(cu);
+      int? cuid = cu.id;
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("isLoggedIn", true);
+
       userController.currentUser.clear();
-      int? cuid = cu.id;
+
       if (cu.userType == "Student") {
+        User currentUser = await HttpUserService.getUser(cuid!);
+        userController.currentUser.add(currentUser);
+        userController.currentUserType = cu.userType as RxString;
+        prefs.setBool("isStudent", true);
+        prefs.setBool("isTeacher", false);
+        prefs.setInt("cuid", cuid);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const WelcomeStudentScreen(),
           ),
         );
-
-        Student currentUser = HttpStudentService.getStudent(cuid!) as Student;
-        userController.currentUser.add(currentUser);
-        userController.currentUserType = cu.userType as RxString;
-        prefs.setBool("isStudent", true);
-        prefs.setBool("isTeacher", false);
       } else if (cu.userType == "Teacher") {
         Navigator.pushReplacement(
           context,
@@ -52,11 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) => const WelcomeTeacherScreen(),
           ),
         );
-        Teacher currentUser = HttpTeacherService.getTeacher(cuid!) as Teacher;
+        User currentUser = await HttpUserService.getUser(cuid!);
         userController.currentUser.add(currentUser);
         userController.currentUserType = cu.userType as RxString;
         prefs.setBool("isTeacher", true);
         prefs.setBool("isStudent", false);
+        prefs.setInt("cuid", cuid);
       } else {
         const snackBar = SnackBar(
           content: Text("Please verify your credentials"),
