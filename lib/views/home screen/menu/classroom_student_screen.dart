@@ -1,7 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/student_controller.dart';
-import 'package:enetcom_app/models/student.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/classroom_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +11,21 @@ class ClassroomStudentScreen extends StatelessWidget {
   ClassroomStudentScreen({Key? key}) : super(key: key);
 
   final StudentController studentController = Get.put(StudentController());
+  final UserController userController = Get.put(UserController());
   final ClasseController classeController = Get.put(ClasseController());
+
+  // getCurrentUser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var isStudent = prefs.getBool('isStudent');
+  //   if (isStudent!) {
+  //     Student currentUser = userController.currentUser.last;
+  //   } else {
+  //     Teacher currentUser = userController.currentUser.last;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    Student currentStudent;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -38,12 +48,12 @@ class ClassroomStudentScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(10.0),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
             child: Text(
-              "Hi Helmy",
+              "Hi ",
               //"Hi ${currentStudent.firstName}",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black87,
                 fontSize: 18.0,
               ),

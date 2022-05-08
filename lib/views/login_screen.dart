@@ -1,9 +1,15 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/student.dart';
+import 'package:enetcom_app/models/teacher.dart';
 import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/services/http_student_service.dart';
+import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/welcome_student_screen.dart';
 import 'package:enetcom_app/views/welcome_teacher_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,32 +21,42 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  UserController userController = Get.put(UserController());
   User user = User(email: "", password: "");
 
   save() async {
-    User currentUser = await HttpUserService.login(user);
-    if (currentUser != null && currentUser.id != 0) {
-      print(currentUser);
+    User cu = await HttpUserService.login(user);
+    if (cu != null && cu.id != 0) {
+      print(cu);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("isLoggedIn", true);
-      if (currentUser.userType == "Student") {
+      userController.currentUser.clear();
+      int? cuid = cu.id;
+      if (cu.userType == "Student") {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const WelcomeStudentScreen(),
           ),
         );
-        // prefs.setBool("isStudent", true);
-        // prefs.setBool("isTeacher", false);
-      } else if (currentUser.userType == "Teacher") {
+
+        Student currentUser = HttpStudentService.getStudent(cuid!) as Student;
+        userController.currentUser.add(currentUser);
+        userController.currentUserType = cu.userType as RxString;
+        prefs.setBool("isStudent", true);
+        prefs.setBool("isTeacher", false);
+      } else if (cu.userType == "Teacher") {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const WelcomeTeacherScreen(),
           ),
         );
-        // prefs.setBool("isTeacher", true);
-        // prefs.setBool("isStudent", false);
+        Teacher currentUser = HttpTeacherService.getTeacher(cuid!) as Teacher;
+        userController.currentUser.add(currentUser);
+        userController.currentUserType = cu.userType as RxString;
+        prefs.setBool("isTeacher", true);
+        prefs.setBool("isStudent", false);
       } else {
         const snackBar = SnackBar(
           content: Text("Please verify your credentials"),
