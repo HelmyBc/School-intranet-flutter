@@ -8,28 +8,26 @@ String userToJson(List<User> data) =>
 
 class User {
   User({
-    required this.id,
-    required this.cin,
-    required this.firstName,
-    required this.lastName,
+    this.cin,
+    this.id,
+    this.firstName,
+    this.lastName,
     required this.email,
-    required this.phone,
-    required this.imageUrl,
-    required this.lastModifiedTime,
-    required this.createdTime,
-    required this.deleted,
+    required this.password,
+    this.phone,
+    this.imageUrl,
+    this.userType,
   });
 
-  int id;
-  int cin;
-  String firstName;
-  String lastName;
+  int? id;
+  int? cin;
+  String? firstName;
+  String? lastName;
   String email;
-  int phone;
-  String imageUrl;
-  DateTime lastModifiedTime;
-  DateTime createdTime;
-  bool deleted;
+  String password;
+  int? phone;
+  String? imageUrl;
+  String? userType;
   //list of posts
   //
 
@@ -39,11 +37,10 @@ class User {
         firstName: json["firstName"],
         lastName: json["lastName"],
         email: json["email"],
+        password: json["password"],
         phone: json["phone"],
         imageUrl: json["imageUrl"],
-        lastModifiedTime: json["lastModifiedTime"],
-        createdTime: json["createdTime"],
-        deleted: json["deleted"],
+        userType: json["userType"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,10 +49,9 @@ class User {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
+        "password": password,
         "phone": phone,
         "imageUrl": imageUrl,
-        "lastModifiedTime": lastModifiedTime,
-        "createdTime": createdTime,
-        "deleted": deleted,
+        "userType": userType,
       };
 }

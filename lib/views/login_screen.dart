@@ -1,0 +1,219 @@
+import 'dart:convert';
+
+import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/data/data.dart';
+import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/services/http_user_service.dart';
+import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class LoginScreen extends StatefulWidget {
+  LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  User user = User(email: "", password: "");
+
+  Uri uri = Uri.parse('http://192.168.56.1:9191/api/user/login');
+
+  save() async {
+    User currentUser = await HttpUserService.login(user);
+    if (currentUser != null && currentUser.id != 0) {
+      print(currentUser);
+      print("inside");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RootAppAnimated(),
+        ),
+      );
+    }
+    print("outside12345678");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: const Color(0xFFEDC9A6),
+      body: SizedBox(
+        width: double.infinity,
+        height: size.height,
+        child: SingleChildScrollView(
+          reverse: true,
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 78.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    "LOGIN",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                  Image(
+                    image: const ExactAssetImage("assets/images/login.png"),
+                    height: size.height * 0.5,
+                    alignment: FractionalOffset.center,
+                  ),
+
+                  // EMAIL INPUT
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Palette.kPrimaryLightColor,
+                      borderRadius: BorderRadius.circular(29),
+                    ),
+                    child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: TextEditingController(text: user.email),
+                      onChanged: (val) {
+                        user.email = val;
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Email is empty';
+                        }
+                        return null;
+                      },
+                      cursorColor: const Color(0xFF2653E0),
+                      decoration: const InputDecoration(
+                        icon: Icon(
+                          Icons.person,
+                          color: Color(0xFF2653E0),
+                        ),
+                        hintText: "Your Email",
+                        border: InputBorder.none,
+                        errorStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  //PASSWORD INPUT
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Palette.kPrimaryLightColor,
+                      borderRadius: BorderRadius.circular(29),
+                    ),
+                    child: TextFormField(
+                      obscureText: true,
+                      controller: TextEditingController(text: user.password),
+                      onChanged: (val) {
+                        user.password = val;
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Password is empty';
+                        }
+                        return null;
+                      },
+                      cursorColor: const Color(0xFF2653E0),
+                      decoration: const InputDecoration(
+                        errorStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                        hintText: "Password",
+                        icon: Icon(
+                          Icons.lock,
+                          color: Color(0xFF2653E0),
+                        ),
+                        suffixIcon: Icon(
+                          Icons.visibility,
+                          color: Color(0xFF2653E0),
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    width: size.width * 0.8,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(29),
+                      child: ElevatedButton(
+                        child: const Text(
+                          "LOGIN",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            save();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF2653E0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 20),
+                          textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // RoundedButton(
+                  //     text: "LOGIN",
+                  //     press: () {
+                  //       Navigator.push(context,
+                  //           MaterialPageRoute(builder: (context) => NavScreen()));
+                  //     }),
+                  SizedBox(height: size.height * 0.03),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 38.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          "Don’t have an Account ? ",
+                          style: TextStyle(
+                            color: Color(0xFF2653E0),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => {},
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const SignUpScreen())),
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              color: Color(0xFF2653E0),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

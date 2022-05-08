@@ -1,6 +1,5 @@
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/views/home%20screen/menu/classroom_student_screen.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -26,12 +25,9 @@ class MyApp extends StatelessWidget {
       title: 'ENETCom',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // primarySwatch: Colors.blue,
-        //primaryColor: const Color(0xFF3EBACE),
-        //accentColor: const Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Palette.scaffold,
       ),
-      home: RootAppAnimated(),
+      home: LoginScreen(),
     );
   }
 }
