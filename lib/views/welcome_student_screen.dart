@@ -27,18 +27,9 @@ class WelcomeStudentScreen extends StatelessWidget {
           alignment: Alignment.center,
           children: <Widget>[
             Positioned(
-              bottom: 0,
-              right: 0,
+              bottom: 10,
               child: Image.asset(
-                "assets/images/teacher_m.png",
-                height: size.height * 0.35,
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: -45,
-              child: Image.asset(
-                "assets/images/teacher_w.png",
+                "assets/images/students.png",
                 height: size.height * 0.35,
               ),
             ),
@@ -47,46 +38,32 @@ class WelcomeStudentScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Good professors",
+                    "You are",
                     style: TextStyle(
-                      fontSize: 36.0,
+                      fontSize: 45.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Text(
-                    "Are the reason why",
+                    "your only limit.",
                     style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    "ORDINARY students dream to do",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    "EXTRAORDINARY things.",
-                    style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 30.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 50.0),
                   MaterialButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RootAppAnimated(),
+                          builder: (context) => const RootAppAnimated(),
                         ),
                       );
                     },
                     child: Container(
                       height: 60,
-                      width: size.width * 0.6,
+                      width: size.width * 0.5,
                       margin: const EdgeInsets.all(20.0),
                       padding: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
@@ -109,6 +86,7 @@ class WelcomeStudentScreen extends StatelessWidget {
                         ],
                       ),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: const [
                           Text(

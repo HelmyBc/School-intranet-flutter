@@ -49,14 +49,19 @@ class HttpUserService {
     }
   }
 
-  static Future<http.Response> getUser(int id) async {
+  static Future<User> getUser(int id) async {
     var url = Uri.parse('http://192.168.56.1:9191/api/user/$id');
     http.Response response = await http.get(
       url,
       headers: headers,
     );
-    print(response.body);
-    return response;
+    if (response.body != null) {
+      Map responseMap = jsonDecode(response.body);
+      User user = User.fromJson(responseMap as Map<String, dynamic>);
+      return user;
+    } else {
+      return null as User;
+    }
   }
 
   static Future<http.Response> deleteUser(int id) async {

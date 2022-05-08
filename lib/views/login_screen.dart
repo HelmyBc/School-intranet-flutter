@@ -1,17 +1,13 @@
-import 'dart:convert';
-
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:enetcom_app/views/welcome_student_screen.dart';
 import 'package:enetcom_app/views/welcome_teacher_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -21,27 +17,30 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   User user = User(email: "", password: "");
 
-  Uri uri = Uri.parse('http://192.168.56.1:9191/api/user/login');
-
   save() async {
     User currentUser = await HttpUserService.login(user);
     if (currentUser != null && currentUser.id != 0) {
       print(currentUser);
-
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool("isLoggedIn", true);
       if (currentUser.userType == "Student") {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => WelcomeStudentScreen(),
+            builder: (context) => const WelcomeStudentScreen(),
           ),
         );
+        // prefs.setBool("isStudent", true);
+        // prefs.setBool("isTeacher", false);
       } else if (currentUser.userType == "Teacher") {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => WelcomeTeacherScreen(),
+            builder: (context) => const WelcomeTeacherScreen(),
           ),
         );
+        // prefs.setBool("isTeacher", true);
+        // prefs.setBool("isStudent", false);
       } else {
         const snackBar = SnackBar(
           content: Text("Please verify your credentials"),

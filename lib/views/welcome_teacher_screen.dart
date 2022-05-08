@@ -77,16 +77,16 @@ class WelcomeTeacherScreen extends StatelessWidget {
                   const SizedBox(height: 50.0),
                   MaterialButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RootAppAnimated(),
+                          builder: (context) => const RootAppAnimated(),
                         ),
                       );
                     },
                     child: Container(
                       height: 60,
-                      width: size.width * 0.6,
+                      width: size.width * 0.5,
                       margin: const EdgeInsets.all(20.0),
                       padding: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(

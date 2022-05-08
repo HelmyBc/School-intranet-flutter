@@ -1,65 +1,63 @@
+import 'dart:async';
 
-// import 'package:enetcom_app/views/login_screen.dart';
-// import 'package:enetcom_app/views/root_app_animated.dart';
-// import 'package:flutter/material.dart';
+import 'package:enetcom_app/views/login_screen.dart';
+import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// class SplashScreen extends StatefulWidget {
-//   const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
-//   @override
-//   _SplashScreenState createState() => _SplashScreenState();
-// }
+  @override
+  State<StatefulWidget> createState() {
+    return _SplashScreenState();
+  }
+}
 
-// class _SplashScreenState extends State<SplashScreen> {
-//   final TokenService _tokenService = TokenService();
-//   final AuthService _authService = AuthService();
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     Future.delayed(Duration.zero, () async {
-//       verifyCurrentToken();
-//     });
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/enetcom_logo.png"),
+              fit: BoxFit.cover),
+        ),
+      ),
+    );
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Scaffold(
-//       body: Center(
-//         child: Text('SPLASH: AUTH'),
-//       ),
-//     );
-//   }
+  void startTimer() {
+    Timer(const Duration(seconds: 3), () {
+      navigateUser(); //It will redirect  after 3 seconds
+    });
+  }
 
-//   verifyCurrentToken() async {
-//     if (_tokenService.exists()) {
-//       bool refresh = await _authService.refreshToken();
-//       if (refresh) {
-//         Navigator.pushAndRemoveUntil(
-//           context,
-//           MaterialPageRoute(
-//             builder: (BuildContext context) => const RootAppAnimated(),
-//           ),
-//           (route) => false,
-//         );
-//       } else {
-//         _tokenService.delete();
-//         Navigator.pushAndRemoveUntil(
-//           context,
-//           MaterialPageRoute(
-//             builder: (BuildContext context) => const LoginScreen(),
-//           ),
-//           (route) => false,
-//         );
-//       }
-//     } else {
-//       Navigator.pushAndRemoveUntil(
-//         context,
-//         MaterialPageRoute(
-//           builder: (BuildContext context) => const LoginScreen(),
-//         ),
-//         (route) => false,
-//       );
-//     }
-//   }
-// }
+  void navigateUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var status = prefs.getBool('isLoggedIn') ?? false;
+    print(status);
+    if (status) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const RootAppAnimated(),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
+    }
+  }
+}

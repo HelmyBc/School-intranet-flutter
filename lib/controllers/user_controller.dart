@@ -4,6 +4,8 @@ import 'package:get/state_manager.dart';
 
 class UserController extends GetxController {
   var isLoading = true.obs;
+  var currentUser = null.obs as User;
+  var currentUserType = "".obs;
   var userList = <User>[].obs;
   //this list MUST HAVE ONLY ONE ELEMENT
   var editingUser = <User>[].obs;
