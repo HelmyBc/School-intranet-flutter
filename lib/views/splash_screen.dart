@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -15,27 +17,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  FeatureController featureController = Get.put(FeatureController());
   @override
   void initState() {
     super.initState();
+    featureController.fetchFeatures();
     startTimer();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/enetcom_logo.png"),
-              fit: BoxFit.cover),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+          child: Hero(
+            tag: "logo",
+            child: Image.asset(
+              "assets/images/enetcom_logo.png",
+            ),
+          ),
         ),
       ),
     );
   }
 
   void startTimer() {
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 4), () {
       navigateUser(); //It will redirect  after 3 seconds
     });
   }

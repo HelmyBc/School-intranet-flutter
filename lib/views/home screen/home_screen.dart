@@ -36,12 +36,14 @@ class HomeScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 backgroundColor: Palette.scaffold,
                 // ignore: prefer_const_constructors
-                title: Image(
-                    image:
-                        const ExactAssetImage("assets/images/enetcom_logo.png"),
-                    //height: 60.0,
-                    width: 180.0,
-                    alignment: FractionalOffset.center),
+                title: Hero(
+                  tag: "logo",
+                  child: const Image(
+                      image: ExactAssetImage("assets/images/enetcom_logo.png"),
+                      //height: 60.0,
+                      width: 180.0,
+                      alignment: FractionalOffset.center),
+                ),
                 centerTitle: false,
                 floating: true,
                 actions: [
@@ -93,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              
+
               SliverToBoxAdapter(
                 child: GetBuilder<FeatureController>(
                   builder: (_c) {
@@ -105,8 +107,7 @@ class HomeScreen extends StatelessWidget {
                       }
                     } else if (_c.featureList.isNotEmpty) {
                       return FeatureCarousel();
-                    }
-                    else {
+                    } else {
                       return Container();
                     }
                   },
