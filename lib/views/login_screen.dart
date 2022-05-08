@@ -5,6 +5,8 @@ import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/welcome_student_screen.dart';
+import 'package:enetcom_app/views/welcome_teacher_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,15 +27,36 @@ class _LoginScreenState extends State<LoginScreen> {
     User currentUser = await HttpUserService.login(user);
     if (currentUser != null && currentUser.id != 0) {
       print(currentUser);
-      print("inside");
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RootAppAnimated(),
-        ),
+
+      if (currentUser.userType == "Student") {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WelcomeStudentScreen(),
+          ),
+        );
+      } else if (currentUser.userType == "Teacher") {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WelcomeTeacherScreen(),
+          ),
+        );
+      } else {
+        const snackBar = SnackBar(
+          content: Text("Please verify your credentials"),
+          backgroundColor: Color(0xFFF54856),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    } else {
+      const snackBar = SnackBar(
+        content: Text("Please verify your credentials"),
+        backgroundColor: Color(0xFFF54856),
       );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      print("outside");
     }
-    print("outside12345678");
   }
 
   @override
