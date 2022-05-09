@@ -1,3 +1,4 @@
+import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -118,5 +119,17 @@ class HttpUserService {
     Map responseMap = jsonDecode(response.body);
     User user = User.fromJson(responseMap as Map<String, dynamic>);
     return user;
+  }
+
+  static Future<List<Subject>> fetchUserSubjects(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/user/subjects/$id'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return subjectFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
   }
 }

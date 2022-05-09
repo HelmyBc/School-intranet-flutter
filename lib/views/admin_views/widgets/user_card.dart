@@ -82,8 +82,8 @@ class UserCard extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              userController.editingUser.clear();
-              userController.editingUser.add(user);
+              // userController.editingUser.clear();
+              // userController.editingUser.add(user);
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(builder: (context) => UpdateuserScreen()),

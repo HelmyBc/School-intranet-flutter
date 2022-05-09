@@ -32,8 +32,8 @@ class Student extends User {
   // String password;
   // int? phone;
   // String? imageUrl;
-  int classeId;
-  int depId;
+  int? classeId;
+  int? depId;
   List? postsId;
   Student({
     required id,

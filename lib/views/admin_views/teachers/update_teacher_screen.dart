@@ -228,7 +228,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                             this.value = value!;
                           }),
                         ),
-                        teacher.chefDep
+                        teacher.chefDep!
                             ? const Text(
                                 "Department boss ? (Currently department boss)")
                             : const Expanded(
@@ -248,7 +248,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                       String email = emailController.text;
                       String password = cinController.text;
                       int phone = int.parse(phoneController.text);
-                      int depId = teacher.depId;
+                      int depId = teacher.depId!;
                       String imageUrl = imageController.text;
                       Teacher updatedteacher = Teacher(
                         id: teacher.id,

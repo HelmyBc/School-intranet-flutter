@@ -24,14 +24,19 @@ class HttpSubjectService {
     return response;
   }
 
-  static Future<http.Response> getSubject(int id) async {
+  static Future<Subject> getSubject(int id) async {
     var url = Uri.parse('http://192.168.56.1:9191/api/subject/$id');
     http.Response response = await http.get(
       url,
       headers: headers,
     );
-    print(response.body);
-    return response;
+    if (response.body != null) {
+      Map responseMap = jsonDecode(response.body);
+      Subject subject = Subject.fromJson(responseMap as Map<String, dynamic>);
+      return subject;
+    } else {
+      return null as Subject;
+    }
   }
 
   static Future<http.Response> deleteSubject(int id) async {

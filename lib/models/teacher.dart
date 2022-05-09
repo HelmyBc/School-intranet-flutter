@@ -41,8 +41,8 @@ class Teacher extends User {
   // String password;
   // int phone;
   // String imageUrl;
-  int depId;
-  bool chefDep;
+  int? depId;
+  bool? chefDep;
   List? classesId;
   List? postsId;
 

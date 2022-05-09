@@ -33,12 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
       int cuid = cu.id!;
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("isLoggedIn", true);
-      //userController.currentUser.clear();
-
+      User currentUser = await HttpUserService.getUser(cuid);
+      userController.currentUserType.value = cu.userType!;
       if (cu.userType == "Student") {
-        User currentUser = await HttpUserService.getUser(cuid);
-        //userController.currentUser.add(currentUser);
-        userController.currentUserType.value = cu.userType!;
         prefs.setBool("isStudent", true);
         prefs.setBool("isTeacher", false);
         prefs.setInt("cuid", cuid);
@@ -49,18 +46,15 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       } else if (cu.userType == "Teacher") {
+        prefs.setBool("isTeacher", true);
+        prefs.setBool("isStudent", false);
+        prefs.setInt("cuid", cuid);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const WelcomeTeacherScreen(),
           ),
         );
-        User currentUser = await HttpUserService.getUser(cuid);
-        //userController.currentUser.add(currentUser);
-        userController.currentUserType.value= cu.userType! ;
-        prefs.setBool("isTeacher", true);
-        prefs.setBool("isStudent", false);
-        prefs.setInt("cuid", cuid);
       } else {
         const snackBar = SnackBar(
           content: Text("Please verify your credentials"),

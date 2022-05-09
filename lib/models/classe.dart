@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:enetcom_app/models/subject.dart';
+
 List<Classe> classeFromJson(String str) =>
     List<Classe>.from(json.decode(str).map((x) => Classe.fromJson(x)));
 
@@ -13,6 +15,7 @@ class Classe {
     required this.groupe,
     required this.depId,
     required this.name,
+    this.subjectsId,
   });
 
   int id;
@@ -20,6 +23,7 @@ class Classe {
   int groupe;
   int depId;
   String name;
+  List? subjectsId;
 
   factory Classe.fromJson(Map<String, dynamic> json) => Classe(
         id: json["id"],
@@ -27,6 +31,7 @@ class Classe {
         level: json["level"],
         groupe: json["groupe"],
         depId: json["depId"],
+        subjectsId: json["subjectsId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,5 +40,6 @@ class Classe {
         "level": level,
         "groupe": groupe,
         "depId": depId,
+        "subjectsId": subjectsId,
       };
 }

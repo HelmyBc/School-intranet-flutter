@@ -76,14 +76,19 @@ class HttpStudentService {
     return response;
   }
 
-  static Future<http.Response> getStudent(int id) async {
+  static Future<Student> getStudent(int id) async {
     var url = Uri.parse('http://192.168.56.1:9191/api/student/$id');
     http.Response response = await http.get(
       url,
       headers: headers,
     );
-    print(response.body);
-    return response;
+    if (response.body != null) {
+      Map responseMap = jsonDecode(response.body);
+      Student student = Student.fromJson(responseMap as Map<String, dynamic>);
+      return student;
+    } else {
+      return null as Student;
+    }
   }
 
   static Future<http.Response> deleteStudent(int id) async {

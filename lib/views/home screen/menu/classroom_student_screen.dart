@@ -1,9 +1,11 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
-import 'package:enetcom_app/controllers/shared_pref.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/classe.dart';
+import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/services/http_classe_service.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/classroom_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
@@ -20,31 +22,9 @@ class ClassroomStudentScreen extends StatefulWidget {
 class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
   final UserController userController = Get.put(UserController());
   final ClasseController classeController = Get.put(ClasseController());
-  //SharedPref sharedPref = SharedPref();
 
   User currentUser = User(email: "", password: "");
-  //SharedPref sharedPref = SharedPref();
-  // User userSave = User(email: "", password: "");
-  // User userLoad = User(email: "", password: "");
 
-  // loadSharedPrefs() async {
-  //   try {
-  //     User user = User.fromJson(await sharedPref.read("user"));
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text("Loaded!"),
-  //         duration: Duration(milliseconds: 500),
-  //       ),
-  //     );
-  //     setState(() {
-  //       userLoad = user;
-  //     });
-  //   } catch (Excepetion) {
-  //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //         content: Text("Nothing found!"),
-  //         duration: Duration(milliseconds: 500)));
-  //   }
-  // }
   @override
   void initState() {
     super.initState();
@@ -53,9 +33,9 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //User currentUser = userController.currentUser.value;
-    //User cu = HttpUserService.getUser(userController.currentUserId.value);
-    //User currentUser = sharedPref.read("user");
+    User currentUser = userController.currentUser.value;
+    Classe currentUserClasse = userController.currentUserClasse.value;
+
     print(currentUser.firstName);
     return Scaffold(
       appBar: AppBar(
@@ -78,6 +58,7 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
         centerTitle: false,
       ),
       body: ListView(
+        shrinkWrap: true,
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -110,26 +91,38 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
-          buildClassroomTile(
-            context,
-            'assets/images/book.png',
-            "Intelligence Artificielle",
-          ),
-          buildClassroomTile(
-            context,
-            'assets/images/book.png',
-            "Traitement d'image",
-          ),
-          buildClassroomTile(
-            context,
-            'assets/images/book.png',
-            "Statistiques et probabilite",
-          ),
-          buildClassroomTile(
-            context,
-            'assets/images/book.png',
-            "Developpement web",
-          ),
+          Obx(() {
+            if (userController.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return Expanded(
+                child: ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    final Subject subject =
+                        userController.currentUserSubjects[index];
+                    return ClassroomTile(
+                      title: subject.name,
+                    );
+                  },
+                  itemCount: userController.currentUserSubjects.length,
+                ),
+              );
+            }
+          }),
+          // ClassroomTile(
+          //   title: "Intelligence Artificielle",
+          // ),
+          // ClassroomTile(
+          //   title: "Traitement d'image",
+          // ),
+          // ClassroomTile(
+          //   title: "Statistiques et probabilite",
+          // ),
+          // ClassroomTile(
+          //   title: "Developpement web",
+          // ),
         ],
       ),
     );

@@ -48,14 +48,26 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var status = prefs.getBool('isLoggedIn') ?? false;
+    var isStudent = prefs.getBool('isStudent') ?? false;
     print(status);
     if (status) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const RootAppAnimated(),
-        ),
-      );
+      if (isStudent) {
+        ///// STUDENT ROUTE
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const RootAppAnimated(),
+          ),
+        );
+      } else {
+        ////// TEACHER ROUTE
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const RootAppAnimated(),
+          ),
+        );
+      }
     } else {
       Navigator.pushReplacement(
         context,

@@ -17,6 +17,11 @@ class User {
     this.phone,
     this.imageUrl,
     this.userType,
+    this.chefDep,
+    this.classeId,
+    this.classesId,
+    this.depId,
+    this.postsId,
   });
 
   int? id;
@@ -29,13 +34,11 @@ class User {
   String? imageUrl;
   String? userType;
   //inherited
-  // bool? chefDep;
-  // List? classesId;
-  // int? classeId;
-  // int? depId;
-  // List? postsId;
-  //list of posts
-  //
+  bool? chefDep;
+  List? classesId;
+  int? classeId;
+  int? depId;
+  List? postsId;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -47,6 +50,11 @@ class User {
         phone: json["phone"],
         imageUrl: json["imageUrl"],
         userType: json["userType"],
+        chefDep: json["chefDep"],
+        classesId: json["classesId"],
+        classeId: json["classeId"],
+        depId: json["depId"],
+        postsId: json["postsId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,5 +67,10 @@ class User {
         "phone": phone,
         "imageUrl": imageUrl,
         "userType": userType,
+        "chefDep": chefDep,
+        "classesId": classesId,
+        "classeId": classeId,
+        "depId": depId,
+        "postsId": postsId,
       };
 }
