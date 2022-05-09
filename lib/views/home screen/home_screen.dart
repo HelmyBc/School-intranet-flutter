@@ -1,5 +1,6 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/feature_controller.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
@@ -16,6 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   FeatureController featureController = Get.put(FeatureController());
+  UserController userController = Get.put(UserController());
 
   bool _isLoading = true;
   @override

@@ -6,8 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
   var isLoading = true.obs;
-  var currentUser = <User>[].obs;
+  var currentUser = User(email: "", password: "").obs;
   var currentUserType = "".obs;
+  var currentUserId = 0.obs;
   var userList = <User>[].obs;
   //this list MUST HAVE ONLY ONE ELEMENT
   var editingUser = <User>[].obs;
@@ -16,7 +17,13 @@ class UserController extends GetxController {
   void onInit() {
     fetchUsers();
     loadCurrentUser();
+    getCurrentUser();
     super.onInit();
+  }
+
+  void getCurrentUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    currentUser.value = await HttpUserService.getUser(prefs.getInt('cuid')!);
   }
 
   void fetchUsers() async {
@@ -36,12 +43,18 @@ class UserController extends GetxController {
       isLoading(true);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var cuid = prefs.getInt('cuid');
-      User currentUser = await HttpUserService.getUser(cuid!);
-      this.currentUser.add(currentUser);
+      if (cuid != null) {
+        User currentUser = await HttpUserService.getUser(cuid);
+        //this.currentUser.add(currentUser);
+        currentUserId.value = cuid;
+      } else {
+        cuid = 0;
+        prefs.setInt('cuid', 0);
+        currentUserId.value = 0;
+      }
     } catch (Excepetion) {
       print(
           "An error while loading current user from shared pref has occured: $Excepetion");
-
       isLoading(false);
     }
   }

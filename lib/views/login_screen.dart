@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/student.dart';
@@ -27,17 +29,16 @@ class _LoginScreenState extends State<LoginScreen> {
   save() async {
     User cu = await HttpUserService.login(user);
     if (cu != null && cu.id != 0) {
-      print(cu);
-      int? cuid = cu.id;
+      print(json.encode(cu));
+      int cuid = cu.id!;
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("isLoggedIn", true);
-
-      userController.currentUser.clear();
+      //userController.currentUser.clear();
 
       if (cu.userType == "Student") {
-        User currentUser = await HttpUserService.getUser(cuid!);
-        userController.currentUser.add(currentUser);
-        userController.currentUserType = cu.userType as RxString;
+        User currentUser = await HttpUserService.getUser(cuid);
+        //userController.currentUser.add(currentUser);
+        userController.currentUserType.value = cu.userType!;
         prefs.setBool("isStudent", true);
         prefs.setBool("isTeacher", false);
         prefs.setInt("cuid", cuid);
@@ -54,9 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) => const WelcomeTeacherScreen(),
           ),
         );
-        User currentUser = await HttpUserService.getUser(cuid!);
-        userController.currentUser.add(currentUser);
-        userController.currentUserType = cu.userType as RxString;
+        User currentUser = await HttpUserService.getUser(cuid);
+        //userController.currentUser.add(currentUser);
+        userController.currentUserType.value= cu.userType! ;
         prefs.setBool("isTeacher", true);
         prefs.setBool("isStudent", false);
         prefs.setInt("cuid", cuid);
@@ -73,7 +74,6 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Color(0xFFF54856),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      print("outside");
     }
   }
 

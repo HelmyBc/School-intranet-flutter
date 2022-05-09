@@ -31,11 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 60.0),
-          child: Hero(
-            tag: "logo",
-            child: Image.asset(
-              "assets/images/enetcom_logo.png",
-            ),
+          child: Image.asset(
+            "assets/images/enetcom_logo.png",
           ),
         ),
       ),
@@ -63,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => const LoginScreen(),
         ),
       );
     }
