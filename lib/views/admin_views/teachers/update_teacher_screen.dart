@@ -262,6 +262,7 @@ class _UpdateTeacherScreenState extends State<UpdateTeacherScreen> {
                         chefDep: value,
                         depId: depId,
                         classesId: teacher.classesId,
+                        subjectsId: teacher.subjectsId,
                       );
                       await HttpTeacherService.updateTeacher(
                           teacher.id!, updatedteacher);

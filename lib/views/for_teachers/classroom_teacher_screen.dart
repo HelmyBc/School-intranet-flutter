@@ -1,27 +1,27 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
+import 'package:enetcom_app/controllers/subject_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/services/http_classe_service.dart';
-import 'package:enetcom_app/services/http_user_service.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/classroom_tile.dart';
+import 'package:enetcom_app/views/for_teachers/add_teacher_subjects_screen.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ClassroomStudentScreen extends StatefulWidget {
-  ClassroomStudentScreen({Key? key}) : super(key: key);
+class ClassroomTeacherScreen extends StatefulWidget {
+  ClassroomTeacherScreen({Key? key}) : super(key: key);
 
   @override
-  State<ClassroomStudentScreen> createState() => _ClassroomStudentScreenState();
+  State<ClassroomTeacherScreen> createState() => _ClassroomTeacherScreenState();
 }
 
-class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
+class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
   final UserController userController = Get.put(UserController());
   final ClasseController classeController = Get.put(ClasseController());
+  //final SubjectController subjectController = Get.put(SubjectController());
 
   User currentUser = User(email: "", password: "");
 
@@ -34,9 +34,20 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
   @override
   Widget build(BuildContext context) {
     User currentUser = userController.currentUser.value;
-    Classe currentUserClasse = userController.currentUserClasse.value;
+    print(userController.currentUserClasses);
+    // List<int> currentUserClasses = userController.currentUserClasses.value;
+    // subjectController.fetchSubjects();
+    // print(currentUser.firstName);
+    // List<String> generateSubjectsNames() {
+    //   return subjectController.subjectList
+    //       .map(
+    //         (subject) => subject.name,
+    //       )
+    //       .toList();
+    // }
 
-    print(currentUser.firstName);
+    // List<String> subjectsNames = generateSubjectsNames();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -65,7 +76,7 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
             child: Obx(
               () => Text(
                 "Hi ${userController.currentUser.value.firstName ?? ""}",
-                //"Hi ${currentStudent.firstName}",
+                //"Hi ${currentTeacher.firstName}",
                 style: const TextStyle(
                   color: Colors.black87,
                   fontSize: 18.0,
@@ -91,26 +102,52 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "My classes",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Edit",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Obx(() {
             if (userController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return Expanded(
-                child: ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Subject subject =
-                        userController.currentUserSubjects[index];
-                    return ClassroomTile(
-                      title: subject.name,
-                    );
-                  },
-                  itemCount: userController.currentUserSubjects.length,
-                ),
+              return ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  final Classe classe =
+                      userController.currentUserClasses[index];
+                  return SubjectTile(
+                    title: classe.name,
+                  );
+                },
+                itemCount: userController.currentUserClasses.length,
               );
             }
           }),
+          const SizedBox(height: 70.0),
           // ClassroomTile(
           //   title: "Intelligence Artificielle",
           // ),
@@ -124,6 +161,13 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
           //   title: "Developpement web",
           // ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

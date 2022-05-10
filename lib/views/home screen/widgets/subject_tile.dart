@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ClassroomTile extends StatelessWidget {
+class SubjectTile extends StatelessWidget {
   String title;
 
-  ClassroomTile({
+  SubjectTile({
     Key? key,
     required this.title,
   }) : super(key: key);

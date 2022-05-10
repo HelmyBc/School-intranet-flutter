@@ -1,4 +1,6 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/views/for_students/classroom_student_screen.dart';
+import 'package:enetcom_app/views/for_teachers/classroom_teacher_screen.dart';
 import 'package:enetcom_app/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,3 +1,4 @@
+import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/teacher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -19,6 +20,8 @@ class HttpTeacherService {
       "imageUrl": teacher.imageUrl,
       "chefDep": teacher.chefDep,
       "depId": teacher.depId,
+      "subjectsId": teacher.subjectsId,
+      "classesId": teacher.classesId,
     };
     var body = json.encode(data);
     http.Response response = await http.put(
@@ -62,6 +65,19 @@ class HttpTeacherService {
     }
   }
 
+//NOT USED YET
+  static Future<List<Classe>> fetchTeacherClasses(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/teacher/$id/classes'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return classeFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
+
   static Future<Teacher> addTeacher(
     String firstName,
     String lastName,
@@ -73,6 +89,7 @@ class HttpTeacherService {
     String imageUrl,
     bool chefDep,
     List? classesId,
+    List? subjectsId,
   ) async {
     Map data = {
       "firstName": firstName,
@@ -85,6 +102,7 @@ class HttpTeacherService {
       "depId": depId,
       "chefDep": chefDep,
       "classesId": classesId,
+      "subjectsId": subjectsId,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/teacher');

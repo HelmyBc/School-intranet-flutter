@@ -73,6 +73,9 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
           .toList();
     }
 
+    List<String> classesNames = generateDepartmentNames();
+
+    
     List<int> generateClasseIds() {
       return classeController.classeList
           .where((classe) => selectedClasses.contains(classe.name))
@@ -306,6 +309,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                       setState(() {
                         selectedClasses = x;
                         selectedClasseIds = generateClasseIds();
+                        print(selectedClasseIds.toString());
                       });
                     },
                   ),
@@ -334,6 +338,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                         imageUrl,
                         chefDep,
                         selectedClasseIds,
+                        [],
                       );
                       firstNameController.text = '';
                       lastNameController.text = '';

@@ -22,6 +22,7 @@ class Teacher extends User {
     required this.depId,
     this.classesId,
     this.postsId,
+    this.subjectsId,
   }) : super(
           id: id,
           firstName: firstName,
@@ -45,6 +46,7 @@ class Teacher extends User {
   bool? chefDep;
   List? classesId;
   List? postsId;
+  List? subjectsId;
 
   factory Teacher.fromJson(Map<String, dynamic> json) => Teacher(
         id: json["id"],
@@ -59,6 +61,7 @@ class Teacher extends User {
         depId: json["depId"],
         classesId: json["classesId"],
         postsId: json["postsId"],
+        subjectsId: json["subjectsId"],
       );
 
   @override
@@ -75,5 +78,6 @@ class Teacher extends User {
         "depId": depId,
         "classesId": classesId,
         "postsId": postsId,
+        "subjectsId": subjectsId,
       };
 }

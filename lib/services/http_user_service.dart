@@ -1,3 +1,4 @@
+import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:http/http.dart' as http;
@@ -123,10 +124,22 @@ class HttpUserService {
 
   static Future<List<Subject>> fetchUserSubjects(int id) async {
     var response = await client
-        .get(Uri.parse('http://192.168.56.1:9191/api/user/subjects/$id'));
+        .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/subjects'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return subjectFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
+
+  static Future<List<Classe>> fetchUserClasses(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/classes'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return classeFromJson(jsonString);
     } else {
       //show error message
       return [];
