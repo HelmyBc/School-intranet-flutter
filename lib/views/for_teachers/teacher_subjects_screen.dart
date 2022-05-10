@@ -1,3 +1,8 @@
+import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
@@ -6,20 +11,21 @@ import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/for_teachers/add_teacher_subjects_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/classe_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class ClassroomTeacherScreen extends StatefulWidget {
-  ClassroomTeacherScreen({Key? key}) : super(key: key);
+class TeacherSubjectsScreen extends StatefulWidget {
+  int classeId;
+  TeacherSubjectsScreen({
+    Key? key,
+    required this.classeId,
+  }) : super(key: key);
 
   @override
-  State<ClassroomTeacherScreen> createState() => _ClassroomTeacherScreenState();
+  State<TeacherSubjectsScreen> createState() => _TeacherSubjectsScreenState();
 }
 
-class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
+class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
   final UserController userController = Get.put(UserController());
   final ClasseController classeController = Get.put(ClasseController());
-  //final SubjectController subjectController = Get.put(SubjectController());
 
   User currentUser = User(email: "", password: "");
 
@@ -116,19 +122,25 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
-               const Text(
-                  "My classes",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+              children: [
+               const Expanded(
+                  child:  Text(
+                    "I teach this/these subject(s) in this class",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 TextButton(
-                  onPressed: () { Navigator.push(context,
-              MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));},
-                  child:const Text(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => AddTeacherSubjectsScreen()));
+                  },
+                  child: const Text(
                     "Edit",
                     style: TextStyle(
                       color: Colors.blue,
@@ -148,38 +160,19 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
                 physics: const ClampingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  final Classe classe =
-                      userController.currentUserClasses[index];
-                  return ClasseTile(
-                    classe: classe,
+                  final Subject subject =
+                      userController.currentUserClasseSubject[index];
+                  return SubjectTile(
+                    title: subject.name,
                   );
                 },
-                itemCount: userController.currentUserClasses.length,
+                itemCount: userController.currentUserClasseSubject.length,
               );
             }
           }),
           const SizedBox(height: 70.0),
-          // ClassroomTile(
-          //   title: "Intelligence Artificielle",
-          // ),
-          // ClassroomTile(
-          //   title: "Traitement d'image",
-          // ),
-          // ClassroomTile(
-          //   title: "Statistiques et probabilite",
-          // ),
-          // ClassroomTile(
-          //   title: "Developpement web",
-          // ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(context,
-      //         MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }

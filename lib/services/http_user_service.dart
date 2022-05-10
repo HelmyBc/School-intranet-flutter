@@ -145,4 +145,15 @@ class HttpUserService {
       return [];
     }
   }
+  static Future<List<Subject>> fetchUserClasseSubjects(int id,int id1) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/classes/$id1/subjects'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return subjectFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
 }

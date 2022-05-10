@@ -1,8 +1,6 @@
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/services/http_classe_service.dart';
-import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:get/state_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,13 +10,14 @@ class UserController extends GetxController {
   var currentUser = User(email: "", password: "").obs;
   var currentUserClasse =
       Classe(depId: 0, groupe: 0, id: 0, level: 0, name: '').obs;
-  
 
   var currentUserType = "".obs;
   var currentUserId = 0.obs;
+  var currentClasse = 0.obs;
   var userList = <User>[].obs;
   var currentUserSubjects = <Subject>[].obs;
   var currentUserClasses = <Classe>[].obs;
+  var currentUserClasseSubject = <Subject>[].obs;
 
   @override
   void onInit() {
@@ -27,6 +26,7 @@ class UserController extends GetxController {
     getCurrentUser();
     getCurrentUserSubjects();
     getCurrentUserClasses();
+    getUserClasseSubjects();
     super.onInit();
   }
 
@@ -45,6 +45,15 @@ class UserController extends GetxController {
   void getCurrentUserClasses() async {
     currentUserClasses.value =
         await HttpUserService.fetchUserClasses(currentUser.value.id!);
+  }
+
+//for classroom teacher second screen
+  void getUserClasseSubjects() async {
+    currentUserClasseSubject.value =
+        await HttpUserService.fetchUserClasseSubjects(
+      currentUser.value.id!,
+      currentClasse.value,
+    );
   }
 
   // void getCurrentUserSubjects() async {

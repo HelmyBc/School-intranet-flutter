@@ -1,17 +1,29 @@
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/classe.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_subjects_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ClasseTile extends StatelessWidget {
-  String title;
-
+  Classe classe;
+  final UserController userController = Get.put(UserController());
   ClasseTile({
     Key? key,
-    required this.title,
+    required this.classe,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        userController.currentClasse.value = classe.id;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => TeacherSubjectsScreen(
+                      classeId: classe.id,
+                    )));
+      },
       child: Stack(children: [
         Container(
           width: MediaQuery.of(context).size.width * 0.93,
@@ -51,7 +63,7 @@ class ClasseTile extends StatelessWidget {
           height: 80,
           width: 250,
           child: Text(
-            title,
+            classe.name,
             style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
