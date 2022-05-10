@@ -1,12 +1,10 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
-import 'package:enetcom_app/controllers/subject_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/classe.dart';
-import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/for_teachers/add_teacher_subjects_screen.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/classe_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,18 +33,6 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
   Widget build(BuildContext context) {
     User currentUser = userController.currentUser.value;
     print(userController.currentUserClasses);
-    // List<int> currentUserClasses = userController.currentUserClasses.value;
-    // subjectController.fetchSubjects();
-    // print(currentUser.firstName);
-    // List<String> generateSubjectsNames() {
-    //   return subjectController.subjectList
-    //       .map(
-    //         (subject) => subject.name,
-    //       )
-    //       .toList();
-    // }
-
-    // List<String> subjectsNames = generateSubjectsNames();
 
     return Scaffold(
       appBar: AppBar(
@@ -84,16 +70,40 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-            child: Text(
-              "Welcome Back!",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                child: Text(
+                  "Welcome Back!",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => AddTeacherSubjectsScreen()));
+                  },
+                  child: const Text(
+                    "Edit subjects",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           buildHeaderBox(
             context,
@@ -103,11 +113,11 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
             'assets/images/student1.png',
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
+              children:  [
+               const Text(
                   "My classes",
                   style: TextStyle(
                     color: Colors.black,
@@ -116,8 +126,9 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: Text(
+                  onPressed: () { Navigator.push(context,
+              MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));},
+                  child:const Text(
                     "Edit",
                     style: TextStyle(
                       color: Colors.blue,
@@ -139,7 +150,7 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   final Classe classe =
                       userController.currentUserClasses[index];
-                  return SubjectTile(
+                  return ClasseTile(
                     title: classe.name,
                   );
                 },
@@ -162,13 +173,13 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
           // ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));
-        },
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(context,
+      //         MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
