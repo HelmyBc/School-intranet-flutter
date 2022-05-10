@@ -1,14 +1,20 @@
-import 'package:enetcom_app/controllers/subject_controller.dart';
-import 'package:enetcom_app/models/subject.dart';
-import 'package:enetcom_app/services/http_subject_service.dart';
-import 'package:enetcom_app/views/admin_views/subjects/update_subject_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:enetcom_app/controllers/subject_controller.dart';
+import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/models/teacher.dart';
+import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/services/http_subject_service.dart';
+import 'package:enetcom_app/views/admin_views/subjects/update_subject_screen.dart';
 
 class SubjectCard extends StatelessWidget {
   final SubjectController subjectController = Get.put(SubjectController());
   Subject subject;
-  SubjectCard({required this.subject});
+  SubjectCard({
+    Key? key,
+    required this.subject,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

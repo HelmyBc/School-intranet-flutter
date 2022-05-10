@@ -13,6 +13,7 @@ class HttpSubjectService {
       "name": subject.name,
       "teacherName": subject.teacherName,
       "classeId": subject.classeId,
+      "teacherId": subject.teacherId,
     };
     var body = json.encode(data);
     http.Response response = await http.put(
@@ -65,11 +66,13 @@ class HttpSubjectService {
     String name,
     String teacherName,
     int classeId,
+    int teacherId,
   ) async {
     Map data = {
       "name": name,
       "teacherName": teacherName,
       "classeId": classeId,
+      "teacherId": teacherId,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/subject');

@@ -18,7 +18,7 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   List<int> selectedDepartmentIds = [];
 
   TextEditingController nameController = TextEditingController();
-  TextEditingController teacherNameController = TextEditingController();
+  TextEditingController teacherIdController = TextEditingController();
   TextEditingController classeIdController = TextEditingController();
   final SubjectController subjectController = Get.put(SubjectController());
   final DepartmentController departmentController =
@@ -27,7 +27,7 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   @override
   void dispose() {
     nameController.dispose();
-    teacherNameController.dispose();
+    teacherIdController.dispose();
     classeIdController.dispose();
     super.dispose();
   }
@@ -126,18 +126,19 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.number,
                       style: textStyle,
-                      controller: teacherNameController..text = subject.teacherName,
+                      controller: teacherIdController
+                        ..text = subject.teacherId.toString(),
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter the Subject name";
+                          return "Please enter the teacher id";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Teacher name',
-                        hintText: 'Enter the teacher name',
+                        labelText: 'Teacher id',
+                        hintText: 'Enter the teacher id',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -182,14 +183,16 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
                     child: const Text('Submit'),
                     onPressed: () async {
                       String name = nameController.text;
-                      String teacherName = teacherNameController.text;
+                     
                       int classeId = int.parse(classeIdController.text);
+                      int teacherId = int.parse(teacherIdController.text);
 
                       Subject updatedSubject = Subject(
                         id: subject.id,
                         classeId: classeId,
+                        teacherId: teacherId,
                         name: name,
-                        teacherName: teacherName,
+                        teacherName: subject.teacherName,
                         coursesIds: subject.coursesIds,
                         tdsIds: subject.tdsIds,
                       );

@@ -10,6 +10,7 @@ class Subject {
   Subject({
     required this.id,
     required this.classeId,
+    required this.teacherId,
     required this.name,
     required this.teacherName,
     this.coursesIds,
@@ -18,6 +19,7 @@ class Subject {
 
   int id;
   int classeId;
+  int teacherId;
   String name;
   String teacherName;
   List? coursesIds;
@@ -28,6 +30,7 @@ class Subject {
         name: json["name"],
         teacherName: json["teacherName"],
         classeId: json["classeId"],
+        teacherId: json["teacherId"],
         coursesIds: json["coursesIds"],
         tdsIds: json["tdsIds"],
       );
@@ -37,6 +40,7 @@ class Subject {
         "name": name,
         "teacherName": teacherName,
         "classeId": classeId,
+        "teacherId": teacherId,
         "coursesIds": coursesIds,
         "tdsIds": tdsIds,
       };

@@ -40,6 +40,135 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
     User currentUser = userController.currentUser.value;
     print(userController.currentUserClasses);
 
+    var children1 = Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "No subjects detected",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => AddTeacherSubjectsScreen()));
+                    },
+                    child: const Text(
+                      "Add",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(58.0),
+                  child: Text(
+                    "Please click the add button in blue to select the subjects you teach.",
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Obx(() {
+          if (userController.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+              physics: const ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                final Subject subject =
+                    userController.currentUserClasseSubject[index];
+                return SubjectTile(
+                  title: subject.name,
+                );
+              },
+              itemCount: userController.currentUserClasseSubject.length,
+            );
+          }
+        }),
+        const SizedBox(height: 70.0),
+      ],
+    );
+    var children2 = Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Expanded(
+                child: Text(
+                  "I teach this/these subject(s) in this class",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => AddTeacherSubjectsScreen()));
+                },
+                child: const Text(
+                  "Edit",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Obx(() {
+          if (userController.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+              physics: const ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                final Subject subject =
+                    userController.currentUserClasseSubject[index];
+                return SubjectTile(
+                  title: subject.name,
+                );
+              },
+              itemCount: userController.currentUserClasseSubject.length,
+            );
+          }
+        }),
+        const SizedBox(height: 70.0),
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -78,6 +207,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
@@ -118,59 +248,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-               const Expanded(
-                  child:  Text(
-                    "I teach this/these subject(s) in this class",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => AddTeacherSubjectsScreen()));
-                  },
-                  child: const Text(
-                    "Edit",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Obx(() {
-            if (userController.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              return ListView.builder(
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  final Subject subject =
-                      userController.currentUserClasseSubject[index];
-                  return SubjectTile(
-                    title: subject.name,
-                  );
-                },
-                itemCount: userController.currentUserClasseSubject.length,
-              );
-            }
-          }),
-          const SizedBox(height: 70.0),
+         
         ],
       ),
     );

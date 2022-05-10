@@ -2,6 +2,7 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/department_controller.dart';
 import 'package:enetcom_app/controllers/subject_controller.dart';
+import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/services/http_subject_service.dart';
 import 'package:flutter/material.dart';
@@ -19,16 +20,20 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
   final minimumPadding = 5.0;
   String? value;
   int selectedId = 0;
+  String? valueTeacher;
+  int selectedIdTeacher = 0;
   // List<String> selectedDepartments = [];
   // List<int> selectedDepartmentIds = [];
 
   final SubjectController subjectController = Get.put(SubjectController());
   final ClasseController classeController = Get.put(ClasseController());
+  final TeacherController teacherController = Get.put(TeacherController());
   // final DepartmentController departmentController =
   //     Get.put(DepartmentController());
 
   TextEditingController nameController = TextEditingController();
   TextEditingController teacherNameController = TextEditingController();
+  TextEditingController teacherIdController = TextEditingController();
   TextEditingController classeIdController = TextEditingController();
 
   Subject? subject;
@@ -36,6 +41,7 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
   @override
   void dispose() {
     nameController.dispose();
+    teacherIdController.dispose();
     teacherNameController.dispose();
     classeIdController.dispose();
     super.dispose();
@@ -51,6 +57,7 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
     classeController.fetchClasses();
+    teacherController.fetchTeachers();
 
     List<String> generateClasseNames() {
       return classeController.classeList
@@ -69,6 +76,23 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
           .first;
     }
 
+    List<String> generateTeacherNames() {
+      return teacherController.teacherList
+          .map(
+            (t) => "${t.firstName} ${t.lastName}",
+          )
+          .toList();
+    }
+
+    int generateTeacherId() {
+      return selectedIdTeacher = teacherController.teacherList
+          .where((t) => "${t.firstName} ${t.lastName}" == valueTeacher)
+          .map(
+            (t) => t.id,
+          )
+          .first!;
+    }
+
     // List<int> generateClasseIds() {
     //   return departmentController.departmentList
     //       .where((dep) => selectedDepartments.contains(dep.shortName))
@@ -77,7 +101,8 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
     //       )
     //       .toList();
     // }
- List<String> classeNames = generateClasseNames();
+    List<String> classeNames = generateClasseNames();
+    List<String> teacherNames = generateTeacherNames();
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -136,27 +161,27 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
-                    child: TextFormField(
-                      keyboardType: TextInputType.name,
-                      style: textStyle,
-                      controller: teacherNameController,
-                      validator: (value) {
-                        if (value == null) {
-                          return "Please enter Teacher full name";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Teacher full name',
-                        hintText: 'Enter the Teacher full name',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                  //   child: TextFormField(
+                  //     keyboardType: TextInputType.name,
+                  //     style: textStyle,
+                  //     controller: teacherIdController,
+                  //     validator: (value) {
+                  //       if (value == null) {
+                  //         return "Please enter Teacher full name";
+                  //       }
+                  //       return null;
+                  //     },
+                  //     decoration: InputDecoration(
+                  //       labelText: 'Teacher full name',
+                  //       hintText: 'Enter the Teacher full name',
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(5.0),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   // Padding(
                   //   padding: EdgeInsets.symmetric(vertical: minimumPadding),
                   //   child: TextFormField(
@@ -205,15 +230,75 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
                                     Border.all(color: Colors.grey, width: 1.5)),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
+                                hint: const Text("Select a teacher"),
+                                value: valueTeacher,
+                                iconSize: 36,
+                                isExpanded: true,
+                                items: teacherNames.map(buildMenuItem).toList(),
+                                onChanged: (value1) {
+                                  setState(() {
+                                    this.valueTeacher = value1;
+                                    this.selectedIdTeacher =
+                                        generateTeacherId();
+                                    print(selectedIdTeacher);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 80.0,
+                        margin: const EdgeInsets.only(left: 10.0),
+                        padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                        child: TextFormField(
+                          enabled: false,
+                          keyboardType: TextInputType.number,
+                          style: textStyle,
+                          controller: teacherIdController
+                            ..text = selectedIdTeacher.toString(),
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please enter the teacher Id";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'teacher Id',
+                            hintText: 'Enter the teacher Id',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: minimumPadding),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1.5)),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
                                 hint: const Text("Select a class"),
                                 value: value,
                                 iconSize: 36,
                                 isExpanded: true,
-                                items:
-                                    classeNames.map(buildMenuItem).toList(),
-                                onChanged: (value) {
+                                items: classeNames.map(buildMenuItem).toList(),
+                                onChanged: (value2) {
                                   setState(() {
-                                    this.value = value;
+                                    this.value = value2;
                                     this.selectedId = generateClasseId();
                                     print(selectedId);
                                   });
@@ -255,16 +340,19 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
                     child: const Text('Submit'),
                     onPressed: () async {
                       String name = nameController.text;
-                      String teacherName = teacherNameController.text;
+                      String teacherName =valueTeacher??"";
                       int classeId = int.parse(classeIdController.text);
+                      int teacherId = selectedIdTeacher;
 
                       Subject subjects = await HttpSubjectService.addSubject(
                         name,
                         teacherName,
+                       
                         classeId,
+                        teacherId,
                       );
                       nameController.text = '';
-                      teacherNameController.text = '';
+                      teacherIdController.text = '';
                       classeIdController.text = '';
                       setState(() {
                         subject = subjects;

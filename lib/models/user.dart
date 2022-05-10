@@ -22,6 +22,7 @@ class User {
     this.classesId,
     this.depId,
     this.postsId,
+    this.subjectsId,
   });
 
   int? id;
@@ -39,6 +40,7 @@ class User {
   int? classeId;
   int? depId;
   List? postsId;
+  List? subjectsId;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -55,6 +57,7 @@ class User {
         classeId: json["classeId"],
         depId: json["depId"],
         postsId: json["postsId"],
+        subjectsId: json["subjectsId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,5 +75,6 @@ class User {
         "classeId": classeId,
         "depId": depId,
         "postsId": postsId,
+        "subjectsId": subjectsId,
       };
 }
