@@ -11,8 +11,8 @@ class HttpSubjectService {
 
     Map data = {
       "name": subject.name,
-      "level": subject.level,
-      "depIds": subject.depIds,
+      "teacherName": subject.teacherName,
+      "classeId": subject.classeId,
     };
     var body = json.encode(data);
     http.Response response = await http.put(
@@ -63,13 +63,13 @@ class HttpSubjectService {
 
   static Future<Subject> addSubject(
     String name,
-    int level,
-    List? depIds,
+    String teacherName,
+    int classeId,
   ) async {
     Map data = {
       "name": name,
-      "level": level,
-      "depIds": depIds,
+      "teacherName": teacherName,
+      "classeId": classeId,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/subject');

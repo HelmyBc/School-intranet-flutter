@@ -1,4 +1,3 @@
-
 import 'package:enetcom_app/controllers/subject_controller.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/services/http_subject_service.dart';
@@ -45,6 +44,14 @@ class SubjectCard extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 20.0,
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                Text(
+                  "Teached by: ${subject.teacherName}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14.0,
                   ),
                 ),
               ],

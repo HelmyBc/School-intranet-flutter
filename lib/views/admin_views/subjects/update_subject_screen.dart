@@ -18,7 +18,8 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   List<int> selectedDepartmentIds = [];
 
   TextEditingController nameController = TextEditingController();
-  TextEditingController levelController = TextEditingController();
+  TextEditingController teacherNameController = TextEditingController();
+  TextEditingController classeIdController = TextEditingController();
   final SubjectController subjectController = Get.put(SubjectController());
   final DepartmentController departmentController =
       Get.put(DepartmentController());
@@ -26,7 +27,8 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
   @override
   void dispose() {
     nameController.dispose();
-    levelController.dispose();
+    teacherNameController.dispose();
+    classeIdController.dispose();
     super.dispose();
   }
 
@@ -124,55 +126,77 @@ class _UpdateSubjectScreenState extends State<UpdateSubjectScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: minimumPadding),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.name,
                       style: textStyle,
-                      controller: levelController
-                        ..text = subject.level.toString(),
+                      controller: teacherNameController..text = subject.teacherName,
                       validator: (value) {
                         if (value == null) {
-                          return "Please enter the Subject level";
+                          return "Please enter the Subject name";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Subject level',
-                        hintText: 'Enter the Subject level',
+                        labelText: 'Teacher name',
+                        hintText: 'Enter the teacher name',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                       ),
                     ),
                   ),
-                  DropDownMultiSelect(
-                    whenEmpty: 'Select subject departments',
-                    options: generateDepartmentNames(),
-                    selectedValues: selectedDepartments,
-                    onChanged: (List<String> x) {
-                      setState(() {
-                        selectedDepartments = x;
-                        selectedDepartmentIds = generateDepartmentIds();
-                      });
-                    },
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: minimumPadding),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      style: textStyle,
+                      controller: classeIdController
+                        ..text = subject.classeId.toString(),
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please enter the classe id";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'classe id',
+                        hintText: 'Enter the classe id',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
                   ),
+                  // DropDownMultiSelect(
+                  //   whenEmpty: 'Select subject departments',
+                  //   options: generateDepartmentNames(),
+                  //   selectedValues: selectedDepartments,
+                  //   onChanged: (List<String> x) {
+                  //     setState(() {
+                  //       selectedDepartments = x;
+                  //       selectedDepartmentIds = generateDepartmentIds();
+                  //     });
+                  //   },
+                  // ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Palette.adminBg),
                     child: const Text('Submit'),
                     onPressed: () async {
                       String name = nameController.text;
-                      int level = int.parse(levelController.text);
+                      String teacherName = teacherNameController.text;
+                      int classeId = int.parse(classeIdController.text);
 
                       Subject updatedSubject = Subject(
                         id: subject.id,
-                        level: level,
+                        classeId: classeId,
                         name: name,
+                        teacherName: teacherName,
                         coursesIds: subject.coursesIds,
                         tdsIds: subject.tdsIds,
-                        depIds: selectedDepartmentIds,
                       );
                       await HttpSubjectService.updateSubject(
                           subject.id, updatedSubject);
                       nameController.text = '';
-                      levelController.text = '';
+                      classeIdController.text = '';
 
                       subjectController.fetchSubjects();
                       setState(() {

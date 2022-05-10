@@ -9,35 +9,35 @@ String subjectToJson(List<Subject> data) =>
 class Subject {
   Subject({
     required this.id,
-    required this.level,
+    required this.classeId,
     required this.name,
+    required this.teacherName,
     this.coursesIds,
     this.tdsIds,
-    this.depIds,
   });
 
   int id;
-  int level;
+  int classeId;
   String name;
+  String teacherName;
   List? coursesIds;
   List? tdsIds;
-  List? depIds;
 
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
         id: json["id"],
         name: json["name"],
-        level: json["level"],
+        teacherName: json["teacherName"],
+        classeId: json["classeId"],
         coursesIds: json["coursesIds"],
         tdsIds: json["tdsIds"],
-        depIds: json["depIds"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "level": level,
+        "teacherName": teacherName,
+        "classeId": classeId,
         "coursesIds": coursesIds,
         "tdsIds": tdsIds,
-        "depIds": depIds,
       };
 }

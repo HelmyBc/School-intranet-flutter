@@ -36,7 +36,7 @@ class ProfileInfoTile extends StatelessWidget {
   }
 
   String generateClasseName() {
-     print("name");
+    print("name");
     return classeController.classeList.value
         .where((classe) => user.classeId == classe.id)
         .map(
