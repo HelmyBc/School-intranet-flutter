@@ -21,8 +21,8 @@ class CurrentProfileScreen extends StatefulWidget {
 }
 
 class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
-    final UserController userController = Get.put(UserController());
-    User currentUser = User(email: "", password: "");
+  final UserController userController = Get.put(UserController());
+  User currentUser = User(email: "", password: "");
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                 ),
               ),
             ),
-            ProfileInfoTile(),
+           ProfileInfoTile(user: currentUser),
             const SizedBox(height: 10),
             const Padding(
               padding: EdgeInsets.only(top: 8.0, left: 14.0),
@@ -165,9 +165,8 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                 ),
               ),
             ),
-           // PostContainer(post: posts[0]),
-           // PostContainer(post: posts[4]),
-
+            // PostContainer(post: posts[0]),
+            // PostContainer(post: posts[4]),
           ],
         ),
       ),
