@@ -1,7 +1,8 @@
+import 'package:avatar_view/avatar_view.dart';
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {
-  final String imageUrl; 
+  final String imageUrl;
   final VoidCallback onClicked;
   const ProfileImage({
     Key? key,
@@ -27,21 +28,36 @@ class ProfileImage extends StatelessWidget {
   }
 
   Widget buildImage() {
-    final image = AssetImage(imageUrl);
-    return ClipOval(
-      child: Material(
-        color: Colors.transparent,
-        child: Ink.image(
-          image: image,
-          fit: BoxFit.cover,
-          width: 128.0,
-          height: 128.0,
-          child: InkWell(
-            onTap: onClicked,
-          ),
-        ),
+    return AvatarView(
+      radius: 64,
+      borderColor: Colors.grey,
+      avatarType: AvatarType.CIRCLE,
+      backgroundColor: Colors.red,
+      imagePath: imageUrl,
+      placeHolder: const Icon(
+        Icons.person,
+        size: 18,
+      ),
+      errorWidget: const Icon(
+        Icons.error,
+        size: 18,
       ),
     );
+    // final image = AssetImage(imageUrl);
+    // return ClipOval(
+    //   child: Material(
+    //     color: Colors.transparent,
+    //     child: Ink.image(
+    //       image: image,
+    //       fit: BoxFit.cover,
+    //       width: 128.0,
+    //       height: 128.0,
+    //       child: InkWell(
+    //         onTap: onClicked,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Widget buildEditIcon(Color color) {

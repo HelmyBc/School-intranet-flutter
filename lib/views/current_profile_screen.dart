@@ -1,14 +1,17 @@
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/data/data.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/edit_profile_screen.dart';
 import 'package:enetcom_app/views/root_app_animated.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
 import 'package:enetcom_app/views/widgets/post_container.dart';
+import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:enetcom_app/views/widgets/profile_image_widget.dart';
 import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class CurrentProfileScreen extends StatefulWidget {
   const CurrentProfileScreen({Key? key}) : super(key: key);
@@ -18,14 +21,17 @@ class CurrentProfileScreen extends StatefulWidget {
 }
 
 class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
+    final UserController userController = Get.put(UserController());
+    User currentUser = User(email: "", password: "");
+
   @override
   Widget build(BuildContext context) {
-    final user = currentUser;
+    User currentUser = userController.currentUser.value;
     return Scaffold(
       backgroundColor: Palette.scaffold,
       appBar: AppBar(
         title: Text(
-          currentUser.name,
+          "${currentUser.firstName} ${currentUser.lastName}",
           style: const TextStyle(
             color: Colors.black,
             fontSize: 30.0,
@@ -99,8 +105,9 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
+            //  ProfileAvatar(imageUrl: currentUser.imageUrl!),
             ProfileImage(
-              imageUrl: currentUser.imageUrl,
+              imageUrl: currentUser.imageUrl!,
               onClicked: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const EditProfileScreen()));
@@ -158,8 +165,8 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                 ),
               ),
             ),
-            PostContainer(post: posts[0]),
-            PostContainer(post: posts[4]),
+           // PostContainer(post: posts[0]),
+           // PostContainer(post: posts[4]),
 
           ],
         ),

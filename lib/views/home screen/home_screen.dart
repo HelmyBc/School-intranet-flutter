@@ -129,9 +129,9 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SliverToBoxAdapter(
-                child: CreatePostContainer(currentUser: currentUser),
-              ),
+              // SliverToBoxAdapter(
+              //   child: CreatePostContainer(currentUser: currentUser),
+              // ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {

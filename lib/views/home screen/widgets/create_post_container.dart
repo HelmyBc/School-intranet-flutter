@@ -1,4 +1,5 @@
-import 'package:enetcom_app/models/user_model.dart';
+
+import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/home%20screen/create_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class CreatePostContainer extends StatelessWidget {
         children: [
           Row(
             children: [
-              ProfileAvatar(imageUrl: currentUser.imageUrl),
+              ProfileAvatar(imageUrl: currentUser.imageUrl!),
               const SizedBox(width: 10.0),
               Expanded(
                 child: TextField(
