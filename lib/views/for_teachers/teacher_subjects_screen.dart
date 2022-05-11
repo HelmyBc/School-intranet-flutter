@@ -1,4 +1,5 @@
 import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/views/for_teachers/add_teacher_subject_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
   @override
   Widget build(BuildContext context) {
     User currentUser = userController.currentUser.value;
+    userController.onInit();
     print(userController.currentUserClasses);
 
     var children1 = Column(
@@ -64,7 +66,9 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => AddTeacherSubjectsScreen()));
+                              builder: (_) => AddTeacherSubjectsScreen(
+                                    classeId: widget.classeId,
+                                  )));
                     },
                     child: const Text(
                       "Add",
@@ -91,24 +95,6 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             ],
           ),
         ),
-        Obx(() {
-          if (userController.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return ListView.builder(
-              physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                final Subject subject =
-                    userController.currentUserClasseSubject[index];
-                return SubjectTile(
-                  title: subject.name,
-                );
-              },
-              itemCount: userController.currentUserClasseSubject.length,
-            );
-          }
-        }),
         const SizedBox(height: 70.0),
       ],
     );
@@ -121,7 +107,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             children: [
               const Expanded(
                 child: Text(
-                  "I teach this/these subject(s) in this class",
+                  "Subject(s) I teach in this class",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
@@ -134,10 +120,11 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => AddTeacherSubjectsScreen()));
+                          builder: (_) => AddTeacherSubjectsScreen(
+                              classeId: widget.classeId)));
                 },
                 child: const Text(
-                  "Edit",
+                  "Add",
                   style: TextStyle(
                     color: Colors.blue,
                     fontSize: 18.0,
@@ -159,7 +146,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                 final Subject subject =
                     userController.currentUserClasseSubject[index];
                 return SubjectTile(
-                  title: subject.name,
+                  subject: subject,
                 );
               },
               itemCount: userController.currentUserClasseSubject.length,
@@ -205,41 +192,16 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: Text(
-                  "Welcome Back!",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            child: Text(
+              "Welcome Back!",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => AddTeacherSubjectsScreen()));
-                  },
-                  child: const Text(
-                    "Edit subjects",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
           buildHeaderBox(
             context,
@@ -248,7 +210,9 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
-         
+          userController.currentUserClasseSubject.isEmpty
+              ? children1
+              : children2,
         ],
       ),
     );

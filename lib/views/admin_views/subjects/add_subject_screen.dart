@@ -340,14 +340,13 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
                     child: const Text('Submit'),
                     onPressed: () async {
                       String name = nameController.text;
-                      String teacherName =valueTeacher??"";
+                      String teacherName = valueTeacher ?? "";
                       int classeId = int.parse(classeIdController.text);
                       int teacherId = selectedIdTeacher;
 
                       Subject subjects = await HttpSubjectService.addSubject(
                         name,
                         teacherName,
-                       
                         classeId,
                         teacherId,
                       );

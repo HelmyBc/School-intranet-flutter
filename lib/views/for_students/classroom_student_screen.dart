@@ -103,25 +103,13 @@ class _ClassroomStudentScreenState extends State<ClassroomStudentScreen> {
                   final Subject subject =
                       userController.currentUserSubjects.value[index];
                   return SubjectTile(
-                    title: subject.name,
+                    subject: subject,
                   );
                 },
                 itemCount: userController.currentUserSubjects.value.length,
               );
             }
           }),
-          // ClassroomTile(
-          //   title: "Intelligence Artificielle",
-          // ),
-          // ClassroomTile(
-          //   title: "Traitement d'image",
-          // ),
-          // ClassroomTile(
-          //   title: "Statistiques et probabilite",
-          // ),
-          // ClassroomTile(
-          //   title: "Developpement web",
-          // ),
         ],
       ),
     );

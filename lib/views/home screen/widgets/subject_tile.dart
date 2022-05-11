@@ -1,17 +1,29 @@
+import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:enetcom_app/models/subject.dart';
+
 class SubjectTile extends StatelessWidget {
-  String title;
+  //String title;
+  Subject subject;
 
   SubjectTile({
     Key? key,
-    required this.title,
+    //required this.title,
+    required this.subject,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => SubjectScreen(
+                      subject: subject,
+                    )));
+      },
       child: Stack(children: [
         Container(
           width: MediaQuery.of(context).size.width * 0.93,
@@ -51,7 +63,7 @@ class SubjectTile extends StatelessWidget {
           height: 80,
           width: 250,
           child: Text(
-            title,
+            subject.name,
             style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,

@@ -3,7 +3,7 @@ import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/views/for_teachers/add_teacher_subjects_screen.dart';
+import 'package:enetcom_app/views/for_teachers/add_teacher_subject_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/classe_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 import 'package:flutter/material.dart';
@@ -84,25 +84,25 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => AddTeacherSubjectsScreen()));
-                  },
-                  child: const Text(
-                    "Edit subjects",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              //   child: TextButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (_) => AddTeacherSubjectsScreen()));
+              //     },
+              //     child: const Text(
+              //       "Edit subjects",
+              //       style: TextStyle(
+              //         color: Colors.blue,
+              //         fontSize: 18.0,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           buildHeaderBox(
@@ -126,8 +126,7 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () { Navigator.push(context,
-              MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));},
+                  onPressed: () { },
                   child:const Text(
                     "Edit",
                     style: TextStyle(
