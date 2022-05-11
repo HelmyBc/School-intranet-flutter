@@ -206,7 +206,6 @@ class _SubjectScreenState extends State<SubjectScreen> {
               ),
             ],
           ),
-         
           const Padding(
             padding: EdgeInsets.all(10.0),
             child: Text(
@@ -218,30 +217,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.all(20.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-
-              // gradient: const LinearGradient(
-              //   begin: Alignment.bottomLeft,
-              //   end: Alignment.topRight,
-              //   colors: [
-              //     Color.fromRGBO(0, 31, 100, 1),
-              //     Color.fromRGBO(4, 76, 144, 0.9),
-              //   ],
-              // ),
-              color: Colors.white,
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  offset: Offset(0.0, 2.0),
-                  blurRadius: 6.0,
-                ),
-              ],
-            ),
-          ),
+          
           children1,
         ],
       ),
