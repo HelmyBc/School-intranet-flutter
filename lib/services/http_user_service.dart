@@ -1,6 +1,7 @@
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -168,5 +169,15 @@ class HttpUserService {
       return [];
     }
   }
-  
+  static Future<List<Td>> fetchSubjectTds(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/subject/$id/tds'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return tdFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
 }

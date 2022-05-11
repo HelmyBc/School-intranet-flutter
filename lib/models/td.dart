@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-List<Course> courseFromJson(String str) =>
-    List<Course>.from(json.decode(str).map((x) => Course.fromJson(x)));
+List<Td> tdFromJson(String str) =>
+    List<Td>.from(json.decode(str).map((x) => Td.fromJson(x)));
 
-String courseToJson(List<Course> data) =>
+String tdToJson(List<Td> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Course {
-  Course({
+class Td {
+  Td({
     required this.id,
     required this.name,
     required this.subjectId,
@@ -21,7 +21,7 @@ class Course {
    int attachmentId;
    String createdTime;
 
-  factory Course.fromJson(Map<String, dynamic> json) => Course(
+  factory Td.fromJson(Map<String, dynamic> json) => Td(
         id: json["id"],
         name: json["name"],
         subjectId: json["subjectId"],
