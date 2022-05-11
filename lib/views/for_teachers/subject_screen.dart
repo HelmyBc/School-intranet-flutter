@@ -1,3 +1,8 @@
+import 'package:dotted_border/dotted_border.dart';
+import 'package:enetcom_app/models/course.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/course_tile.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/upload_box.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,7 +11,6 @@ import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/views/widgets/build_header_box.dart';
 
 class SubjectScreen extends StatefulWidget {
   Subject subject;
@@ -239,8 +243,35 @@ class _SubjectScreenState extends State<SubjectScreen> {
                 ),
               ],
             ),
-            
           ),
+          userController.currentUserClasseSubjectCourses.isEmpty
+              ? Center(
+                  child: GestureDetector(
+                    child: UploadBox(
+                      text: "No courses yet, upload courses here.",
+                    ),
+                    onTap: () {},
+                  ),
+                )
+              : Obx(() {
+                  if (userController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        final Course course = userController
+                            .currentUserClasseSubjectCourses[index];
+                        return CourseTile(
+                          course: course,
+                        );
+                      },
+                      itemCount:
+                          userController.currentUserClasseSubjectCourses.length,
+                    );
+                  }
+                }),
           children1,
         ],
       ),

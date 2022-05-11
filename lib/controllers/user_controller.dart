@@ -1,4 +1,5 @@
 import 'package:enetcom_app/models/classe.dart';
+import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
@@ -14,10 +15,14 @@ class UserController extends GetxController {
   var currentUserType = "".obs;
   var currentUserId = 0.obs;
   var currentClasse = 0.obs;
+  var currentSubject = 0.obs;
+  var currentCourse = 0.obs;
   var userList = <User>[].obs;
   var currentUserSubjects = <Subject>[].obs;
   var currentUserClasses = <Classe>[].obs;
   var currentUserClasseSubject = <Subject>[].obs;
+  var currentUserClasseSubjectCourses = <Course>[].obs;
+  var currentUserClasseSubjectTds = <Course>[].obs;
 
   @override
   void onInit() {
@@ -27,6 +32,7 @@ class UserController extends GetxController {
     getCurrentUserSubjects();
     getCurrentUserClasses();
     getUserClasseSubjects();
+    getUserClasseSubjectCourses();
     super.onInit();
   }
 
@@ -56,10 +62,11 @@ class UserController extends GetxController {
     );
   }
 
-  // void getCurrentUserSubjects() async {
-  //   currentUserClasse.value =
-  //       await HttpClasseService.getClasse(currentUser.value.classeId!);
-  // }
+//for classroom teacher third screen
+  void getUserClasseSubjectCourses() async {
+    currentUserClasseSubjectCourses.value =
+        await HttpUserService.fetchSubjectCourses(currentSubject.value);
+  }
 
   void fetchUsers() async {
     try {
