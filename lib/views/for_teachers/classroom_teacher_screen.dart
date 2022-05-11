@@ -32,7 +32,8 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
   @override
   Widget build(BuildContext context) {
     User currentUser = userController.currentUser.value;
-    print(userController.currentUserClasses);
+    print(userController.currentUserClasseSubjectCourses);
+    userController.onInit();
 
     return Scaffold(
       appBar: AppBar(
@@ -72,8 +73,8 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Padding(
+            children: const [
+              Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: Text(
                   "Welcome Back!",
@@ -116,8 +117,8 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
-               const Text(
+              children: [
+                const Text(
                   "My classes",
                   style: TextStyle(
                     color: Colors.black,
@@ -126,8 +127,8 @@ class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () { },
-                  child:const Text(
+                  onPressed: () {},
+                  child: const Text(
                     "Edit",
                     style: TextStyle(
                       color: Colors.blue,

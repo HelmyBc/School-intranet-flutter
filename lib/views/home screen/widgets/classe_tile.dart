@@ -14,6 +14,8 @@ class ClasseTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // userController.onInit();
+    userController.currentClasse.value = classe.id;
     return GestureDetector(
       onTap: () {
         userController.currentClasse.value = classe.id;

@@ -1,10 +1,13 @@
+import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:enetcom_app/models/subject.dart';
+import 'package:get/get.dart';
 
 class SubjectTile extends StatelessWidget {
+  UserController userController = Get.put(UserController());
   //String title;
   Subject subject;
 
@@ -17,6 +20,10 @@ class SubjectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        
+        //userController.onInit();
+        userController.currentSubject.value = subject.id;
+        //userController.getUserClasseSubjectCourses();
         Navigator.push(
             context,
             MaterialPageRoute(

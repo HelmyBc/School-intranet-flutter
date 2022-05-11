@@ -2,7 +2,7 @@ import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:enetcom_app/models/subject.dart';
 
 class CourseTile extends StatelessWidget {
@@ -15,6 +15,11 @@ class CourseTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    DateTime createdTime = DateTime.parse(course.createdTime);
+
+    final difference = DateTime.now().difference(createdTime);
+    final dateTime = DateTime.now().subtract(difference);
+    final timeAgo = timeago.format(dateTime);
     return GestureDetector(
       onTap: () {
         // Navigator.push(
@@ -25,7 +30,7 @@ class CourseTile extends StatelessWidget {
         //             )));
       },
       child: Container(
-        margin: const EdgeInsets.all(20.0),
+        margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
@@ -49,16 +54,16 @@ class CourseTile extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    'Chapitre 1 intelligence arrtificielle partie 1',
-                    style: TextStyle(
+                    course.name,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    'Published 2 days ago',
+                    timeAgo,
                     style: TextStyle(),
                   ),
                 ],
@@ -66,7 +71,7 @@ class CourseTile extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
             ),
           ],
         ),

@@ -17,9 +17,9 @@ class Course {
 
   int id;
   String name;
-   int subjectId;
-   int attachmentId;
-   String createdTime;
+  int subjectId;
+  int attachmentId;
+  String createdTime;
 
   factory Course.fromJson(Map<String, dynamic> json) => Course(
         id: json["id"],

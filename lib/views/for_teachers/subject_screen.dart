@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:enetcom_app/controllers/course_controller.dart';
 import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/course_tile.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/upload_box.dart';
@@ -26,6 +27,7 @@ class SubjectScreen extends StatefulWidget {
 class _SubjectScreenState extends State<SubjectScreen> {
   final UserController userController = Get.put(UserController());
   final ClasseController classeController = Get.put(ClasseController());
+  final CourseController courseController = Get.put(CourseController());
 
   User currentUser = User(email: "", password: "");
 
@@ -244,7 +246,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
               ],
             ),
           ),
-          userController.currentUserClasseSubjectCourses.isEmpty
+          userController.currentUserClasseSubjectCourses.isNotEmpty
               ? Center(
                   child: GestureDetector(
                     child: UploadBox(
@@ -272,7 +274,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                     );
                   }
                 }),
-          children1,
+          //children1,
         ],
       ),
     );
