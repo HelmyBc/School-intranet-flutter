@@ -1,4 +1,5 @@
 import 'package:enetcom_app/models/classe.dart';
+import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:http/http.dart' as http;
@@ -156,4 +157,16 @@ class HttpUserService {
       return [];
     }
   }
+  static Future<List<Course>> fetchSubjectCourses(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/subject/$id/courses'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return courseFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
+  
 }

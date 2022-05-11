@@ -206,18 +206,41 @@ class _SubjectScreenState extends State<SubjectScreen> {
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Text(
-              "Courses",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Courses",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (_) => AddTeacherSubjectsScreen(
+                    //               classeId: widget.classeId,
+                    //             )));
+                  },
+                  child: const Text(
+                    "Add",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
+            
           ),
-          
           children1,
         ],
       ),
