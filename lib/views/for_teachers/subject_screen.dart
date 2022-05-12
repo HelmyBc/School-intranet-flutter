@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:enetcom_app/views/for_teachers/upload_course_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -282,13 +283,18 @@ class _SubjectScreenState extends State<SubjectScreen> {
               ],
             ),
           ),
-          userController.currentUserClasseSubjectCourses.isNotEmpty
+          userController.currentUserClasseSubjectCourses.isEmpty
               ? Center(
                   child: GestureDetector(
                     child: UploadBox(
                       text: "No courses yet, upload courses here.",
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => UploadCourseScreen()));
+                    },
                   ),
                 )
               : Obx(() {
