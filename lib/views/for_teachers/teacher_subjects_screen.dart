@@ -40,7 +40,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(userController.currentClasseId.value);
+    print(userController.currentClasse.name);
     print(userController.currentUserClasseSubjects.value);
     var children1 = Column(
       children: [
@@ -101,27 +101,27 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
     var children2 = Column(
       children: [
         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${widget.classe.name} subjects",
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Divider(thickness: 2),
+            ],
+          ),
+        ),
+        Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${widget.classe.name} courses",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Divider(thickness: 2),
-                  ],
-                ),
-              ),
               const Expanded(
                 child: Text(
                   "Subject(s) I teach in this class",
@@ -173,6 +173,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
         const SizedBox(height: 70.0),
       ],
     );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -228,67 +229,10 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        "Subject(s) I teach in this class",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => AddTeacherSubjectsScreen(
-                                    classe: widget.classe)));
-                      },
-                      child: const Text(
-                        "Add",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Obx(() {
-                if (userController.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  return ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      final Subject subject =
-                          userController.currentUserClasseSubjects[index];
-                      return SubjectTile(
-                        subject: subject,
-                      );
-                    },
-                    itemCount: userController.currentUserClasseSubjects.length,
-                  );
-                }
-              }),
-              const SizedBox(height: 70.0),
-            ],
-          ),
-          // userController.currentUserClasseSubjects.isEmpty
-          //     ? children1
-          //     : children2,
+
+          userController.currentUserClasseSubjects.isEmpty
+              ? children1
+              : children2,
         ],
       ),
     );
