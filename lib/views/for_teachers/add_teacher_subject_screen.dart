@@ -6,14 +6,17 @@ import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/subject_controller.dart';
 import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/services/http_subject_service.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_subjects_screen.dart';
 
 class AddTeacherSubjectsScreen extends StatefulWidget {
-  int classeId;
+  //int classeId;
+  Classe classe;
   AddTeacherSubjectsScreen({
     Key? key,
-    required this.classeId,
+    required this.classe,
   }) : super(key: key);
 
   @override
@@ -58,7 +61,7 @@ class _AddTeacherSubjectsScreenState extends State<AddTeacherSubjectsScreen> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              Get.back();
             },
           ),
           backgroundColor: Palette.scaffold,
@@ -115,7 +118,7 @@ class _AddTeacherSubjectsScreenState extends State<AddTeacherSubjectsScreen> {
                       String name = nameController.text;
                       String teacherName =
                           "${userController.currentUser.value.firstName} ${userController.currentUser.value.lastName}";
-                      int classeId = widget.classeId;
+                      int classeId = widget.classe.id;
                       int teacherId = userController.currentUser.value.id!;
 
                       Subject subjects = await HttpSubjectService.addSubject(
@@ -127,8 +130,13 @@ class _AddTeacherSubjectsScreenState extends State<AddTeacherSubjectsScreen> {
                       nameController.text = '';
                       setState(() {
                         subject = subjects;
-                        Navigator.pop(context);
-                        userController.onInit();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => TeacherSubjectsScreen(
+                                      classe: userController.currentClasse,
+                                    )));
+                        // userController.onInit();
                         //subjectController.fetchSubjects();
                       });
                     },

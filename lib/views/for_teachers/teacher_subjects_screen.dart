@@ -1,6 +1,3 @@
-import 'package:enetcom_app/models/subject.dart';
-import 'package:enetcom_app/views/for_teachers/add_teacher_subject_screen.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,16 +5,21 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/classe.dart';
+import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/views/for_teachers/add_teacher_subject_screen.dart';
 import 'package:enetcom_app/views/for_teachers/add_teacher_subjects_screen.dart';
+import 'package:enetcom_app/views/for_teachers/classroom_teacher_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/classe_tile.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 
 class TeacherSubjectsScreen extends StatefulWidget {
-  int classeId;
+  // int classeId;
+  Classe classe;
   TeacherSubjectsScreen({
     Key? key,
-    required this.classeId,
+    required this.classe,
   }) : super(key: key);
 
   @override
@@ -26,9 +28,9 @@ class TeacherSubjectsScreen extends StatefulWidget {
 
 class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
   final UserController userController = Get.put(UserController());
-  final ClasseController classeController = Get.put(ClasseController());
+  //final ClasseController classeController = Get.put(ClasseController());
 
-  User currentUser = User(email: "", password: "");
+  //User currentUser = User(email: "", password: "");
 
   @override
   void initState() {
@@ -38,10 +40,8 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User currentUser = userController.currentUser.value;
-    userController.onInit();
-    print(userController.currentUserClasses);
-
+    print(userController.currentClasseId.value);
+    print(userController.currentUserClasseSubjects.value);
     var children1 = Column(
       children: [
         Padding(
@@ -67,7 +67,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (_) => AddTeacherSubjectsScreen(
-                                    classeId: widget.classeId,
+                                    classe: widget.classe,
                                   )));
                     },
                     child: const Text(
@@ -105,6 +105,23 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${widget.classe.name} courses",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Divider(thickness: 2),
+                  ],
+                ),
+              ),
               const Expanded(
                 child: Text(
                   "Subject(s) I teach in this class",
@@ -120,8 +137,8 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => AddTeacherSubjectsScreen(
-                              classeId: widget.classeId)));
+                          builder: (_) =>
+                              AddTeacherSubjectsScreen(classe: widget.classe)));
                 },
                 child: const Text(
                   "Add",
@@ -144,12 +161,12 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
                 final Subject subject =
-                    userController.currentUserClasseSubject[index];
+                    userController.currentUserClasseSubjects[index];
                 return SubjectTile(
                   subject: subject,
                 );
               },
-              itemCount: userController.currentUserClasseSubject.length,
+              itemCount: userController.currentUserClasseSubjects.length,
             );
           }
         }),
@@ -165,7 +182,8 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => ClassroomTeacherScreen()));
           },
         ),
         backgroundColor: Palette.scaffold,
@@ -210,9 +228,67 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
-          userController.currentUserClasseSubject.isEmpty
-              ? children1
-              : children2,
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        "Subject(s) I teach in this class",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => AddTeacherSubjectsScreen(
+                                    classe: widget.classe)));
+                      },
+                      child: const Text(
+                        "Add",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Obx(() {
+                if (userController.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Subject subject =
+                          userController.currentUserClasseSubjects[index];
+                      return SubjectTile(
+                        subject: subject,
+                      );
+                    },
+                    itemCount: userController.currentUserClasseSubjects.length,
+                  );
+                }
+              }),
+              const SizedBox(height: 70.0),
+            ],
+          ),
+          // userController.currentUserClasseSubjects.isEmpty
+          //     ? children1
+          //     : children2,
         ],
       ),
     );

@@ -11,16 +11,16 @@ class UserController extends GetxController {
   var currentUser = User(email: "", password: "").obs;
   var currentUserClasse =
       Classe(depId: 0, groupe: 0, id: 0, level: 0, name: '').obs;
-
+  var currentClasse = Classe(id: 0, level: 0, groupe: 0, depId: 0, name: "");
   var currentUserType = "".obs;
   var currentUserId = 0.obs;
-  var currentClasse = 0.obs;
+  var currentClasseId = 0.obs;
   var currentSubject = 0.obs;
   var currentCourse = 0.obs;
   var userList = <User>[].obs;
   var currentUserSubjects = <Subject>[].obs;
   var currentUserClasses = <Classe>[].obs;
-  var currentUserClasseSubject = <Subject>[].obs;
+  var currentUserClasseSubjects = <Subject>[].obs;
   var currentUserClasseSubjectCourses = <Course>[].obs;
   var currentUserClasseSubjectTds = <Course>[].obs;
 
@@ -38,6 +38,8 @@ class UserController extends GetxController {
 
   void getCurrentUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // newly added
+    currentUserId.value = await prefs.getInt('cuid')!;
     currentUser.value = await HttpUserService.getUser(prefs.getInt('cuid')!);
   }
 
@@ -55,10 +57,10 @@ class UserController extends GetxController {
 
 //for classroom teacher second screen
   void getUserClasseSubjects() async {
-    currentUserClasseSubject.value =
+    currentUserClasseSubjects.value =
         await HttpUserService.fetchUserClasseSubjects(
       currentUser.value.id!,
-      currentClasse.value,
+      currentClasseId.value,
     );
   }
 

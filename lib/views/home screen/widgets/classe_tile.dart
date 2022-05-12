@@ -15,15 +15,16 @@ class ClasseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // userController.onInit();
-    userController.currentClasse.value = classe.id;
+    userController.currentClasseId.value = classe.id;
     return GestureDetector(
       onTap: () {
-        userController.currentClasse.value = classe.id;
+        userController.currentClasseId.value = classe.id;
+        userController.currentClasse = classe;
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (_) => TeacherSubjectsScreen(
-                      classeId: classe.id,
+                      classe: classe,
                     )));
       },
       child: Stack(children: [

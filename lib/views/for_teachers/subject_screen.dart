@@ -1,22 +1,24 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:enetcom_app/controllers/course_controller.dart';
-import 'package:enetcom_app/models/course.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/course_tile.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/upload_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/classe_controller.dart';
+import 'package:enetcom_app/controllers/course_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/course_tile.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/upload_box.dart';
 
 class SubjectScreen extends StatefulWidget {
+  //User user;
   Subject subject;
   SubjectScreen({
     Key? key,
+    //required this.user,
     required this.subject,
   }) : super(key: key);
 
@@ -26,10 +28,10 @@ class SubjectScreen extends StatefulWidget {
 
 class _SubjectScreenState extends State<SubjectScreen> {
   final UserController userController = Get.put(UserController());
-  final ClasseController classeController = Get.put(ClasseController());
-  final CourseController courseController = Get.put(CourseController());
+  //final ClasseController classeController = Get.put(ClasseController());
+  //final CourseController courseController = Get.put(CourseController());
 
-  User currentUser = User(email: "", password: "");
+  // User currentUser = User(email: "", password: "");
 
   @override
   void initState() {
@@ -39,9 +41,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User currentUser = userController.currentUser.value;
+    //User currentUser = userController.currentUser.value;
     userController.onInit();
-    print(widget.subject);
+    print(widget.subject.name);
 
     var children1 = Column(
       children: [
@@ -213,16 +215,36 @@ class _SubjectScreenState extends State<SubjectScreen> {
             ],
           ),
           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${widget.subject.name} courses",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Divider(thickness: 2),
+              ],
+            ),
+          ),
+
+          Padding(
             padding: const EdgeInsets.all(15.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Courses",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                const Expanded(
+                  child: Text(
+                    "Courses",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 TextButton(
