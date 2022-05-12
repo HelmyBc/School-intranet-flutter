@@ -130,8 +130,14 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: CreatePostContainer(
-                    currentUser: userController.currentUser.value),
+                child: Obx(() {
+                  if (userController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return CreatePostContainer(
+                        currentUser: userController.currentUser.value);
+                  }
+                }),
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(

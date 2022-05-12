@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CurrentProfileScreen extends StatefulWidget {
-  const CurrentProfileScreen({Key? key}) : super(key: key);
+  CurrentProfileScreen({Key? key}) : super(key: key);
 
   @override
   _CurrentProfileScreenState createState() => _CurrentProfileScreenState();
@@ -141,7 +141,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                 ),
               ),
             ),
-           ProfileInfoTile(user: currentUser),
+            ProfileInfoTile(user: currentUser),
             const SizedBox(height: 10),
             const Padding(
               padding: EdgeInsets.only(top: 8.0, left: 14.0),

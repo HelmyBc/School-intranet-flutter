@@ -92,7 +92,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             child: InkWell(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const CurrentProfileScreen())),
+                  builder: (context) => CurrentProfileScreen())),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[

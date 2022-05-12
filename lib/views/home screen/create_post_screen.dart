@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:enetcom_app/controllers/post_controller.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/attachment.dart';
 import 'package:enetcom_app/models/post.dart';
@@ -21,10 +22,11 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   final PostController postController = Get.put(PostController());
+  final UserController userController = Get.put(UserController());
 
-  TextEditingController uidController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController profImageController = TextEditingController();
+  // TextEditingController uidController = TextEditingController();
+  // TextEditingController usernameController = TextEditingController();
+  // TextEditingController profImageController = TextEditingController();
 
   TextEditingController descriptionController = TextEditingController();
   Post? post;
@@ -63,10 +65,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   Widget _previewImage() {
     if (_imageFile != null) {
-      return
-          //child: Image.file(File(_imageFile!.path)),
-          ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+      return ClipRRect(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(30.0),
+        ),
         child: Stack(
           children: [
             Container(
@@ -138,9 +140,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   @override
   void dispose() {
     descriptionController.dispose();
-    usernameController.dispose();
-    profImageController.dispose();
-    uidController.dispose();
+    // usernameController.dispose();
+    // profImageController.dispose();
+    // uidController.dispose();
     super.dispose();
   }
 
@@ -177,9 +179,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     imageId = 0;
                   }
                   String description = descriptionController.text;
-                  int uid = int.parse(uidController.text);
-                  String username = usernameController.text;
-                  String profImage = profImageController.text;
+                  int uid = userController.currentUser.value.id!;
+                  String username =
+                      "${userController.currentUser.value.firstName} ${userController.currentUser.value.lastName}";
+                  String profImage = userController.currentUser.value.imageUrl!;
 
                   Post posts = await HttpPostService.addPost(
                     description,
@@ -190,9 +193,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     profImage,
                   );
                   descriptionController.text = '';
-                  uidController.text = '';
-                  usernameController.text = '';
-                  profImageController.text = '';
+                  // uidController.text = '';
+                  // usernameController.text = '';
+                  // profImageController.text = '';
                   setState(() {
                     post = posts;
                     Navigator.pop(context);
@@ -200,9 +203,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   });
                 } else {
                   String description = descriptionController.text;
-                  int uid = int.parse(uidController.text);
-                  String username = usernameController.text;
-                  String profImage = profImageController.text;
+                  int uid = userController.currentUser.value.id!;
+                  String username =
+                      "${userController.currentUser.value.firstName} ${userController.currentUser.value.lastName}";
+                  String profImage = userController.currentUser.value.imageUrl!;
                   String imageUrl = "";
                   int imageId = 0;
 
@@ -215,9 +219,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     profImage,
                   );
                   descriptionController.text = '';
-                  uidController.text = '';
-                  usernameController.text = '';
-                  profImageController.text = '';
                   setState(() {
                     post = posts;
                     Navigator.pop(context);
@@ -259,14 +260,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         children: [
                           Row(
                             children: [
-                              ProfileAvatar(imageUrl: currentUser.imageUrl),
+                              ProfileAvatar(
+                                  imageUrl: userController
+                                      .currentUser.value.imageUrl!),
                               const SizedBox(width: 8.0),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      currentUser.name,
+                                      "${userController.currentUser.value.firstName} ${userController.currentUser.value.lastName}",
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -293,66 +296,66 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ],
                           ),
                           const SizedBox(height: 10.0),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.name,
-                              controller: usernameController,
-                              validator: (value) {
-                                if (value == null) {
-                                  return "Please enter your username";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                labelText: 'username',
-                                hintText: 'username',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              controller: uidController,
-                              validator: (value) {
-                                if (value == null) {
-                                  return "Please enter your uid";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                labelText: 'uid',
-                                hintText: 'uid',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.url,
-                              controller: profImageController,
-                              validator: (value) {
-                                if (value == null) {
-                                  return "Please enter your profImage";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                labelText: 'prof Image',
-                                hintText: 'prof Image',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          //   child: TextFormField(
+                          //     keyboardType: TextInputType.name,
+                          //     controller: usernameController,
+                          //     validator: (value) {
+                          //       if (value == null) {
+                          //         return "Please enter your username";
+                          //       }
+                          //       return null;
+                          //     },
+                          //     decoration: InputDecoration(
+                          //       labelText: 'username',
+                          //       hintText: 'username',
+                          //       border: OutlineInputBorder(
+                          //         borderRadius: BorderRadius.circular(20.0),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          //   child: TextFormField(
+                          //     keyboardType: TextInputType.number,
+                          //     controller: uidController,
+                          //     validator: (value) {
+                          //       if (value == null) {
+                          //         return "Please enter your uid";
+                          //       }
+                          //       return null;
+                          //     },
+                          //     decoration: InputDecoration(
+                          //       labelText: 'uid',
+                          //       hintText: 'uid',
+                          //       border: OutlineInputBorder(
+                          //         borderRadius: BorderRadius.circular(20.0),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          //   child: TextFormField(
+                          //     keyboardType: TextInputType.url,
+                          //     controller: profImageController,
+                          //     validator: (value) {
+                          //       if (value == null) {
+                          //         return "Please enter your profImage";
+                          //       }
+                          //       return null;
+                          //     },
+                          //     decoration: InputDecoration(
+                          //       labelText: 'prof Image',
+                          //       hintText: 'prof Image',
+                          //       border: OutlineInputBorder(
+                          //         borderRadius: BorderRadius.circular(20.0),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           const SizedBox(height: 18.0),
                           TextFormField(
                             minLines: 3,

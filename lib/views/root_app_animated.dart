@@ -18,7 +18,7 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
   List barItems = [
     HomeScreen(),
     StudentScreen(),
-    const CurrentProfileScreen(),
+    CurrentProfileScreen(),
     AdminDashboard(),
   ];
 
@@ -91,18 +91,15 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
-                            width: index == currentIndex
-                                ? displayWidth * .13
-                                : 0,
+                            width:
+                                index == currentIndex ? displayWidth * .13 : 0,
                           ),
                           AnimatedOpacity(
                             opacity: index == currentIndex ? 1 : 0,
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
                             child: Text(
-                              index == currentIndex
-                                  ? listOfStrings[index]
-                                  : '',
+                              index == currentIndex ? listOfStrings[index] : '',
                               style: const TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.w600,
@@ -117,9 +114,8 @@ class _RootAppAnimatedState extends State<RootAppAnimated> {
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
-                            width: index == currentIndex
-                                ? displayWidth * .03
-                                : 20,
+                            width:
+                                index == currentIndex ? displayWidth * .03 : 20,
                           ),
                           Icon(
                             listOfIcons[index],
