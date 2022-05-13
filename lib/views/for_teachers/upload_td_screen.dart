@@ -132,26 +132,29 @@ class _UploadTdScreenState extends State<UploadTdScreen> {
                               "http://192.168.56.1:9191/api/download/${attachment.id}";
                           pdfId = attachment.id;
                           String name = titleController.text;
-                          Td td1 = await HttpTdService.addTd(
-                            name,
-                            widget.subject.id,
-                            pdfId,
-                            pdfUrl,
-                          );
-                          titleController.text = '';
-                          setState(() {
-                            td = td1;
-                            // userController.currentUserClasseSubjecttds
-                            //     .add(td1);
-                            //tdController.fetchtds();
-                            userController.getUserClasseSubjectTds();
-                          });
+                          if (pdfId != 0) {
+                            Td td1 = await HttpTdService.addTd(
+                              name,
+                              widget.subject.id,
+                              pdfId,
+                              pdfUrl,
+                            );
+                            titleController.text = '';
+                            setState(() {
+                              td = td1;
+                              // userController.currentUserClasseSubjecttds
+                              //     .add(td1);
+                              //tdController.fetchtds();
+                              userController.getUserClasseSubjectTds();
+                            });
+                          }
                           Navigator.pop(context);
-                        }else{
-                           const snackBar = SnackBar(
-                             backgroundColor: Colors.redAccent,
-                            content: Text("To upload a TD you need both title and PDF file!"));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          const snackBar = SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text(
+                                  "To upload a TD you need both title and PDF file!"));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
                       child: const Text(
