@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/course_tile.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +76,12 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
     }
   }
 
+  void clearPdf() {
+    setState(() {
+      _pdfFile = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
@@ -123,7 +130,7 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        if (_pdfFile != null && titleController.text!="") {
+                        if (_pdfFile != null && titleController.text != "") {
                           Attachment attachment =
                               await uploadPdf(_pdfFile!.path, uploadUrl);
                           pdfUrl =
@@ -139,8 +146,12 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                           titleController.text = '';
                           setState(() {
                             course = course1;
-                            courseController.fetchCourses();
+                            // userController.currentUserClasseSubjectCourses
+                            //     .add(course1);
+                            //courseController.fetchCourses();
+                            userController.getUserClasseSubjectCourses();
                           });
+                          Navigator.pop(context);
                         }
                       },
                       child: const Text(
@@ -178,56 +189,104 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  _pickPdf();
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
-                  child: DottedBorder(
-                    padding: const EdgeInsets.all(0),
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(20),
-                    dashPattern: const [10, 10],
-                    color: Colors.blue.shade800,
-                    strokeWidth: 2,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.93,
-                      padding: const EdgeInsets.all(40.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.lightBlue.withOpacity(0.3),
-                      ),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Icon(
-                              CupertinoIcons.share,
-                              color: Colors.blue[800],
-                              size: 30,
+              _pdfFile == null
+                  ? GestureDetector(
+                      onTap: () {
+                        _pickPdf();
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        child: DottedBorder(
+                          padding: const EdgeInsets.all(0),
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(20),
+                          dashPattern: const [10, 10],
+                          color: Colors.blue.shade800,
+                          strokeWidth: 2,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.93,
+                            padding: const EdgeInsets.all(40.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.lightBlue.withOpacity(0.3),
                             ),
-                            const SizedBox(height: 15.0),
-                            const Text(
-                              "Tap here to upload a PDF",
-                              style: TextStyle(
-                                color: Colors.black54,
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.share,
+                                    color: Colors.blue[800],
+                                    size: 30,
+                                  ),
+                                  const SizedBox(height: 15.0),
+                                  const Text(
+                                    "Tap here to upload a PDF",
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15.0),
+                                  Text(
+                                    "Browse",
+                                    style: TextStyle(
+                                      color: Colors.blue[800],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 15.0),
-                            Text(
-                              "Browse",
-                              style: TextStyle(
-                                color: Colors.blue[800],
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
+                    )
+                  : Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 7.0),
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 2.0),
+                            blurRadius: 6.0,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Image(
+                            image: ExactAssetImage("assets/images/pdf.png"),
+                            //height: 60.0,
+                            width: 80.0,
+                            alignment: FractionalOffset.center,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _pdfFile!.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              clearPdf();
+                            },
+                            icon: const Icon(Icons.close),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              )
             ],
           ),
         ),

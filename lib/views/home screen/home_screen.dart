@@ -23,8 +23,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     featureController.fetchFeatures();
-    if (featureController.featureList != null ||
-        featureController.featureList != []) {
+    userController.getCurrentUser();
+    if ((featureController.featureList != null ||
+            featureController.featureList != []) &&
+        userController.isLoading == false) {
       _isLoading = false;
     }
     return GestureDetector(

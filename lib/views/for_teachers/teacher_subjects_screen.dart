@@ -2,102 +2,86 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/controllers/classe_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/subject.dart';
-import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/for_teachers/add_teacher_subject_screen.dart';
-import 'package:enetcom_app/views/for_teachers/add_teacher_subjects_screen.dart';
 import 'package:enetcom_app/views/for_teachers/classroom_teacher_screen.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/classe_tile.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 
-class TeacherSubjectsScreen extends StatefulWidget {
-  // int classeId;
+class TeacherSubjectsScreen extends StatelessWidget {
   Classe classe;
   TeacherSubjectsScreen({
-    Key? key,
     required this.classe,
-  }) : super(key: key);
-
-  @override
-  State<TeacherSubjectsScreen> createState() => _TeacherSubjectsScreenState();
-}
-
-class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
-  final UserController userController = Get.put(UserController());
-  //final ClasseController classeController = Get.put(ClasseController());
-
-  //User currentUser = User(email: "", password: "");
-
-  @override
-  void initState() {
-    super.initState();
-    userController.onInit();
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
-    print(userController.currentClasse.name);
-    print(userController.currentUserClasseSubjects.value);
-    var children1 = Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Expanded(
-                    child: Text(
-                      "No subjects detected",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => AddTeacherSubjectsScreen(
-                                    classe: widget.classe,
-                                  )));
-                    },
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(58.0),
-                  child: Text(
-                    "Please click the add button in blue to select the subjects you teach.",
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 70.0),
-      ],
-    );
+    final UserController userController = Get.put(UserController());
+    userController.getCurrentUser();
+    userController.getUserClasseSubjects();
+    Classe classe = userController.currentClasse;
+    //User currentUser = userController.currentUser.value;
+    //userController.onInit();
+    // print(userController.currentClasse.name);
+    // print(userController.currentUserClasseSubjects);
+    // var children1 = Column(
+    //   children: [
+    //     Padding(
+    //       padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+    //       child: Column(
+    //         children: [
+    //           Row(
+    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //             children: [
+    //               const Expanded(
+    //                 child: Text(
+    //                   "No subjects detected",
+    //                   style: TextStyle(
+    //                     color: Colors.black,
+    //                     fontSize: 20.0,
+    //                     fontWeight: FontWeight.bold,
+    //                   ),
+    //                 ),
+    //               ),
+    //               TextButton(
+    //                 onPressed: () {
+    //                   Navigator.push(
+    //                       context,
+    //                       MaterialPageRoute(
+    //                           builder: (_) => AddTeacherSubjectsScreen(
+    //                                 classe: widget.classe,
+    //                               )));
+    //                 },
+    //                 child: const Text(
+    //                   "Add",
+    //                   style: TextStyle(
+    //                     color: Colors.blue,
+    //                     fontSize: 18.0,
+    //                     fontWeight: FontWeight.bold,
+    //                   ),
+    //                 ),
+    //               ),
+    //             ],
+    //           ),
+    //           Center(
+    //             child: Padding(
+    //               padding: const EdgeInsets.all(58.0),
+    //               child: Text(
+    //                 "Please click the add button in blue to select the subjects you teach.",
+    //                 style: TextStyle(
+    //                   color: Colors.grey[700],
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //     const SizedBox(height: 70.0),
+    //   ],
+    // );
     var children2 = Column(
       children: [
         Padding(
@@ -119,7 +103,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                   ],
                 ),
                 child: Text(
-                  "${widget.classe.name} subjects",
+                  "${classe.name} subjects",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
@@ -152,7 +136,7 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (_) =>
-                              AddTeacherSubjectsScreen(classe: widget.classe)));
+                              AddTeacherSubjectsScreen(classe: classe)));
                 },
                 child: const Text(
                   "Add",
@@ -184,6 +168,17 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             );
           }
         }),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 58.0, vertical: 10.0),
+          child: Center(
+            child: Text(
+              "Please click the add button in blue to select the subjects you teach.",
+              style: TextStyle(
+                color: Colors.grey[700],
+              ),
+            ),
+          ),
+        ),
         const SizedBox(height: 70.0),
       ],
     );
@@ -243,9 +238,10 @@ class _TeacherSubjectsScreenState extends State<TeacherSubjectsScreen> {
             "All the documents you need\nare here for you.",
             'assets/images/student1.png',
           ),
-          userController.currentUserClasseSubjects.isEmpty
-              ? children1
-              : children2,
+          children2,
+          // userController.currentUserClasseSubjects.isEmpty
+          //     ? children1
+          //     : children2,
         ],
       ),
     );

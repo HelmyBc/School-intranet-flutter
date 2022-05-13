@@ -6,16 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ClasseTile extends StatelessWidget {
-  Classe classe;
   final UserController userController = Get.put(UserController());
-  ClasseTile({
-    Key? key,
-    required this.classe,
-  }) : super(key: key);
+  Classe classe;
+
+  ClasseTile({required this.classe});
   @override
   Widget build(BuildContext context) {
     // userController.onInit();
-    userController.currentClasseId.value = classe.id;
+    // userController.currentClasseId.value = classe.id;
+    // userController.currentClasse = classe;
     return GestureDetector(
       onTap: () {
         userController.currentClasseId.value = classe.id;
@@ -23,9 +22,7 @@ class ClasseTile extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_) => TeacherSubjectsScreen(
-                      classe: classe,
-                    )));
+                builder: (context) => TeacherSubjectsScreen(classe: classe)));
       },
       child: Stack(children: [
         Container(

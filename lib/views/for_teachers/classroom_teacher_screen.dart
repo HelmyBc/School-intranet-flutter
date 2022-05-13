@@ -11,28 +11,18 @@ import 'package:enetcom_app/views/widgets/build_header_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ClassroomTeacherScreen extends StatefulWidget {
+class ClassroomTeacherScreen extends StatelessWidget {
   ClassroomTeacherScreen({Key? key}) : super(key: key);
 
   @override
-  State<ClassroomTeacherScreen> createState() => _ClassroomTeacherScreenState();
-}
-
-class _ClassroomTeacherScreenState extends State<ClassroomTeacherScreen> {
-  final UserController userController = Get.put(UserController());
-  //final ClasseController classeController = Get.put(ClasseController());
-  //final SubjectController subjectController = Get.put(SubjectController());
-
-  User currentUser = User(email: "", password: "");
-
-  @override
-  void initState() {
-    super.initState();
-    userController.onInit();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.put(UserController());
+    //final ClasseController classeController = Get.put(ClasseController());
+    //final SubjectController subjectController = Get.put(SubjectController());
+
+    // User currentUser = User(email: "", password: "");
+    userController.getCurrentUser();
+    userController.getCurrentUserClasses();
     User currentUser = userController.currentUser.value;
     print(userController.currentUserClasseSubjectCourses);
     userController.onInit();

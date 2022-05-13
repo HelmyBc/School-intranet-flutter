@@ -20,9 +20,9 @@ class SubjectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        
         //userController.onInit();
-        userController.currentSubject.value = subject.id;
+        userController.currentSubjectId.value = subject.id;
+        userController.currentSubject = subject;
         //userController.getUserClasseSubjectCourses();
         Navigator.push(
             context,

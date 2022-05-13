@@ -12,11 +12,13 @@ class UserController extends GetxController {
   var currentUserClasse =
       Classe(depId: 0, groupe: 0, id: 0, level: 0, name: '').obs;
   var currentClasse = Classe(id: 0, level: 0, groupe: 0, depId: 0, name: "");
+  var currentSubject =
+      Subject(id: 0, classeId: 0, teacherId: 0, name: "", teacherName: "");
   var currentUserType = "".obs;
   var currentUserId = 0.obs;
   var currentClasseId = 0.obs;
-  var currentSubject = 0.obs;
-  var currentCourse = 0.obs;
+  var currentSubjectId = 0.obs;
+  var currentCourseId = 0.obs;
   var userList = <User>[].obs;
   var currentUserSubjects = <Subject>[].obs;
   var currentUserClasses = <Classe>[].obs;
@@ -29,10 +31,10 @@ class UserController extends GetxController {
     fetchUsers();
     //loadCurrentUser();
     getCurrentUser();
-    getCurrentUserSubjects();
+    // getCurrentUserSubjects();
     getCurrentUserClasses();
-    getUserClasseSubjects();
-    getUserClasseSubjectCourses();
+    // getUserClasseSubjects();
+    // getUserClasseSubjectCourses();
     super.onInit();
   }
 
@@ -67,7 +69,7 @@ class UserController extends GetxController {
 //for classroom teacher third screen
   void getUserClasseSubjectCourses() async {
     currentUserClasseSubjectCourses.value =
-        await HttpUserService.fetchSubjectCourses(currentSubject.value);
+        await HttpUserService.fetchSubjectCourses(currentSubjectId.value);
   }
 
   void fetchUsers() async {
