@@ -1,7 +1,12 @@
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/course.dart';
+import 'package:enetcom_app/services/http_course_service.dart';
+import 'package:enetcom_app/views/for_teachers/edit_course_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CourseTile extends StatelessWidget {
@@ -14,11 +19,52 @@ class CourseTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    UserController userController = Get.put(UserController());
     DateTime createdTime = DateTime.parse(course.createdTime);
 
     final difference = DateTime.now().difference(createdTime);
     final dateTime = DateTime.now().subtract(difference);
     final timeAgo = timeago.format(dateTime);
+
+    void showActions() {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) => CupertinoActionSheet(
+          title: const Text('Select An Option'),
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              child: const Text('Edit title'),
+              onPressed: () {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) =>
+                //             EditCourseScreen(course: course)));
+                Navigator.pop(context);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: const Text('Delete'),
+              onPressed: () {
+                HttpCourseService.deleteCourse(course.id);
+                userController.getUserClasseSubjectCourses();
+                const snackBar =
+                    SnackBar(content: Text("Course deleted succefully!"));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                Navigator.pop(context);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -73,7 +119,17 @@ class CourseTile extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                if (userController.currentUserType.value == "Teacher" ||
+                    userController.currentUserType.value == "Admin") {
+                  showActions();
+                } else {
+                  const snackBar = SnackBar(
+                      content: Text(
+                          "Oops! only the owner of this course can edit/delete."));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
               icon: const Icon(Icons.more_vert),
             ),
           ],
