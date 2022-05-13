@@ -291,9 +291,12 @@ class _SubjectScreenState extends State<SubjectScreen> {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => UploadCourseScreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              UploadCourseScreen(subject: widget.subject),
+                        ),
+                      );
                     },
                   ),
                 )

@@ -57,12 +57,14 @@ class HttpCourseService {
   static Future<Course> addCourse(
     String name,
     int subjectId,
-    int attachmentId,
+    int attachmentId,  
+    String pdfUrl,  
   ) async {
     Map data = {
       "name": name,
       "subjectId": subjectId,
       "attachmentId": attachmentId,
+      "pdfUrl": pdfUrl,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/course');

@@ -26,10 +26,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   final PostController postController = Get.put(PostController());
   final UserController userController = Get.put(UserController());
 
-  // TextEditingController uidController = TextEditingController();
-  // TextEditingController usernameController = TextEditingController();
-  // TextEditingController profImageController = TextEditingController();
-
   TextEditingController descriptionController = TextEditingController();
   Post? post;
   XFile? _imageFile;

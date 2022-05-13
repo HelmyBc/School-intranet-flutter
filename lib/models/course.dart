@@ -11,12 +11,14 @@ class Course {
     required this.id,
     required this.name,
     required this.subjectId,
+    required this.pdfUrl,
     required this.attachmentId,
     required this.createdTime,
   });
 
   int id;
   String name;
+  String pdfUrl;
   int subjectId;
   int attachmentId;
   String createdTime;
@@ -27,6 +29,7 @@ class Course {
         subjectId: json["subjectId"],
         attachmentId: json["attachmentId"],
         createdTime: json["createdTime"],
+        pdfUrl: json["pdfUrl"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,5 +38,6 @@ class Course {
         "subjectId": subjectId,
         "attachmentId": attachmentId,
         "createdTime": createdTime,
+        "pdfUrl": pdfUrl,
       };
 }
