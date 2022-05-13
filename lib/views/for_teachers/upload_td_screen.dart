@@ -12,7 +12,6 @@ import 'package:open_file/open_file.dart';
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/attachment.dart';
-import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/services/http_td_service.dart';
 

@@ -137,20 +137,22 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                               "http://192.168.56.1:9191/api/download/${attachment.id}";
                           pdfId = attachment.id;
                           String name = titleController.text;
-                          Course course1 = await HttpCourseService.addCourse(
-                            name,
-                            widget.subject.id,
-                            pdfId,
-                            pdfUrl,
-                          );
-                          titleController.text = '';
-                          setState(() {
-                            course = course1;
-                            // userController.currentUserClasseSubjectCourses
-                            //     .add(course1);
-                            //courseController.fetchCourses();
-                            userController.getUserClasseSubjectCourses();
-                          });
+                          if (pdfId != 0) {
+                            Course course1 = await HttpCourseService.addCourse(
+                              name,
+                              widget.subject.id,
+                              pdfId,
+                              pdfUrl,
+                            );
+                            titleController.text = '';
+                            setState(() {
+                              course = course1;
+                              // userController.currentUserClasseSubjectCourses
+                              //     .add(course1);
+                              //courseController.fetchCourses();
+                              userController.getUserClasseSubjectCourses();
+                            });
+                          }
                           Navigator.pop(context);
                         } else {
                           const snackBar = SnackBar(
