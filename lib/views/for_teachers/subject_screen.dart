@@ -1,4 +1,7 @@
+import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/views/for_teachers/upload_course_screen.dart';
+import 'package:enetcom_app/views/for_teachers/upload_td_screen.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/td_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +24,7 @@ class SubjectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     userController.getUserClasseSubjectCourses();
+    userController.getUserClasseSubjectTds();
     Subject subject = userController.currentSubject;
     //userController.onInit();
     print(subject.name);
@@ -291,6 +295,105 @@ class SubjectScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => UploadCourseScreen(subject: subject),
+                  ),
+                );
+              },
+            ),
+            const Divider(thickness: 2.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.green,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0.0, 2.0),
+                          blurRadius: 6.0,
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      "${subject.name} TDs",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Divider(thickness: 2),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "TDs",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => UploadTdScreen(subject: subject),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Add",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Obx(() {
+              if (userController.isLoading.value) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    final Td td =
+                        userController.currentUserClasseSubjectTds[index];
+                    return TdTile(
+                      td: td,
+                    );
+                  },
+                  itemCount: userController.currentUserClasseSubjectTds.length,
+                );
+              }
+            }),
+            GestureDetector(
+              child: UploadBox(
+                text: "Add more TDs? upload TDs here.",
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => UploadTdScreen(subject: subject),
                   ),
                 );
               },

@@ -1,41 +1,37 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/course_tile.dart';
+import 'package:enetcom_app/models/td.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 
 import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/controllers/course_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/attachment.dart';
-import 'package:enetcom_app/models/course.dart';
+import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/subject.dart';
-import 'package:enetcom_app/services/http_course_service.dart';
+import 'package:enetcom_app/services/http_td_service.dart';
 
-class UploadCourseScreen extends StatefulWidget {
+class UploadTdScreen extends StatefulWidget {
   Subject subject;
-  UploadCourseScreen({
+  UploadTdScreen({
     Key? key,
     required this.subject,
   }) : super(key: key);
 
   @override
-  State<UploadCourseScreen> createState() => _UploadCourseScreenState();
+  State<UploadTdScreen> createState() => _UploadTdScreenState();
 }
 
-class _UploadCourseScreenState extends State<UploadCourseScreen> {
+class _UploadTdScreenState extends State<UploadTdScreen> {
   final UserController userController = Get.put(UserController());
-  final CourseController courseController = Get.put(CourseController());
   TextEditingController titleController = TextEditingController();
 
-  Course? course;
+  Td? td;
   PlatformFile? _pdfFile;
   String pdfUrl = "";
   int pdfId = 0;
@@ -121,7 +117,7 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Add a new course",
+                      "Add a new td",
                       style: TextStyle(
                         color: Palette.adminBg,
                         fontWeight: FontWeight.bold,
@@ -137,7 +133,7 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                               "http://192.168.56.1:9191/api/download/${attachment.id}";
                           pdfId = attachment.id;
                           String name = titleController.text;
-                          Course course1 = await HttpCourseService.addCourse(
+                          Td td1 = await HttpTdService.addTd(
                             name,
                             widget.subject.id,
                             pdfId,
@@ -145,19 +141,18 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                           );
                           titleController.text = '';
                           setState(() {
-                            course = course1;
-                            // userController.currentUserClasseSubjectCourses
-                            //     .add(course1);
-                            //courseController.fetchCourses();
-                            userController.getUserClasseSubjectCourses();
+                            td = td1;
+                            // userController.currentUserClasseSubjecttds
+                            //     .add(td1);
+                            //tdController.fetchtds();
+                            userController.getUserClasseSubjectTds();
                           });
                           Navigator.pop(context);
-                        } else {
-                          const snackBar = SnackBar(
-                              backgroundColor: Colors.redAccent,
-                              content: Text(
-                                  "To upload a course you need both title and PDF file!"));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }else{
+                           const snackBar = SnackBar(
+                             backgroundColor: Colors.redAccent,
+                            content: Text("To upload a TD you need both title and PDF file!"));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
                       child: const Text(
@@ -187,8 +182,8 @@ class _UploadCourseScreenState extends State<UploadCourseScreen> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelText: '  Course name',
-                    hintText: 'Enter the course name',
+                    labelText: '  td name',
+                    hintText: 'Enter the td name',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),

@@ -12,6 +12,7 @@ class Td {
     required this.name,
     required this.subjectId,
     required this.attachmentId,
+    required this.pdfUrl,
     required this.createdTime,
   });
 
@@ -19,6 +20,7 @@ class Td {
   String name;
    int subjectId;
    int attachmentId;
+   String pdfUrl;
    String createdTime;
 
   factory Td.fromJson(Map<String, dynamic> json) => Td(
@@ -26,6 +28,7 @@ class Td {
         name: json["name"],
         subjectId: json["subjectId"],
         attachmentId: json["attachmentId"],
+        pdfUrl: json["pdfUrl"],
         createdTime: json["createdTime"],
       );
 
@@ -34,6 +37,7 @@ class Td {
         "name": name,
         "subjectId": subjectId,
         "attachmentId": attachmentId,
+        "pdfUrl": pdfUrl,
         "createdTime": createdTime,
       };
 }

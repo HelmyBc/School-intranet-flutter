@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
     userController.getCurrentUser();
     if ((featureController.featureList != null ||
             featureController.featureList != []) &&
-        userController.isLoading == false) {
+        userController.isLoading.value == false) {
       _isLoading = false;
     }
     return GestureDetector(
@@ -118,10 +118,10 @@ class HomeScreen extends StatelessWidget {
                 child: GetBuilder<FeatureController>(
                   builder: (_c) {
                     if (_c.isLoading.isTrue) {
-                      if (_c.featureList.isNotEmpty) {
-                        return FeatureCarousel();
-                      } else {
+                      if (_c.featureList.isEmpty) {
                         return const CarouselLoading();
+                      } else {
+                        return FeatureCarousel();
                       }
                     } else if (_c.featureList.isNotEmpty) {
                       return FeatureCarousel();

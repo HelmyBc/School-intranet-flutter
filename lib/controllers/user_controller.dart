@@ -1,6 +1,7 @@
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/course.dart';
 import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:get/state_manager.dart';
@@ -24,7 +25,7 @@ class UserController extends GetxController {
   var currentUserClasses = <Classe>[].obs;
   var currentUserClasseSubjects = <Subject>[].obs;
   var currentUserClasseSubjectCourses = <Course>[].obs;
-  var currentUserClasseSubjectTds = <Course>[].obs;
+  var currentUserClasseSubjectTds = <Td>[].obs;
 
   @override
   void onInit() {
@@ -70,6 +71,11 @@ class UserController extends GetxController {
   void getUserClasseSubjectCourses() async {
     currentUserClasseSubjectCourses.value =
         await HttpUserService.fetchSubjectCourses(currentSubjectId.value);
+  }
+//for classroom teacher third screen
+  void getUserClasseSubjectTds() async {
+    currentUserClasseSubjectTds.value =
+        await HttpUserService.fetchSubjectTds(currentSubjectId.value);
   }
 
   void fetchUsers() async {
