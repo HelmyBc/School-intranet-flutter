@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/views/login_screen.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/teacher_root_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const RootAppAnimated(),
+            builder: (context) => const TeacherRootApp(),
           ),
         );
       } else {
@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const RootAppAnimated(),
+            builder: (context) => const TeacherRootApp(),
           ),
         );
       }

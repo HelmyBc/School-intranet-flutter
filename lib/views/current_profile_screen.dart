@@ -2,7 +2,7 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/edit_profile_screen.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/teacher_root_app.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
 import 'package:enetcom_app/views/widgets/post_container.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
@@ -26,6 +26,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    userController.getCurrentUser();
     User currentUser = userController.currentUser.value;
     return Scaffold(
       backgroundColor: Palette.scaffold,
@@ -49,7 +50,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const RootAppAnimated(),
+                builder: (_) => const TeacherRootApp(),
               ),
             ),
           ),

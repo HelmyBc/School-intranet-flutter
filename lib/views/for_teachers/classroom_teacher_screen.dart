@@ -6,7 +6,7 @@ import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/admin_views/teachers/update_teacher_screen.dart';
 import 'package:enetcom_app/views/for_teachers/add_teacher_subject_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/classe_tile.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/teacher_root_app.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +37,7 @@ class ClassroomTeacherScreen extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (_) => RootAppAnimated()));
+                context, MaterialPageRoute(builder: (_) => TeacherRootApp()));
           },
         ),
         backgroundColor: Palette.scaffold,

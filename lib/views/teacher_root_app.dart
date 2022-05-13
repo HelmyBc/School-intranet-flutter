@@ -6,14 +6,14 @@ import 'package:enetcom_app/views/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RootAppAnimated extends StatefulWidget {
-  const RootAppAnimated({Key? key}) : super(key: key);
+class TeacherRootApp extends StatefulWidget {
+  const TeacherRootApp({Key? key}) : super(key: key);
 
   @override
-  State<RootAppAnimated> createState() => _RootAppAnimatedState();
+  State<TeacherRootApp> createState() => _TeacherRootAppState();
 }
 
-class _RootAppAnimatedState extends State<RootAppAnimated> {
+class _TeacherRootAppState extends State<TeacherRootApp> {
   var currentIndex = 0;
   List barItems = [
     HomeScreen(),

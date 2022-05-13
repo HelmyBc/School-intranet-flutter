@@ -120,15 +120,7 @@ class CourseTile extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                if (userController.currentUserType.value == "Teacher" ||
-                    userController.currentUserType.value == "Admin") {
-                  showActions();
-                } else {
-                  const snackBar = SnackBar(
-                      content: Text(
-                          "Oops! only the owner of this course can edit/delete."));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
+                showActions();
               },
               icon: const Icon(Icons.more_vert),
             ),

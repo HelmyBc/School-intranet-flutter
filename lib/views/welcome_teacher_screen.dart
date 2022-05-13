@@ -1,4 +1,4 @@
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/teacher_root_app.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeTeacherScreen extends StatelessWidget {
@@ -80,7 +80,7 @@ class WelcomeTeacherScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RootAppAnimated(),
+                          builder: (context) => const TeacherRootApp(),
                         ),
                       );
                     },

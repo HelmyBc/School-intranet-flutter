@@ -3,7 +3,7 @@ import 'package:enetcom_app/controllers/teacher_controller.dart';
 import 'package:enetcom_app/models/teacher.dart';
 import 'package:enetcom_app/views/admin_views/teachers/add_teacher_screen.dart';
 import 'package:enetcom_app/views/admin_views/widgets/teacher_card.dart';
-import 'package:enetcom_app/views/root_app_animated.dart';
+import 'package:enetcom_app/views/teacher_root_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
