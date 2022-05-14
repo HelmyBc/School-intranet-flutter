@@ -1,5 +1,7 @@
+import 'package:avatar_view/avatar_view.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/empty_content.dart';
+import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -100,7 +102,7 @@ class StudentSubjectsScreen extends StatelessWidget {
                 )
               : EmptyContent(
                   text:
-                      "No subjects available, ask your teacher to add their subjects here",
+                      "Unavailable subject? please ask your teacher update their clasroom space.",
                 ),
         ),
         const SizedBox(height: 70.0),
@@ -133,26 +135,40 @@ class StudentSubjectsScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Obx(
-              () => Text(
-                "Hi ${userController.currentUser.value.firstName ?? ""}",
-                //"Hi ${currentTeacher.firstName}",
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 18.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Obx(
+                      () => Text(
+                        "Hi ${userController.currentUser.value.firstName ?? ""}",
+                        //"Hi ${currentTeacher.firstName}",
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      "Welcome Back!",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-            child: Text(
-              "Welcome Back!",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-              ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: AvatarView(
+                    imagePath: userController.currentUser.value.imageUrl!,
+                    radius: 20,
+                  ),
+                ),
+              ],
             ),
           ),
           buildHeaderBox(
