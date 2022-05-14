@@ -27,7 +27,7 @@ class ProfileInfoTile extends StatelessWidget {
 
   List<String> generateClasseNames() {
     print("names");
-    return classeController.classeList.value
+    return classeController.classeList
         .where((classe) => user.classesId!.contains(classe.id))
         .map(
           (classe) => classe.name,
@@ -48,7 +48,9 @@ class ProfileInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    classeController.fetchClasses();
+    userController.getCurrentUser();
+    userController.getCurrentUserClasses();
+    user = userController.currentUser();
     // List<String> classesNames = generateClasseNames();
     // String classeName = generateClasseName();
     return Container(
@@ -73,7 +75,7 @@ class ProfileInfoTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Full Name",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
@@ -81,7 +83,7 @@ class ProfileInfoTile extends StatelessWidget {
                 ),
                 Text(
                   "${user.firstName} ${user.lastName}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -110,15 +112,18 @@ class ProfileInfoTile extends StatelessWidget {
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Classes",
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       Text(
-                        generateClasseNames().toString(),
-                        style: TextStyle(
+                        generateClasseNames()
+                            .toString()
+                            .replaceAll('[', '')
+                            .replaceAll(']', ''),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -127,7 +132,7 @@ class ProfileInfoTile extends StatelessWidget {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Class",
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
@@ -135,7 +140,7 @@ class ProfileInfoTile extends StatelessWidget {
                       ),
                       Text(
                         generateClasseName(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -145,15 +150,15 @@ class ProfileInfoTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Email",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 Text(
-                  "${user.email}",
-                  style: TextStyle(
+                  user.email,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -163,7 +168,7 @@ class ProfileInfoTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Phone",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
@@ -171,7 +176,7 @@ class ProfileInfoTile extends StatelessWidget {
                 ),
                 Text(
                   "${user.phone}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w400,
                   ),
                 ),

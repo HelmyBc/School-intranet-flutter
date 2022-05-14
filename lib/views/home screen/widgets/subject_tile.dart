@@ -24,12 +24,8 @@ class SubjectTile extends StatelessWidget {
         userController.currentSubjectId.value = subject.id;
         userController.currentSubject = subject;
         //userController.getUserClasseSubjectCourses();
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => SubjectScreen(
-                      subject: subject,
-                    )));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => SubjectScreen(subject: subject)));
       },
       child: Stack(children: [
         Container(
@@ -65,18 +61,22 @@ class SubjectTile extends StatelessWidget {
             image: AssetImage('assets/images/book.png'),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(110, 30, 0, 0),
-          height: 80,
-          width: 250,
-          child: Text(
-            subject.name,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+        Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(110, 30, 0, 0),
+              height: 80,
+              width: 250,
+              child: Text(
+                subject.name,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
             ),
-          ),
+          ],
         ),
         Positioned(
           right: -5,

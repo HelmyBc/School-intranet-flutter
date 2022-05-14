@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:enetcom_app/controllers/feature_controller.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/teacher_root_app.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  UserController userController = Get.put(UserController());
   FeatureController featureController = Get.put(FeatureController());
   @override
   void initState() {
     super.initState();
     featureController.fetchFeatures();
+    userController.getCurrentUser();
     startTimer();
   }
 

@@ -1,10 +1,13 @@
 import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/admin_views/admin_dashboard.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/home%20screen/home_screen.dart';
 import 'package:enetcom_app/views/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class TeacherRootApp extends StatefulWidget {
   const TeacherRootApp({Key? key}) : super(key: key);
@@ -14,17 +17,33 @@ class TeacherRootApp extends StatefulWidget {
 }
 
 class _TeacherRootAppState extends State<TeacherRootApp> {
+  UserController userController = Get.put(UserController());
+
   var currentIndex = 0;
-  List barItems = [
-    HomeScreen(),
-    StudentScreen(),
-    CurrentProfileScreen(),
-    AdminDashboard(),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    userController.getCurrentUser();
+    User currentUser = userController.currentUser.value;
     double displayWidth = MediaQuery.of(context).size.width;
+    List barItems = [
+      HomeScreen(),
+      StudentScreen(),
+      CurrentProfileScreen(
+        currentUser: currentUser,
+      ),
+      AdminDashboard(),
+    ];
+    Widget getBarPage() {
+      return IndexedStack(
+        index: currentIndex,
+        children: List.generate(
+          barItems.length,
+          (index) => barItems[index],
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Palette.scaffold,
       bottomNavigationBar: Container(
@@ -135,16 +154,6 @@ class _TeacherRootAppState extends State<TeacherRootApp> {
         ),
       ),
       body: getBarPage(),
-    );
-  }
-
-  Widget getBarPage() {
-    return IndexedStack(
-      index: currentIndex,
-      children: List.generate(
-        barItems.length,
-        (index) => barItems[index],
-      ),
     );
   }
 

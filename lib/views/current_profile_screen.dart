@@ -1,20 +1,24 @@
-import 'package:enetcom_app/config/palette.dart';
-import 'package:enetcom_app/controllers/user_controller.dart';
-import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/views/edit_profile_screen.dart';
-import 'package:enetcom_app/views/teacher_root_app.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
-import 'package:enetcom_app/views/widgets/post_container.dart';
-import 'package:enetcom_app/views/widgets/profile_avatar.dart';
-import 'package:enetcom_app/views/widgets/profile_image_widget.dart';
-import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
+import 'package:avatar_view/avatar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import 'package:enetcom_app/config/palette.dart';
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/views/edit_profile_screen.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
+import 'package:enetcom_app/views/teacher_root_app.dart';
+import 'package:enetcom_app/views/widgets/profile_image_widget.dart';
+import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
+
 class CurrentProfileScreen extends StatefulWidget {
-  CurrentProfileScreen({Key? key}) : super(key: key);
+  User currentUser;
+  CurrentProfileScreen({
+    Key? key,
+    required this.currentUser,
+  }) : super(key: key);
 
   @override
   _CurrentProfileScreenState createState() => _CurrentProfileScreenState();
@@ -22,153 +26,185 @@ class CurrentProfileScreen extends StatefulWidget {
 
 class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
   final UserController userController = Get.put(UserController());
-  User currentUser = User(email: "", password: "");
+  // User currentUser = User(email: "", password: "");
 
   @override
   Widget build(BuildContext context) {
-    userController.getCurrentUser();
-    User currentUser = userController.currentUser.value;
-    return Scaffold(
-      backgroundColor: Palette.scaffold,
-      appBar: AppBar(
-        title: Text(
-          "${currentUser.firstName} ${currentUser.lastName}",
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            letterSpacing: -1.2,
+    // userController.getCurrentUser();
+    // User currentUser = userController.currentUser.value;
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Palette.scaffold,
+        appBar: AppBar(
+          title: Text(
+            "${widget.currentUser.firstName} ${widget.currentUser.lastName}",
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: -1.2,
+            ),
           ),
-        ),
-        systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark),
-        leading: GestureDetector(
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            iconSize: 30.0,
-            color: Colors.black,
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const TeacherRootApp(),
+          systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark),
+          leading: GestureDetector(
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              iconSize: 30.0,
+              color: Colors.black,
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const TeacherRootApp(),
+                ),
               ),
             ),
           ),
-        ),
-        elevation: 0,
-        backgroundColor: Palette.mainWhite,
-        actions: [
-          // CircleButton(
-          //   icon: Icons.done,
-          //   iconColor: Palette.mainBlack,
-          //   toScreen: const NavScreen(),
-          // )
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
-            decoration: BoxDecoration(
-              color: Palette.facebookBlue,
-              borderRadius: BorderRadius.circular(20.0),
+          elevation: 0,
+          backgroundColor: Palette.mainWhite,
+          actions: [
+            // CircleButton(
+            //   icon: Icons.done,
+            //   iconColor: Palette.mainBlack,
+            //   toScreen: const NavScreen(),
+            // )
+            Container(
+              margin:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
+              decoration: BoxDecoration(
+                color: Palette.facebookBlue,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: InkWell(
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const EditProfileScreen())),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.edit,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          "Edit",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-            child: InkWell(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const EditProfileScreen())),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.edit,
-                        size: 20.0,
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              const SizedBox(height: 20),
+              //  ProfileAvatar(imageUrl: currentUser.imageUrl!),
+              //PFOFILE IMAGE WIDGET
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const EditProfileScreen()));
+                },
+                child: Center(
+                  child: Stack(
+                    children: [
+                      AvatarView(
+                        radius: 64,
+                        borderColor: Colors.grey,
+                        avatarType: AvatarType.CIRCLE,
+                        backgroundColor: Colors.red,
+                        imagePath: userController.currentUser.value.imageUrl!,
+                        placeHolder: const Icon(
+                          Icons.person,
+                          size: 18,
+                        ),
+                        errorWidget: const Icon(
+                          Icons.error,
+                          size: 18,
+                        ),
                       ),
-                      SizedBox(
-                        width: 8.0,
-                      ),
-                      Text(
-                        "Edit",
-                        style: TextStyle(
+                      Positioned(
+                        bottom: 0.0,
+                        right: 4.0,
+                        child: ClipOval(
+                          child: Container(
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0),
+                            padding: const EdgeInsets.all(3.0),
+                            child: ClipOval(
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.blue,
+                                child: const Icon(
+                                  Icons.edit,
+                                  size: 20.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 14.0),
+                child: Text(
+                  "Profile Info",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+              ProfileInfoTile(user: widget.currentUser),
+              const SizedBox(height: 10),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 14.0),
+                child: Text(
+                  "Create a post",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+              CreatePostContainer(currentUser: widget.currentUser),
+              const SizedBox(height: 10),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 14.0),
+                child: Text(
+                  "My posts",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+              // PostContainer(post: posts[0]),
+              // PostContainer(post: posts[4]),
+            ],
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            //  ProfileAvatar(imageUrl: currentUser.imageUrl!),
-            ProfileImage(
-              imageUrl: currentUser.imageUrl!,
-              onClicked: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const EditProfileScreen()));
-              },
-            ),
-            // const SizedBox(
-            //   height: 24.0,
-            // ),
-            // Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text(
-            //       currentUser.name,
-            //       style: const TextStyle(
-            //         fontWeight: FontWeight.bold,
-            //         fontSize: 24.0,
-            //       ),
-            //     ),
-            //     const SizedBox(height: 4.0),
-            //     Text("Etudiant à : ${currentUser.university}"),
-            //   ],
-            // ),
-            const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 14.0),
-              child: Text(
-                "Profile Info",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            ProfileInfoTile(user: currentUser),
-            const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 14.0),
-              child: Text(
-                "Create a post",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            CreatePostContainer(currentUser: currentUser),
-            const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 14.0),
-              child: Text(
-                "My posts",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            // PostContainer(post: posts[0]),
-            // PostContainer(post: posts[4]),
-          ],
         ),
       ),
     );

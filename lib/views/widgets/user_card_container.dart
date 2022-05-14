@@ -1,4 +1,4 @@
-import 'package:enetcom_app/models/user_model.dart';
+import 'package:enetcom_app/models/user.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,34 +64,34 @@ class UserCardContainer extends StatelessWidget {
         children: [
           Row(
             children: [
-              ProfileAvatar(imageUrl: user.imageUrl),
+              ProfileAvatar(imageUrl: user.imageUrl!),
               const SizedBox(width: 10.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      user.name,
+                      "${user.firstName!} ${user.lastName!}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.school,
-                          color: Colors.grey[600],
-                          size: 12.0,
-                        ),
-                        Text(
-                          ' • ${user.university} ',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 12.0,
-                          ),
-                        )
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Icon(
+                    //       Icons.school,
+                    //       color: Colors.grey[600],
+                    //       size: 12.0,
+                    //     ),
+                    //     Text(
+                    //       ' • ${user.university} ',
+                    //       style: TextStyle(
+                    //         color: Colors.grey[600],
+                    //         fontSize: 12.0,
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

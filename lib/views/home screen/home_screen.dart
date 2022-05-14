@@ -4,7 +4,6 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/carousel_slider_data_found.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/widgets/category_list.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/feature_carousel.dart';

@@ -13,8 +13,9 @@ import 'package:enetcom_app/views/widgets/build_header_box.dart';
 class TeacherSubjectsScreen extends StatelessWidget {
   Classe classe;
   TeacherSubjectsScreen({
+    Key? key,
     required this.classe,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

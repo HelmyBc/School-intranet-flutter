@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
-import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/attachment.dart';
 import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/services/http_post_service.dart';
@@ -75,12 +74,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               // width: 45.0,
               child: AspectRatio(
                 aspectRatio: 487 / 451,
-                child: Container(
-                  child: Image.file(
-                    File(_imageFile!.path),
-                    fit: BoxFit.cover,
-                    alignment: FractionalOffset.topCenter,
-                  ),
+                child:  Image.file(
+                  File(_imageFile!.path),
+                  fit: BoxFit.cover,
+                  alignment: FractionalOffset.topCenter,
                 ),
               ),
             ),
@@ -138,9 +135,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   @override
   void dispose() {
     descriptionController.dispose();
-    // usernameController.dispose();
-    // profImageController.dispose();
-    // uidController.dispose();
     super.dispose();
   }
 
