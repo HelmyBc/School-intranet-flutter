@@ -151,7 +151,7 @@ class UserController extends GetxController {
   var currentClasseId = 0.obs;
   var currentSubjectId = 0.obs;
   var currentCourseId = 0.obs;
-   var currentUserTypeInt = 0.obs;
+  var currentUserTypeInt = 0.obs;
   var userList = <User>[].obs;
   var currentUserSubjects = <Subject>[].obs;
   var currentUserClasses = <Classe>[].obs;
@@ -175,7 +175,7 @@ class UserController extends GetxController {
   void getCurrentUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // newly added
-    currentUserId.value = await prefs.getInt('cuid')!;
+    currentUserId.value = prefs.getInt('cuid')!;
     currentUser.value = await HttpUserService.getUser(prefs.getInt('cuid')!);
   }
 

@@ -1,16 +1,20 @@
-import 'package:enetcom_app/controllers/user_controller.dart';
-import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:enetcom_app/models/subject.dart';
 import 'package:get/get.dart';
+
+import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/subject.dart';
+import 'package:enetcom_app/views/for_students/student_subject_screen.dart';
 
 class SubjectTile extends StatelessWidget {
   UserController userController = Get.put(UserController());
 
   Subject subject;
 
-  SubjectTile({Key? key, required this.subject}) : super(key: key);
+  SubjectTile({
+    Key? key,
+    required this.subject,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,10 @@
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/td.dart';
-import 'package:enetcom_app/models/td.dart';
-import 'package:enetcom_app/services/http_td_service.dart';
-import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:enetcom_app/models/subject.dart';
 
 class TdTile extends StatelessWidget {
   //String title;
@@ -26,45 +22,6 @@ class TdTile extends StatelessWidget {
     final difference = DateTime.now().difference(createdTime);
     final dateTime = DateTime.now().subtract(difference);
     final timeAgo = timeago.format(dateTime);
-
-    void showActions() {
-      showCupertinoModalPopup(
-        context: context,
-        builder: (BuildContext context) => CupertinoActionSheet(
-          title: const Text('Select An Option'),
-          actions: <Widget>[
-            CupertinoActionSheetAction(
-              child: const Text('Edit title'),
-              onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             EditCourseScreen(course: course)));
-                Navigator.pop(context);
-              },
-            ),
-            CupertinoActionSheetAction(
-              child: const Text('Delete'),
-              onPressed: () {
-                HttpTdService.deleteTd(td.id);
-                userController.getUserClasseSubjectTds();
-                const snackBar =
-                    SnackBar(content: Text("TD deleted succefully!"));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.pop(context);
-              },
-            ),
-            CupertinoActionSheetAction(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      );
-    }
 
     return GestureDetector(
       onTap: () {
@@ -119,14 +76,6 @@ class TdTile extends StatelessWidget {
                 ],
               ),
             ),
-            userController.currentUserTypeInt.value == 1
-                ? IconButton(
-                    onPressed: () {
-                      showActions();
-                    },
-                    icon: const Icon(Icons.more_vert),
-                  )
-                : const SizedBox(),
           ],
         ),
       ),

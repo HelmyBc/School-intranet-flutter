@@ -90,19 +90,12 @@ class ClassroomStudentScreen extends StatelessWidget {
             );
           }
         }),
-        Center(
-          child: userController.currentUserTypeInt.value == 1
-              ? Text(
-                  "Please click the add button in blue to select the subjects you teach.",
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                  ),
-                )
-              : EmptyContent(
-                  text:
-                      "Unavailable subject? please ask your teacher update their clasroom space.",
-                ),
+
+        EmptyContent(
+          text:
+              "Unavailable subject? please ask your teacher update their clasroom space.",
         ),
+
         const SizedBox(height: 70.0),
       ],
     );
