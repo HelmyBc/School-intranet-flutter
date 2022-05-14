@@ -1,9 +1,5 @@
-import 'package:avatar_view/avatar_view.dart';
-import 'package:enetcom_app/data/data.dart';
-import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/empty_content.dart';
-import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +18,7 @@ class ClassroomStudentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserController userController = Get.put(UserController());
-    userController.getUserSubjects();
+    userController.getCurrentUserSubjects();
     Classe classe = userController.currentClasse;
 
     var children2 = Column(

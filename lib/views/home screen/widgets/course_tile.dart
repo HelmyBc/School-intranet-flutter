@@ -113,7 +113,7 @@ class CourseTile extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     timeAgo,
-                    style: TextStyle(),
+                    style: const TextStyle(),
                   ),
                 ],
               ),

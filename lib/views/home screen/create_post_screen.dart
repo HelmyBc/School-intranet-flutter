@@ -185,9 +185,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     profImage,
                   );
                   descriptionController.text = '';
-                  // uidController.text = '';
-                  // usernameController.text = '';
-                  // profImageController.text = '';
                   setState(() {
                     post = posts;
                     Navigator.pop(context);

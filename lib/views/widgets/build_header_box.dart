@@ -60,7 +60,7 @@ Widget buildHeaderBox(
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   title2,
                   style: const TextStyle(

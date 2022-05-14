@@ -2,11 +2,7 @@ import 'dart:convert';
 
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
-import 'package:enetcom_app/models/student.dart';
-import 'package:enetcom_app/models/teacher.dart';
 import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/services/http_student_service.dart';
-import 'package:enetcom_app/services/http_teacher_service.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/welcome_student_screen.dart';
 import 'package:enetcom_app/views/welcome_teacher_screen.dart';

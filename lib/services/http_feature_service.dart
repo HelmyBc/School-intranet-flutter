@@ -22,13 +22,11 @@ class HttpFeatureService {
     String description,
     String title,
     String imageUrl,
-    //DateTime createdTime,
   ) async {
     Map data = {
       "description": description,
-      "username": title,
+      "title": title,
       "imageUrl": imageUrl,
-      //"createdTime": createdTime,
     };
     var body = json.encode(data);
     var url = Uri.parse('http://192.168.56.1:9191/api/feature');
@@ -48,7 +46,7 @@ class HttpFeatureService {
     var url = Uri.parse('http://192.168.56.1:9191/api/feature/$id');
 
     Map data = {
-      "title": feature.description,
+      "title": feature.title,
       "description": feature.title,
       "imageUrl": feature.imageUrl,
     };

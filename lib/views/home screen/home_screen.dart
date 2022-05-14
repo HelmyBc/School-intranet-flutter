@@ -47,13 +47,10 @@ class HomeScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 backgroundColor: Palette.scaffold,
                 // ignore: prefer_const_constructors
-                title: Hero(
-                  tag: "logo",
-                  child: const Image(
-                    image: ExactAssetImage("assets/images/enetcom_logo.png"),
-                    width: 180.0,
-                    alignment: FractionalOffset.center,
-                  ),
+                title: const Image(
+                  image: ExactAssetImage("assets/images/enetcom_logo.png"),
+                  width: 180.0,
+                  alignment: FractionalOffset.center,
                 ),
                 centerTitle: false,
                 floating: true,
@@ -63,11 +60,6 @@ class HomeScreen extends StatelessWidget {
                     iconColor: Palette.mainBlack,
                     toScreen: HomeScreen(),
                   ),
-                  // CircleButton(
-                  //   icon: Icons.settings,
-                  //   iconColor: Palette.mainBlack,
-                  //   toScreen: HomeScreen(),
-                  // ),
                   ClipOval(
                     child: Material(
                       color: Colors.transparent, // Button color
@@ -77,12 +69,13 @@ class HomeScreen extends StatelessWidget {
                           logout(context);
                         },
                         child: const SizedBox(
-                            width: 56,
-                            height: 56,
-                            child: Icon(
-                              MdiIcons.logout,
-                              color: Palette.mainBlack,
-                            )),
+                          width: 56,
+                          height: 56,
+                          child: Icon(
+                            MdiIcons.logout,
+                            color: Palette.mainBlack,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -101,7 +94,6 @@ class HomeScreen extends StatelessWidget {
                         child: StudentCategoryList(),
                       ),
                     ),
-
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
                 sliver: SliverToBoxAdapter(
@@ -162,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                     } else {
                       return ListView.builder(
                         shrinkWrap: true,
-                        physics: ScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         //controller: controller,
                         itemBuilder: (BuildContext context, int index) {
                           final Post post = postController.postList[index];
@@ -174,15 +166,6 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // SliverList(
-              //   delegate: SliverChildBuilderDelegate(
-              //     (context, index) {
-              //       final PostModel post = posts[index];
-              //       return PostContainer(post: post);
-              //     },
-              //     childCount: posts.length,
-              //   ),
-              // ),
             ],
           ),
         ),

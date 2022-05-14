@@ -29,64 +29,8 @@ class SubjectScreen extends StatelessWidget {
     Subject subject = userController.currentSubject;
     //userController.onInit();
     print(subject.name);
-
-    // var children1 = Column(
-    //   children: [
-    //     Padding(
-    //       padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-    //       child: Column(
-    //         children: [
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //             children: [
-    //               const Expanded(
-    //                 child: Text(
-    //                   "No subjects detected",
-    //                   style: TextStyle(
-    //                     color: Colors.black,
-    //                     fontSize: 20.0,
-    //                     fontWeight: FontWeight.bold,
-    //                   ),
-    //                 ),
-    //               ),
-    //               TextButton(
-    //                 onPressed: () {
-    //                   // Navigator.push(
-    //                   //     context,
-    //                   //     MaterialPageRoute(
-    //                   //         builder: (_) => AddTeacherSubjectsScreen(
-    //                   //               classeId: widget.classeId,
-    //                   //             )));
-    //                 },
-    //                 child: const Text(
-    //                   "Add",
-    //                   style: TextStyle(
-    //                     color: Colors.blue,
-    //                     fontSize: 18.0,
-    //                     fontWeight: FontWeight.bold,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //           Center(
-    //             child: Padding(
-    //               padding: const EdgeInsets.all(58.0),
-    //               child: Text(
-    //                 "Please click the add button in blue to select the subjects you teach.",
-    //                 style: TextStyle(
-    //                   color: Colors.grey[700],
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //     const SizedBox(height: 70.0),
-    //   ],
-    // );
-
+    print(userController.currentUserType.value);
+    print(userController.currentUserTypeInt.value);
     return RefreshIndicator(
       onRefresh: () async => loadData(),
       child: Scaffold(
