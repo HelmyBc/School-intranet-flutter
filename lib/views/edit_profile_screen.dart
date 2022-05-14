@@ -7,6 +7,7 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/attachment.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
+import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/teacher_root_app.dart';
 
 import 'package:enetcom_app/views/widgets/widgets.dart';
@@ -169,7 +170,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const TeacherRootApp(),
+                builder: (_) => CurrentProfileScreen(
+                  currentUser: userController.currentUser.value,
+                ),
               ),
             ),
           ),
@@ -212,19 +215,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               size: 18,
                             ),
                           )
-                        : AvatarView(
-                            radius: 64,
-                            borderColor: Colors.grey,
-                            avatarType: AvatarType.CIRCLE,
-                            backgroundColor: Colors.red,
-                            imagePath: imageUrl,
-                            placeHolder: const Icon(
-                              Icons.person,
-                              size: 18,
-                            ),
-                            errorWidget: const Icon(
-                              Icons.error,
-                              size: 18,
+                        : ClipOval(
+                            child: SizedBox(
+                              height: 128,
+                              width: 128,
+                              child: Image.file(
+                                File(_imageFile!.path),
+                                fit: BoxFit.cover,
+                                alignment: FractionalOffset.topCenter,
+                              ),
                             ),
                           ),
                     Positioned(
@@ -286,7 +285,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 keyboardType: TextInputType.name,
                 style: textStyle,
                 controller: lastNameController
-                  ..text = userController.currentUser.value.firstName!,
+                  ..text = userController.currentUser.value.lastName!,
                 validator: (value) {
                   if (value == null) {
                     return "Please enter your last name";
@@ -314,37 +313,83 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               child: InkWell(
                 onTap: () async {
-                  String firstName = firstNameController.text;
-                  String lastName = lastNameController.text;
-                  String password = userController.currentUser.value.password;
+                  if (_imageFile != null) {
+                    Attachment attachment =
+                        await uploadImage(_imageFile!.path, uploadUrl);
+                    if (_imageFile != null) {
+                      imageUrl =
+                          "http://192.168.56.1:9191/api/download/${attachment.id}";
+                      imageId = attachment.id;
+                    } else {
+                      imageUrl = "";
+                      imageId = 0;
+                    }
+                    String firstName = firstNameController.text;
+                    String lastName = lastNameController.text;
+                    String password = userController.currentUser.value.password;
 
-                  User updatedUser = User(
-                    cin: userController.currentUser.value.cin,
-                    id: userController.currentUser.value.id,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: userController.currentUser.value.email,
-                    password: password,
-                    imageUrl: userController.currentUser.value.imageUrl,
-                    phone: userController.currentUser.value.phone,
-                    chefDep: userController.currentUser.value.chefDep,
-                    classeId: userController.currentUser.value.classeId,
-                    depId: userController.currentUser.value.depId,
-                    classesId: userController.currentUser.value.classesId,
-                    postsId: userController.currentUser.value.postsId,
-                    subjectsId: userController.currentUser.value.subjectsId,
-                  );
-                  await HttpUserService.updateUser(
-                      userController.currentUser.value.id!, updatedUser);
-                  firstNameController.text = '';
-                  lastNameController.text = '';
-                  userController.fetchUsers();
-                  setState(() {
-                    const snackBar =
-                        SnackBar(content: Text("Profile updated succefully!"));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    Navigator.pop(context);
-                  });
+                    User updatedUser = User(
+                      cin: userController.currentUser.value.cin,
+                      id: userController.currentUser.value.id,
+                      firstName: firstName,
+                      lastName: lastName,
+                      email: userController.currentUser.value.email,
+                      password: password,
+                      imageUrl: imageUrl,
+                      phone: userController.currentUser.value.phone,
+                      chefDep: userController.currentUser.value.chefDep,
+                      classeId: userController.currentUser.value.classeId,
+                      depId: userController.currentUser.value.depId,
+                      classesId: userController.currentUser.value.classesId,
+                      postsId: userController.currentUser.value.postsId,
+                      subjectsId: userController.currentUser.value.subjectsId,
+                    );
+                    await HttpUserService.updateUser(
+                        userController.currentUser.value.id!, updatedUser);
+                    firstNameController.text = '';
+                    lastNameController.text = '';
+                    userController.fetchUsers();
+                    setState(() {
+                      const snackBar = SnackBar(
+                          content: Text("Profile updated succefully!"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      userController.getCurrentUser();
+                      Navigator.pop(context);
+                    });
+                  } else {
+                    String firstName = firstNameController.text;
+                    String lastName = lastNameController.text;
+                    String password = userController.currentUser.value.password;
+
+                    User updatedUser = User(
+                      cin: userController.currentUser.value.cin,
+                      id: userController.currentUser.value.id,
+                      firstName: firstName,
+                      lastName: lastName,
+                      email: userController.currentUser.value.email,
+                      password: password,
+                      imageUrl: userController.currentUser.value.imageUrl,
+                      phone: userController.currentUser.value.phone,
+                      chefDep: userController.currentUser.value.chefDep,
+                      classeId: userController.currentUser.value.classeId,
+                      depId: userController.currentUser.value.depId,
+                      classesId: userController.currentUser.value.classesId,
+                      postsId: userController.currentUser.value.postsId,
+                      subjectsId: userController.currentUser.value.subjectsId,
+                    );
+                    await HttpUserService.updateUser(
+                        userController.currentUser.value.id!, updatedUser);
+                    firstNameController.text = '';
+                    lastNameController.text = '';
+                    userController.fetchUsers();
+                    setState(() {
+                      const snackBar = SnackBar(
+                          content: Text("Profile updated succefully!"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      userController.getCurrentUser();
+                      Navigator.pop(context);
+                    });
+                  }
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
