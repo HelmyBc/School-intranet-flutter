@@ -35,9 +35,9 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(10.0),
-        itemCount: categories.length - 1,
+        itemCount: teacher_categories.length - 1,
         itemBuilder: (BuildContext context, int index) {
-          final menuItem = categories[index + 1];
+          final menuItem = teacher_categories[index + 1];
           return Container(
             margin: const EdgeInsets.all(10.0),
             padding: const EdgeInsets.all(10.0),

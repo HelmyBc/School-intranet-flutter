@@ -1,4 +1,5 @@
-import 'package:enetcom_app/views/teacher_root_app.dart';
+import 'package:enetcom_app/views/for_students/student_root_app.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeStudentScreen extends StatelessWidget {
@@ -57,7 +58,7 @@ class WelcomeStudentScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const TeacherRootApp(),
+                          builder: (context) => const StudentRootApp(),
                         ),
                       );
                     },

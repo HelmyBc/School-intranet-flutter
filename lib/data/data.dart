@@ -1,5 +1,3 @@
-import 'package:enetcom_app/models/feature.dart';
-import 'package:enetcom_app/models/feature_model.dart';
 import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/models/user_model.dart';
 import 'package:enetcom_app/views/coming_soon_screen.dart';
@@ -211,7 +209,7 @@ final List<PostModel> posts = [
   )
 ];
 
-List categories = [
+List teacher_categories = [
   {
     "name": "All",
     "icon": "assets/category/menu0.svg",
@@ -243,7 +241,59 @@ List categories = [
     "description": "Here you can find all your courses in PDF.",
     "screen": ComingSoonScreen(),
   },
-  
+  {
+    "name": "Exams",
+    "icon": "assets/category/exams.svg",
+    "description": "Here you can find all your grades in every subject.",
+    "screen": ComingSoonScreen(),
+  },
+  {
+    "name": "TPs",
+    "icon": "assets/category/tp.svg",
+    "description":
+        "Here you can see your upcoming TPs and where u can file your reports.",
+    "screen": ComingSoonScreen(),
+  },
+  {
+    "name": "Internship",
+    "icon": "assets/category/stage.svg",
+    "description":
+        "The space where u can find all the needed sheets and information about internships.",
+    "screen": ComingSoonScreen(),
+  },
+];
+List student_categories = [
+  {
+    "name": "All",
+    "icon": "assets/category/menu0.svg",
+    "description": "",
+    "screen": MenuScreen()
+  },
+  {
+    "name": "Classroom",
+    "icon": "assets/category/class.svg",
+    "description":
+        "Your classroom space, where you can find all the subjects and your classmates.",
+    "screen": ClassroomStudentScreen(),
+  },
+  {
+    "name": "Timetable",
+    "icon": "assets/category/time.svg",
+    "description": "You can find your class timetable here.",
+    "screen": ComingSoonScreen(),
+  },
+  {
+    "name": "absence",
+    "icon": "assets/category/absence.svg",
+    "description": "Here u can see your absence counter for each subject.",
+    "screen": ComingSoonScreen(),
+  },
+  {
+    "name": "Courses",
+    "icon": "assets/category/course.svg",
+    "description": "Here you can find all your courses in PDF.",
+    "screen": ComingSoonScreen(),
+  },
   {
     "name": "Exams",
     "icon": "assets/category/exams.svg",

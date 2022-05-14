@@ -1,4 +1,4 @@
-import 'package:enetcom_app/views/teacher_root_app.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeTeacherScreen extends StatelessWidget {

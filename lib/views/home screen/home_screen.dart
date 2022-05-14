@@ -5,7 +5,7 @@ import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
 import 'package:enetcom_app/views/login_screen.dart';
-import 'package:enetcom_app/views/widgets/category_list.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/teacher_category_list.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/feature_carousel.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
               const SliverPadding(
                 padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                 sliver: SliverToBoxAdapter(
-                  child: CategoryList(),
+                  child: TeacherCategoryList(),
                 ),
               ),
               SliverPadding(

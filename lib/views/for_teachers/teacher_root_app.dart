@@ -3,6 +3,7 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/admin_views/admin_dashboard.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
+import 'package:enetcom_app/views/for_teachers/classroom_teacher_screen.dart';
 import 'package:enetcom_app/views/home%20screen/home_screen.dart';
 import 'package:enetcom_app/views/students_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _TeacherRootAppState extends State<TeacherRootApp> {
     double displayWidth = MediaQuery.of(context).size.width;
     List barItems = [
       HomeScreen(),
-      StudentScreen(),
+      ClassroomTeacherScreen(),
       CurrentProfileScreen(
         currentUser: currentUser,
       ),
@@ -166,7 +167,7 @@ class _TeacherRootAppState extends State<TeacherRootApp> {
 
   List<String> listOfStrings = [
     'Home',
-    'People',
+    'Class',
     'Account',
     'Menu',
   ];

@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/login_screen.dart';
-import 'package:enetcom_app/views/teacher_root_app.dart';
+import 'package:enetcom_app/views/for_students/student_root_app.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,10 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var status = prefs.getBool('isLoggedIn') ?? false;
-    var isStudent = prefs.getBool('isStudent') ?? false;
-    print(status);
+    var isTeacher = prefs.getBool('isTeacher') ?? false;
+
     if (status) {
-      if (isStudent) {
+      if (isTeacher) {
         ///// STUDENT ROUTE
         Navigator.pushReplacement(
           context,
@@ -67,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const TeacherRootApp(),
+            builder: (context) => const StudentRootApp(),
           ),
         );
       }

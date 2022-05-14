@@ -29,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
   save() async {
     User cu = await HttpUserService.login(user);
     if (cu != null && cu.id != 0) {
-      print(json.encode(cu));
       int cuid = cu.id!;
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("isLoggedIn", true);
@@ -39,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         prefs.setBool("isStudent", true);
         prefs.setBool("isTeacher", false);
         prefs.setInt("cuid", cuid);
+        print(cu.userType);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -49,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
         prefs.setBool("isTeacher", true);
         prefs.setBool("isStudent", false);
         prefs.setInt("cuid", cuid);
+        print(cu.userType);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

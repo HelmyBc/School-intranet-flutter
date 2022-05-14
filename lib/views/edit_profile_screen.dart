@@ -8,7 +8,7 @@ import 'package:enetcom_app/models/attachment.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
-import 'package:enetcom_app/views/teacher_root_app.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -325,7 +325,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     }
                     String firstName = firstNameController.text;
                     String lastName = lastNameController.text;
-                    String password = userController.currentUser.value.password;
 
                     User updatedUser = User(
                       cin: userController.currentUser.value.cin,
@@ -333,7 +332,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       firstName: firstName,
                       lastName: lastName,
                       email: userController.currentUser.value.email,
-                      password: password,
+                      password: userController.currentUser.value.password,
                       imageUrl: imageUrl,
                       phone: userController.currentUser.value.phone,
                       chefDep: userController.currentUser.value.chefDep,
@@ -365,7 +364,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   } else {
                     String firstName = firstNameController.text;
                     String lastName = lastNameController.text;
-                    String password = userController.currentUser.value.password;
 
                     User updatedUser = User(
                       cin: userController.currentUser.value.cin,
@@ -373,7 +371,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       firstName: firstName,
                       lastName: lastName,
                       email: userController.currentUser.value.email,
-                      password: password,
+                      password: userController.currentUser.value.password,
                       imageUrl: userController.currentUser.value.imageUrl,
                       phone: userController.currentUser.value.phone,
                       chefDep: userController.currentUser.value.chefDep,

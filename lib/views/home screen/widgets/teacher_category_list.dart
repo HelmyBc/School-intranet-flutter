@@ -2,14 +2,14 @@ import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/views/widgets/category_box.dart';
 import 'package:flutter/material.dart';
 
-class CategoryList extends StatefulWidget {
-  const CategoryList({Key? key}) : super(key: key);
+class TeacherCategoryList extends StatefulWidget {
+  const TeacherCategoryList({Key? key}) : super(key: key);
 
   @override
-  State<CategoryList> createState() => _CategoryListState();
+  State<TeacherCategoryList> createState() => _TeacherCategoryListState();
 }
 
-class _CategoryListState extends State<CategoryList> {
+class _TeacherCategoryListState extends State<TeacherCategoryList> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -17,14 +17,14 @@ class _CategoryListState extends State<CategoryList> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(
-          categories.length,
+          teacher_categories.length,
           (index) => Padding(
             padding: const EdgeInsets.only(right: 15),
             child: CategoryBox(
               selectedColor: Colors.white,
-              data: categories[index],
+              data: teacher_categories[index],
               onTap: () {
-                getScreen(context,categories[index]["screen"]);
+                getScreen(context, teacher_categories[index]["screen"]);
               },
             ),
           ),

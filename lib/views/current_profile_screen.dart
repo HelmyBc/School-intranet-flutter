@@ -11,7 +11,7 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/edit_profile_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
-import 'package:enetcom_app/views/teacher_root_app.dart';
+import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
 
 class CurrentProfileScreen extends StatefulWidget {

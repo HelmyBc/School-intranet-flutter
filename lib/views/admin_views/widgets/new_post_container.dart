@@ -1,7 +1,9 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_post_service.dart';
+import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/admin_views/posts/edit_post_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +16,7 @@ import 'package:timeago/timeago.dart' as timeago;
 class NewPostContainer extends StatelessWidget {
   final Post post;
 
-  NewPostContainer({
+  const NewPostContainer({
     Key? key,
     required this.post,
   }) : super(key: key);

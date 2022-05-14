@@ -18,6 +18,7 @@ class HttpUserService {
       "firstName": user.firstName,
       "lastName": user.lastName,
       "email": user.email,
+      "password": user.password,
       "phone": user.phone,
       "cin": user.cin,
       "imageUrl": user.imageUrl,
