@@ -9,7 +9,6 @@ import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/teacher_root_app.dart';
-
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -348,13 +347,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         userController.currentUser.value.id!, updatedUser);
                     firstNameController.text = '';
                     lastNameController.text = '';
-                    userController.fetchUsers();
+                    userController.getCurrentUser();
                     setState(() {
                       const snackBar = SnackBar(
                           content: Text("Profile updated succefully!"));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       userController.getCurrentUser();
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CurrentProfileScreen(
+                            currentUser: userController.currentUser.value,
+                          ),
+                        ),
+                      );
                     });
                   } else {
                     String firstName = firstNameController.text;

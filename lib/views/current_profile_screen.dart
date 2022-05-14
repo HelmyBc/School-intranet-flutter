@@ -26,12 +26,13 @@ class CurrentProfileScreen extends StatefulWidget {
 
 class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
   final UserController userController = Get.put(UserController());
+
   // User currentUser = User(email: "", password: "");
 
   @override
   Widget build(BuildContext context) {
-    // userController.getCurrentUser();
-    // User currentUser = userController.currentUser.value;
+    userController.getCurrentUser();
+    User currentUser = userController.currentUser.value;
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -121,7 +122,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const EditProfileScreen()));
+                      builder: (context) => EditProfileScreen()));
                 },
                 child: Center(
                   child: Stack(
