@@ -1,5 +1,6 @@
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/course.dart';
+import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/user.dart';
@@ -130,6 +131,17 @@ class HttpUserService {
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return subjectFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
+  static Future<List<Post>> fetchUserPosts(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/posts'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return postFromJson(jsonString);
     } else {
       //show error message
       return [];

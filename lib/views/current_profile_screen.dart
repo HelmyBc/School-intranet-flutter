@@ -1,4 +1,6 @@
 import 'package:avatar_view/avatar_view.dart';
+import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +12,6 @@ import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/edit_profile_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.dart';
 import 'package:enetcom_app/views/teacher_root_app.dart';
-import 'package:enetcom_app/views/widgets/profile_image_widget.dart';
 import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
 
 class CurrentProfileScreen extends StatefulWidget {
@@ -32,6 +33,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
   @override
   Widget build(BuildContext context) {
     userController.getCurrentUser();
+    userController.getCurrentUserPosts();
     User currentUser = userController.currentUser.value;
     return GestureDetector(
       onTap: () {
@@ -201,6 +203,24 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                     fontSize: 20.0,
                   ),
                 ),
+              ),
+              Obx(
+                () {
+                  if (userController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        final Post post =
+                            userController.currentUserPosts[index];
+                        return NewPostContainer(post: post);
+                      },
+                      itemCount: userController.currentUserPosts.length,
+                    );
+                  }
+                },
               ),
               // PostContainer(post: posts[0]),
               // PostContainer(post: posts[4]),

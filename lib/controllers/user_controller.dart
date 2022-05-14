@@ -1,5 +1,6 @@
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/course.dart';
+import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/user.dart';
@@ -26,6 +27,7 @@ class UserController extends GetxController {
   var currentUserClasseSubjects = <Subject>[].obs;
   var currentUserClasseSubjectCourses = <Course>[].obs;
   var currentUserClasseSubjectTds = <Td>[].obs;
+  var currentUserPosts = <Post>[].obs;
 
   @override
   void onInit() {
@@ -44,6 +46,11 @@ class UserController extends GetxController {
     // newly added
     currentUserId.value = await prefs.getInt('cuid')!;
     currentUser.value = await HttpUserService.getUser(prefs.getInt('cuid')!);
+  }
+
+  void getCurrentUserPosts() async {
+    currentUserPosts.value =
+        await HttpUserService.fetchUserPosts(currentUser.value.id!);
   }
 
   //For classroom student screen
@@ -72,6 +79,7 @@ class UserController extends GetxController {
     currentUserClasseSubjectCourses.value =
         await HttpUserService.fetchSubjectCourses(currentSubjectId.value);
   }
+
 //for classroom teacher third screen
   void getUserClasseSubjectTds() async {
     currentUserClasseSubjectTds.value =
