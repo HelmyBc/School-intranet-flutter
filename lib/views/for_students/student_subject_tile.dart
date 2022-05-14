@@ -6,12 +6,12 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/subject.dart';
 import 'package:enetcom_app/views/for_students/student_subject_screen.dart';
 
-class SubjectTile extends StatelessWidget {
+class StudentSubjectTile extends StatelessWidget {
   UserController userController = Get.put(UserController());
 
   Subject subject;
 
-  SubjectTile({
+  StudentSubjectTile({
     Key? key,
     required this.subject,
   }) : super(key: key);

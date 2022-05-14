@@ -1,4 +1,5 @@
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
+import 'package:enetcom_app/views/for_students/student_subject_tile.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/empty_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,6 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/subject.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/subject_tile.dart';
 import 'package:enetcom_app/views/widgets/build_header_box.dart';
 
 class ClassroomStudentScreen extends StatelessWidget {
@@ -82,7 +82,7 @@ class ClassroomStudentScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 final Subject subject =
                     userController.currentUserSubjects[index];
-                return SubjectTile(
+                return StudentSubjectTile(
                   subject: subject,
                 );
               },
