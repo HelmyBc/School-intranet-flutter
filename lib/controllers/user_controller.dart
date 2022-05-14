@@ -38,6 +38,7 @@ class UserController extends GetxController {
     getCurrentUser();
     // getCurrentUserSubjects();
     getCurrentUserClasses();
+
     // getUserClasseSubjects();
     // getUserClasseSubjectCourses();
     super.onInit();
@@ -67,8 +68,16 @@ class UserController extends GetxController {
         await HttpUserService.fetchUserPosts(currentUser.value.id!);
   }
 
+  //for classroom student screen
+  void getCurrentUserClasse() async {
+    currentClasse =
+        await HttpUserService.fetchUserClasse(currentUser.value.id!);
+  }
+
   //For classroom student screen
-  void getCurrentUserSubjects() async {
+  void getUserSubjects() async {
+    getCurrentUser();
+    getCurrentUserClasse();
     currentUserSubjects.value =
         await HttpUserService.fetchUserSubjects(currentUser.value.id!);
   }
@@ -98,12 +107,6 @@ class UserController extends GetxController {
   void getUserClasseSubjectTds() async {
     currentUserClasseSubjectTds.value =
         await HttpUserService.fetchSubjectTds(currentSubjectId.value);
-  }
-
-  //for classroom student screen
-  void getCurrentUserClasse() async {
-    currentUserClasses.value =
-        await HttpUserService.fetchUserClasses(currentUser.value.id!);
   }
 
   void fetchUsers() async {

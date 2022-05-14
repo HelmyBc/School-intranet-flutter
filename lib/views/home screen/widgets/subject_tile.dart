@@ -2,28 +2,22 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:enetcom_app/models/subject.dart';
 import 'package:get/get.dart';
 
 class SubjectTile extends StatelessWidget {
   UserController userController = Get.put(UserController());
-  //String title;
+
   Subject subject;
 
-  SubjectTile({
-    Key? key,
-    //required this.title,
-    required this.subject,
-  }) : super(key: key);
+  SubjectTile({Key? key, required this.subject}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //userController.onInit();
         userController.currentSubjectId.value = subject.id;
         userController.currentSubject = subject;
-        //userController.getUserClasseSubjectCourses();
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => SubjectScreen(subject: subject)));
       },
@@ -61,22 +55,34 @@ class SubjectTile extends StatelessWidget {
             image: AssetImage('assets/images/book.png'),
           ),
         ),
-        Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.fromLTRB(110, 30, 0, 0),
-              height: 80,
-              width: 250,
-              child: Text(
-                subject.name,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+        Container(
+          margin: const EdgeInsets.fromLTRB(110, 30, 0, 0),
+          height: 80,
+          width: 250,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  subject.name,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 19,
+                  ),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Text(
+                  "Teached by: ${subject.teacherName}",
+                  style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         Positioned(
           right: -5,

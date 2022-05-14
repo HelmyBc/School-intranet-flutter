@@ -2,6 +2,7 @@ import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/models/user_model.dart';
 import 'package:enetcom_app/views/coming_soon_screen.dart';
 import 'package:enetcom_app/views/for_students/classroom_student_screen.dart';
+import 'package:enetcom_app/views/for_students/student_subjects_screen.dart';
 import 'package:enetcom_app/views/for_teachers/classroom_teacher_screen.dart';
 import 'package:enetcom_app/views/home%20screen/menu/menu_screen.dart';
 
@@ -274,7 +275,7 @@ List student_categories = [
     "icon": "assets/category/class.svg",
     "description":
         "Your classroom space, where you can find all the subjects and your classmates.",
-    "screen": ClassroomStudentScreen(),
+    "screen": StudentSubjectsScreen(),
   },
   {
     "name": "Timetable",

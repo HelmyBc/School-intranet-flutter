@@ -1,8 +1,10 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/for_students/classroom_student_screen.dart';
+import 'package:enetcom_app/views/for_students/student_subjects_screen.dart';
 import 'package:enetcom_app/views/for_students/user_dashboard.dart';
 import 'package:enetcom_app/views/students_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +29,11 @@ class _StudentRootAppState extends State<StudentRootApp> {
   Widget build(BuildContext context) {
     userController.getCurrentUser();
     User currentUser = userController.currentUser.value;
+    Classe currentUserClasse = userController.currentClasse;
     double displayWidth = MediaQuery.of(context).size.width;
     List barItems = [
       HomeScreen(),
-      ClassroomStudentScreen(),
+      StudentSubjectsScreen(),
       CurrentProfileScreen(
         currentUser: currentUser,
       ),

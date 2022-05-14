@@ -137,6 +137,7 @@ class HttpUserService {
       return [];
     }
   }
+
   static Future<List<Post>> fetchUserPosts(int id) async {
     var response = await client
         .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/posts'));
@@ -146,6 +147,18 @@ class HttpUserService {
     } else {
       //show error message
       return [];
+    }
+  }
+
+  static Future<Classe> fetchUserClasse(int id) async {
+    var response = await client
+        .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/classe'));
+    if (response.body != null) {
+      Map responseMap = jsonDecode(response.body);
+      Classe classe = Classe.fromJson(responseMap as Map<String, dynamic>);
+      return classe;
+    } else {
+      return null as Classe;
     }
   }
 
@@ -160,9 +173,10 @@ class HttpUserService {
       return [];
     }
   }
-  static Future<List<Subject>> fetchUserClasseSubjects(int id,int id1) async {
-    var response = await client
-        .get(Uri.parse('http://192.168.56.1:9191/api/user/$id/classes/$id1/subjects'));
+
+  static Future<List<Subject>> fetchUserClasseSubjects(int id, int id1) async {
+    var response = await client.get(Uri.parse(
+        'http://192.168.56.1:9191/api/user/$id/classes/$id1/subjects'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return subjectFromJson(jsonString);
@@ -171,6 +185,7 @@ class HttpUserService {
       return [];
     }
   }
+
   static Future<List<Course>> fetchSubjectCourses(int id) async {
     var response = await client
         .get(Uri.parse('http://192.168.56.1:9191/api/subject/$id/courses'));
@@ -182,6 +197,7 @@ class HttpUserService {
       return [];
     }
   }
+
   static Future<List<Td>> fetchSubjectTds(int id) async {
     var response = await client
         .get(Uri.parse('http://192.168.56.1:9191/api/subject/$id/tds'));

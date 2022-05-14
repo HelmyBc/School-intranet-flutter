@@ -1,6 +1,7 @@
 import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/views/for_teachers/upload_course_screen.dart';
 import 'package:enetcom_app/views/for_teachers/upload_td_screen.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/empty_content.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/td_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -247,24 +248,27 @@ class SubjectScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => UploadCourseScreen(subject: subject),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  userController.currentUserTypeInt.value == 1
+                      ? TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    UploadCourseScreen(subject: subject),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "Add",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),
@@ -348,24 +352,27 @@ class SubjectScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => UploadTdScreen(subject: subject),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  userController.currentUserTypeInt.value == 1
+                      ? TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    UploadTdScreen(subject: subject),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "Add",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),
@@ -387,19 +394,23 @@ class SubjectScreen extends StatelessWidget {
                 );
               }
             }),
-            GestureDetector(
-              child: UploadBox(
-                text: "Add more TDs? upload TDs here.",
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => UploadTdScreen(subject: subject),
+            userController.currentUserTypeInt.value == 1
+                ? GestureDetector(
+                    child: UploadBox(
+                      text: "Add more TDs? upload TDs here.",
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => UploadTdScreen(subject: subject),
+                        ),
+                      );
+                    },
+                  )
+                : EmptyContent(
+                    text: "No more data, ask your teacher to upload",
                   ),
-                );
-              },
-            ),
           ],
         ),
       ),
