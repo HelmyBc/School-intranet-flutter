@@ -16,11 +16,13 @@ class UserController extends GetxController {
   var currentClasse = Classe(id: 0, level: 0, groupe: 0, depId: 0, name: "");
   var currentSubject =
       Subject(id: 0, classeId: 0, teacherId: 0, name: "", teacherName: "");
+
   var currentUserType = "".obs;
   var currentUserId = 0.obs;
   var currentClasseId = 0.obs;
   var currentSubjectId = 0.obs;
   var currentCourseId = 0.obs;
+  var currentUserTypeInt = 0.obs;
   var userList = <User>[].obs;
   var currentUserSubjects = <Subject>[].obs;
   var currentUserClasses = <Classe>[].obs;
@@ -43,9 +45,21 @@ class UserController extends GetxController {
 
   void getCurrentUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // newly added
     currentUserId.value = await prefs.getInt('cuid')!;
     currentUser.value = await HttpUserService.getUser(prefs.getInt('cuid')!);
+  }
+
+  void getCurrentUserType() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var isTeacher = prefs.getBool('isTeacher') ?? false;
+    var isStudent = prefs.getBool('isStudent') ?? false;
+    if (isStudent) {
+      currentUserTypeInt.value = 0;
+    } else if (isTeacher) {
+      currentUserTypeInt.value = 1;
+    } else {
+      currentUserTypeInt.value = 0;
+    }
   }
 
   void getCurrentUserPosts() async {
@@ -86,6 +100,12 @@ class UserController extends GetxController {
         await HttpUserService.fetchSubjectTds(currentSubjectId.value);
   }
 
+  //for classroom student screen
+  void getCurrentUserClasse() async {
+    currentUserClasses.value =
+        await HttpUserService.fetchUserClasses(currentUser.value.id!);
+  }
+
   void fetchUsers() async {
     try {
       isLoading(true);
@@ -97,24 +117,4 @@ class UserController extends GetxController {
       isLoading(false);
     }
   }
-
-  // void loadCurrentUser() async {
-  //   try {
-  //     isLoading(true);
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     var cuid = prefs.getInt('cuid');
-  //     if (cuid != null) {
-  //       User currentUser = await HttpUserService.getUser(cuid);
-  //       currentUserId.value = cuid;
-  //     } else {
-  //       cuid = 0;
-  //       prefs.setInt('cuid', 0);
-  //       currentUserId.value = 0;
-  //     }
-  //   } catch (Excepetion) {
-  //     print(
-  //         "An error while loading current user from shared pref has occured: $Excepetion");
-  //     isLoading(false);
-  //   }
-  // }
 }

@@ -1,6 +1,7 @@
 import 'package:avatar_view/avatar_view.dart';
 import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
+import 'package:enetcom_app/views/for_students/student_root_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,8 +16,8 @@ import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
 
 class CurrentProfileScreen extends StatefulWidget {
-  User currentUser;
-  CurrentProfileScreen({
+  final User currentUser;
+ const CurrentProfileScreen({
     Key? key,
     required this.currentUser,
   }) : super(key: key);
@@ -61,7 +62,9 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const TeacherRootApp(),
+                  builder: (_) => userController.currentUserTypeInt.value == 1
+                      ? const TeacherRootApp()
+                      : const StudentRootApp(),
                 ),
               ),
             ),

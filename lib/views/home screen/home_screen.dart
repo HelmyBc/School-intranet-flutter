@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   bool _isLoading = true;
   @override
   Widget build(BuildContext context) {
+    print(userController.currentUserType.value);
     featureController.fetchFeatures();
     userController.getCurrentUser();
     if ((featureController.featureList != null ||

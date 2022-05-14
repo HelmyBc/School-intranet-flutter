@@ -178,13 +178,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
         elevation: 0,
         backgroundColor: Palette.mainWhite,
-        actions: [
-          CircleButton(
-            icon: Icons.done,
-            iconColor: Palette.mainBlack,
-            toScreen: const TeacherRootApp(),
-          )
-        ],
+        // actions: [
+        //   CircleButton(
+        //     icon: Icons.done,
+        //     iconColor: Palette.mainBlack,
+        //     toScreen: const TeacherRootApp(),
+        //   )
+        // ],
       ),
       body: Form(
         child: ListView(
