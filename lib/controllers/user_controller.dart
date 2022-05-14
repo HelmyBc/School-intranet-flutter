@@ -33,21 +33,23 @@ class UserController extends GetxController {
 
   @override
   void onInit() {
-    fetchUsers();
-    //loadCurrentUser();
     getCurrentUser();
-    // getCurrentUserSubjects();
-    getCurrentUserClasses();
-
-    // getUserClasseSubjects();
-    // getUserClasseSubjectCourses();
     super.onInit();
+    fetchUsers();
   }
 
   void getCurrentUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     currentUserId.value = await prefs.getInt('cuid')!;
     currentUser.value = await HttpUserService.getUser(prefs.getInt('cuid')!);
+    if (currentUserTypeInt.value == 0) {
+      currentClasse =
+          await HttpUserService.fetchUserClasse(currentUser.value.id!);
+    }
+    if (currentUserTypeInt.value == 1) {
+      currentUserClasses.value =
+          await HttpUserService.fetchUserClasses(currentUser.value.id!);
+    }
   }
 
   void getCurrentUserType() async {
@@ -70,8 +72,10 @@ class UserController extends GetxController {
 
   //for classroom student screen
   void getCurrentUserClasse() async {
-    currentClasse =
-        await HttpUserService.fetchUserClasse(currentUser.value.id!);
+    if (currentUserTypeInt.value == 0) {
+      currentClasse =
+          await HttpUserService.fetchUserClasse(currentUser.value.id!);
+    }
   }
 
   //For classroom student screen
@@ -84,8 +88,10 @@ class UserController extends GetxController {
 
 //for classroom teacher screen
   void getCurrentUserClasses() async {
-    currentUserClasses.value =
-        await HttpUserService.fetchUserClasses(currentUser.value.id!);
+    if (currentUserTypeInt.value == 1) {
+      currentUserClasses.value =
+          await HttpUserService.fetchUserClasses(currentUser.value.id!);
+    }
   }
 
 //for classroom teacher second screen

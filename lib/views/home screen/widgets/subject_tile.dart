@@ -1,5 +1,5 @@
 import 'package:enetcom_app/controllers/user_controller.dart';
-import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
+import 'package:enetcom_app/views/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:enetcom_app/models/subject.dart';

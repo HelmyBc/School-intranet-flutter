@@ -6,8 +6,6 @@ class FeatureController extends GetxController {
   var isLoading = false.obs;
   var current = 0.obs;
   var featureList = <Feature>[].obs;
-  //this list MUST HAVE ONLY ONE ELEMENT
-  //var editingFeature = <Feature>[].obs;
 
   @override
   void onInit() {

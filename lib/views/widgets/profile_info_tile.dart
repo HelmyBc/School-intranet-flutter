@@ -42,14 +42,12 @@ class ProfileInfoTile extends StatelessWidget {
         .map(
           (classe) => classe.name,
         )
-        .toList()
-        .first;
+        .toString();
   }
 
   @override
   Widget build(BuildContext context) {
     userController.getCurrentUser();
-    userController.getCurrentUserClasses();
     user = userController.currentUser();
     // List<String> classesNames = generateClasseNames();
     // String classeName = generateClasseName();

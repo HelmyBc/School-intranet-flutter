@@ -291,19 +291,22 @@ class SubjectScreen extends StatelessWidget {
                 );
               }
             }),
-            GestureDetector(
-              child: UploadBox(
-                text: "Add more courses? upload courses here.",
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => UploadCourseScreen(subject: subject),
-                  ),
-                );
-              },
-            ),
+            userController.currentUserTypeInt.value == 1
+                ? GestureDetector(
+                    child: UploadBox(
+                      text: "Add more courses? upload courses here.",
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => UploadCourseScreen(subject: subject),
+                        ),
+                      );
+                    },
+                  )
+                : EmptyContent(
+                    text: "TD not found?, ask your teacher to upload"),
             const Divider(thickness: 2.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -409,7 +412,7 @@ class SubjectScreen extends StatelessWidget {
                     },
                   )
                 : EmptyContent(
-                    text: "No more data, ask your teacher to upload",
+                    text: "TD not found?, ask your teacher to upload",
                   ),
           ],
         ),

@@ -4,9 +4,7 @@ import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/for_students/classroom_student_screen.dart';
-import 'package:enetcom_app/views/for_students/student_subjects_screen.dart';
 import 'package:enetcom_app/views/for_students/user_dashboard.dart';
-import 'package:enetcom_app/views/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -33,7 +31,7 @@ class _StudentRootAppState extends State<StudentRootApp> {
     double displayWidth = MediaQuery.of(context).size.width;
     List barItems = [
       HomeScreen(),
-      StudentSubjectsScreen(),
+      ClassroomStudentScreen(),
       CurrentProfileScreen(
         currentUser: currentUser,
       ),

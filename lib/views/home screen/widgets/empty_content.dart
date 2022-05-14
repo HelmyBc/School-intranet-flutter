@@ -25,7 +25,7 @@ class EmptyContent extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: Colors.redAccent.withOpacity(0.1),
+            color: Colors.amber.withOpacity(0.2),
           ),
           child: Center(
             child: Column(
@@ -40,7 +40,7 @@ class EmptyContent extends StatelessWidget {
                   text,
                   style: const TextStyle(
                     color: Colors.black54,
-                    fontSize: 20.0,
+                    fontSize: 16.0,
                   ),
                 ),
                 const SizedBox(height: 10.0),

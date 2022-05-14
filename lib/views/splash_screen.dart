@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:enetcom_app/controllers/feature_controller.dart';
+import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
@@ -10,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -21,11 +22,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   UserController userController = Get.put(UserController());
   FeatureController featureController = Get.put(FeatureController());
+  PostController postController = Get.put(PostController());
   @override
   void initState() {
     super.initState();
-    featureController.fetchFeatures();
     userController.getCurrentUser();
+    featureController.fetchFeatures();
+
     startTimer();
   }
 

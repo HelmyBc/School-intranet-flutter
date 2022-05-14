@@ -1,8 +1,6 @@
-import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/models/user_model.dart';
 import 'package:enetcom_app/views/coming_soon_screen.dart';
 import 'package:enetcom_app/views/for_students/classroom_student_screen.dart';
-import 'package:enetcom_app/views/for_students/student_subjects_screen.dart';
 import 'package:enetcom_app/views/for_teachers/classroom_teacher_screen.dart';
 import 'package:enetcom_app/views/home%20screen/menu/menu_screen.dart';
 
@@ -150,65 +148,65 @@ final List<User> onlineUsers = [
 //   ),
 // ];
 
-final List<PostModel> posts = [
-  PostModel(
-    user: currentUser,
-    caption:
-        'Dear Microsoft members, much work is awaiting for you this year, WORK HARD.',
-    timeAgo: '58m',
-    imageUrl: 'assets/images/post0.jpg',
-    interested: 1202,
-    comments: 184,
-    shares: 96,
-  ),
-  PostModel(
-    user: onlineUsers[5],
-    caption:
-        'Please enjoy this placeholder text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    timeAgo: '3hr',
-    imageUrl: '',
-    interested: 683,
-    comments: 79,
-    shares: 18,
-  ),
-  PostModel(
-    user: onlineUsers[4],
-    caption: 'This is a very good boi.',
-    timeAgo: '8hr',
-    imageUrl: 'assets/images/post2.jpg',
-    interested: 894,
-    comments: 201,
-    shares: 27,
-  ),
-  PostModel(
-    user: onlineUsers[3],
-    caption: 'Adventure 🏔',
-    timeAgo: '15hr',
-    imageUrl: 'assets/images/post3.jpg',
-    interested: 722,
-    comments: 183,
-    shares: 42,
-  ),
-  PostModel(
-    user: onlineUsers[0],
-    caption:
-        'More placeholder text for the soul: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    timeAgo: '1d',
-    imageUrl: '',
-    interested: 482,
-    comments: 37,
-    shares: 9,
-  ),
-  PostModel(
-    user: onlineUsers[9],
-    caption: 'A classic.',
-    timeAgo: '1d',
-    imageUrl: 'assets/images/post4.jpg',
-    interested: 1523,
-    shares: 129,
-    comments: 301,
-  )
-];
+// final List<PostModel> posts = [
+//   PostModel(
+//     user: currentUser,
+//     caption:
+//         'Dear Microsoft members, much work is awaiting for you this year, WORK HARD.',
+//     timeAgo: '58m',
+//     imageUrl: 'assets/images/post0.jpg',
+//     interested: 1202,
+//     comments: 184,
+//     shares: 96,
+//   ),
+//   PostModel(
+//     user: onlineUsers[5],
+//     caption:
+//         'Please enjoy this placeholder text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     timeAgo: '3hr',
+//     imageUrl: '',
+//     interested: 683,
+//     comments: 79,
+//     shares: 18,
+//   ),
+//   PostModel(
+//     user: onlineUsers[4],
+//     caption: 'This is a very good boi.',
+//     timeAgo: '8hr',
+//     imageUrl: 'assets/images/post2.jpg',
+//     interested: 894,
+//     comments: 201,
+//     shares: 27,
+//   ),
+//   PostModel(
+//     user: onlineUsers[3],
+//     caption: 'Adventure 🏔',
+//     timeAgo: '15hr',
+//     imageUrl: 'assets/images/post3.jpg',
+//     interested: 722,
+//     comments: 183,
+//     shares: 42,
+//   ),
+//   PostModel(
+//     user: onlineUsers[0],
+//     caption:
+//         'More placeholder text for the soul: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     timeAgo: '1d',
+//     imageUrl: '',
+//     interested: 482,
+//     comments: 37,
+//     shares: 9,
+//   ),
+//   PostModel(
+//     user: onlineUsers[9],
+//     caption: 'A classic.',
+//     timeAgo: '1d',
+//     imageUrl: 'assets/images/post4.jpg',
+//     interested: 1523,
+//     shares: 129,
+//     comments: 301,
+//   )
+// ];
 
 List teacher_categories = [
   {
@@ -275,7 +273,7 @@ List student_categories = [
     "icon": "assets/category/class.svg",
     "description":
         "Your classroom space, where you can find all the subjects and your classmates.",
-    "screen": StudentSubjectsScreen(),
+    "screen": ClassroomStudentScreen(),
   },
   {
     "name": "Timetable",

@@ -118,12 +118,14 @@ class CourseTile extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () {
-                showActions();
-              },
-              icon: const Icon(Icons.more_vert),
-            ),
+            userController.currentUserTypeInt.value == 1
+                ? IconButton(
+                    onPressed: () {
+                      showActions();
+                    },
+                    icon: const Icon(Icons.more_vert),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

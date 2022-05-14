@@ -17,7 +17,7 @@ import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
 
 class CurrentProfileScreen extends StatefulWidget {
   final User currentUser;
- const CurrentProfileScreen({
+  const CurrentProfileScreen({
     Key? key,
     required this.currentUser,
   }) : super(key: key);
@@ -33,9 +33,8 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    userController.getCurrentUser();
-    userController.getCurrentUserPosts();
     User currentUser = userController.currentUser.value;
+    userController.getCurrentUserPosts();
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -184,6 +183,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                 ),
               ),
               ProfileInfoTile(user: widget.currentUser),
+
               const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 14.0),
@@ -214,7 +214,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                   } else {
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         final Post post =
                             userController.currentUserPosts[index];

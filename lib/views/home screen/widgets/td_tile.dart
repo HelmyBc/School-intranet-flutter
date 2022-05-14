@@ -2,7 +2,7 @@ import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/models/td.dart';
 import 'package:enetcom_app/services/http_td_service.dart';
-import 'package:enetcom_app/views/for_teachers/subject_screen.dart';
+import 'package:enetcom_app/views/subject_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
@@ -119,12 +119,14 @@ class TdTile extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () {
-                showActions();
-              },
-              icon: const Icon(Icons.more_vert),
-            ),
+            userController.currentUserTypeInt.value == 1
+                ? IconButton(
+                    onPressed: () {
+                      showActions();
+                    },
+                    icon: const Icon(Icons.more_vert),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

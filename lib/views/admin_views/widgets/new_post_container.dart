@@ -1,9 +1,7 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/models/post.dart';
-import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_post_service.dart';
-import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/admin_views/posts/edit_post_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
+import 'dart:convert' show utf8;
 
 class NewPostContainer extends StatelessWidget {
   final Post post;
@@ -75,7 +74,7 @@ class NewPostContainer extends StatelessWidget {
 class _PostHeader extends StatelessWidget {
   final Post post;
 
-  _PostHeader({
+  const _PostHeader({
     Key? key,
     required this.post,
   }) : super(key: key);

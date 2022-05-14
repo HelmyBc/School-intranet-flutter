@@ -1,9 +1,13 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/feature_controller.dart';
+import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/data/data.dart';
+import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/models/post_model.dart';
+import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/student_category_list.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/teacher_category_list.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/feature_carousel.dart';
@@ -11,18 +15,19 @@ import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  FeatureController featureController = Get.put(FeatureController());
   UserController userController = Get.put(UserController());
+  FeatureController featureController = Get.put(FeatureController());
+  PostController postController = Get.put(PostController());
 
   bool _isLoading = true;
   @override
   Widget build(BuildContext context) {
     print(userController.currentUserType.value);
-    featureController.fetchFeatures();
     userController.getCurrentUser();
     if ((featureController.featureList != null ||
             featureController.featureList != []) &&
@@ -75,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                             width: 56,
                             height: 56,
                             child: Icon(
-                              Icons.logout_rounded,
+                              MdiIcons.logout,
                               color: Palette.mainBlack,
                             )),
                       ),
@@ -83,12 +88,20 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SliverPadding(
-                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                sliver: SliverToBoxAdapter(
-                  child: TeacherCategoryList(),
-                ),
-              ),
+              userController.currentUserTypeInt.value == 1
+                  ? const SliverPadding(
+                      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                      sliver: SliverToBoxAdapter(
+                        child: TeacherCategoryList(),
+                      ),
+                    )
+                  : const SliverPadding(
+                      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                      sliver: SliverToBoxAdapter(
+                        child: StudentCategoryList(),
+                      ),
+                    ),
+
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
                 sliver: SliverToBoxAdapter(
@@ -141,15 +154,35 @@ class HomeScreen extends StatelessWidget {
                   }
                 }),
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final PostModel post = posts[index];
-                    return PostContainer(post: post);
+              SliverToBoxAdapter(
+                child: Obx(
+                  () {
+                    if (postController.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: ScrollPhysics(),
+                        //controller: controller,
+                        itemBuilder: (BuildContext context, int index) {
+                          final Post post = postController.postList[index];
+                          return NewPostContainer(post: post);
+                        },
+                        itemCount: postController.postList.length,
+                      );
+                    }
                   },
-                  childCount: posts.length,
                 ),
               ),
+              // SliverList(
+              //   delegate: SliverChildBuilderDelegate(
+              //     (context, index) {
+              //       final PostModel post = posts[index];
+              //       return PostContainer(post: post);
+              //     },
+              //     childCount: posts.length,
+              //   ),
+              // ),
             ],
           ),
         ),
