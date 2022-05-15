@@ -195,7 +195,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
                   ),
                 ),
               ),
-              CreatePostContainer(currentUser: widget.currentUser),
+              CreatePostContainer(imageUrl: widget.currentUser.imageUrl),
               const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 14.0),

@@ -126,7 +126,9 @@ class UserDashboard extends StatelessWidget {
 
   void logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    await prefs.clear();
+    Get.clearRouteTree();
+    Get.reset();
     Get.deleteAll();
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const LoginScreen()),

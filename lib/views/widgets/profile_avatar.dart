@@ -14,7 +14,7 @@ class ProfileAvatar extends StatelessWidget {
     required this.imageUrl,
     this.isActive = false,
     this.hasBorder = false,
-    this.raduis = 20,
+    this.raduis = 20.0,
   }) : super(key: key);
 
   @override

@@ -1,15 +1,16 @@
-import 'package:enetcom_app/models/user.dart';
-import 'package:enetcom_app/views/home%20screen/create_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:enetcom_app/models/user.dart';
+import 'package:enetcom_app/views/home%20screen/create_post_screen.dart';
 
 import '../../widgets/widgets.dart';
 
 class CreatePostContainer extends StatelessWidget {
-  final User currentUser;
+  final String? imageUrl;
   const CreatePostContainer({
     Key? key,
-    required this.currentUser,
+    this.imageUrl = "",
   }) : super(key: key);
 
   @override
@@ -32,7 +33,10 @@ class CreatePostContainer extends StatelessWidget {
         children: [
           Row(
             children: [
-              ProfileAvatar(imageUrl: currentUser.imageUrl!),
+              if (imageUrl == null || imageUrl!.isEmpty)
+                const SizedBox.shrink()
+              else
+                ProfileAvatar(imageUrl: imageUrl!),
               const SizedBox(width: 10.0),
               Expanded(
                 child: TextField(

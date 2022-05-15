@@ -11,6 +11,7 @@ import 'package:enetcom_app/views/home%20screen/widgets/student_category_list.da
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/teacher_category_list.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/feature_carousel.dart';
+import 'package:enetcom_app/views/widgets/shimmer_widget.dart';
 import 'package:enetcom_app/views/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,11 +139,20 @@ class HomeScreen extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Obx(() {
-                  if (userController.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
+                  if (userController.isLoading.value ||
+                      userController.currentUser.value.imageUrl == null ||
+                      userController.currentUser.value.imageUrl!.isEmpty) {
+                    return Container(
+                      margin: const EdgeInsets.all(10),
+                      child: ShimmerWidget.rectangular(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width,
+                        raduis: 20,
+                      ),
+                    );
                   } else {
                     return CreatePostContainer(
-                        currentUser: userController.currentUser.value);
+                        imageUrl: userController.currentUser.value.imageUrl!);
                   }
                 }),
               ),
@@ -175,7 +185,9 @@ class HomeScreen extends StatelessWidget {
 
   void logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    await prefs.clear();
+    Get.clearRouteTree();
+    Get.reset();
     Get.deleteAll();
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const LoginScreen()),
