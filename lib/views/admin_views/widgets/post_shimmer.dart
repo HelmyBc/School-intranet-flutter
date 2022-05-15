@@ -92,7 +92,7 @@ class _PostHeader extends StatelessWidget {
             children: const [
               ShimmerWidget.rectangular(
                 height: 18,
-                width: 100,
+                width: 120,
                 raduis: 8,
               ),
               SizedBox(height: 4),
