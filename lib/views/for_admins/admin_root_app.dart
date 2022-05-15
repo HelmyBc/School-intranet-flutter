@@ -4,6 +4,7 @@ import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/admin_views/admin_dashboard.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
+import 'package:enetcom_app/views/users_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,7 @@ class _AdminRootAppState extends State<AdminRootApp> {
     double displayWidth = MediaQuery.of(context).size.width;
     List barItems = [
       HomeScreen(),
+      UsersScreen(),
       CurrentProfileScreen(
         currentUser: currentUser,
       ),
@@ -63,7 +65,7 @@ class _AdminRootAppState extends State<AdminRootApp> {
           borderRadius: BorderRadius.circular(50),
         ),
         child: ListView.builder(
-          itemCount: 3,
+          itemCount: 4,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
           itemBuilder: (context, index) => InkWell(
@@ -160,12 +162,14 @@ class _AdminRootAppState extends State<AdminRootApp> {
 
   List<IconData> listOfIcons = [
     Icons.home_rounded,
+    Icons.group,
     Icons.person,
     Icons.menu,
   ];
 
   List<String> listOfStrings = [
     'Home',
+    'Users',
     'Account',
     'Menu',
   ];

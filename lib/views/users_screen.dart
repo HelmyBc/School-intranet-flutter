@@ -1,3 +1,4 @@
+import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/admin_views/widgets/user_card.dart';
@@ -6,36 +7,43 @@ import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 
 class UsersScreen extends StatelessWidget {
-  // final GlobalKey<RefreshIndicatorState> _refreshIndacatorKey =
-  //     GlobalKey<RefreshIndicatorState>();
   final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Users',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            // letterSpacing: -1.2,
-          ),
-        ),
+        elevation: 0,
+        automaticallyImplyLeading: true,
+        backgroundColor: Palette.scaffold,
+        title: const Image(
+            image: ExactAssetImage("assets/images/enetcom_logo.png"),
+            //height: 60.0,
+            width: 180.0,
+            alignment: FractionalOffset.center),
         centerTitle: false,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
       ),
       body: RefreshIndicator(
         onRefresh: () async => loadData(),
-        child: Column(
+        child: ListView(
+          shrinkWrap: true,
           children: [
             const SizedBox(height: 16),
-            // Container(
-            //   padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
-            //   child: Rooms(onlineUsers: onlineUsers),
-            // ),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Users',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    // letterSpacing: -1.2,
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
             Expanded(
               child: Obx(() {
@@ -43,6 +51,8 @@ class UsersScreen extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else {
                   return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       final User user = userController.userList[index];
                       return UserCard(user: user);

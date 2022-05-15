@@ -164,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const ScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            final Post post = postController.postList[index];
+                            final Post post = postController.postList.reversed.toList()[index];
                             return NewPostContainer(post: post);
                           },
                           itemCount: postController.postList.length,
