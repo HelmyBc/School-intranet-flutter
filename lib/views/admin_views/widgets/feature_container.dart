@@ -7,12 +7,12 @@ import 'package:enetcom_app/models/feature.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class FeatureContainer extends StatelessWidget {final Feature feature;
+class FeatureContainer extends StatelessWidget {
+  final Feature feature;
   const FeatureContainer({
     Key? key,
     required this.feature,
   }) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class FeatureContainer extends StatelessWidget {final Feature feature;
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _FeatureHeader(feature: feature),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 10.0),
                 Text(feature.description),
               ],
             ),
@@ -83,8 +83,10 @@ class _FeatureHeader extends StatelessWidget {
             children: [
               Text(
                 feature.title,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Colors.grey[800],
                   fontWeight: FontWeight.w600,
+                  fontSize: 20.0,
                 ),
               ),
               Row(
@@ -93,13 +95,13 @@ class _FeatureHeader extends StatelessWidget {
                     '$timeAgo • ',
                     style: TextStyle(
                       color: Colors.grey[600],
-                      fontSize: 12.0,
+                      fontSize: 16.0,
                     ),
                   ),
                   Icon(
                     Icons.public,
                     color: Colors.grey[600],
-                    size: 12.0,
+                    size: 16.0,
                   )
                 ],
               ),
