@@ -2,6 +2,7 @@ import 'package:avatar_view/avatar_view.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
 import 'package:enetcom_app/views/widgets/shimmer_widget.dart';
+import 'package:enetcom_app/views/widgets/user_profile_info_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -92,18 +93,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0, left: 14.0),
-                child: Text(
-                  "Profile Info",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 8.0, left: 14.0, right: 14.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Profile Info",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Text(
+                      "${widget.selectedUser.userType}",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              ProfileInfoTile(user: widget.selectedUser),
-
+              UserInfoTile(user: widget.selectedUser),
               const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 14.0),
