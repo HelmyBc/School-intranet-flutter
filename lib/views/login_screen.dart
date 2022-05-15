@@ -2,6 +2,7 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_user_service.dart';
+import 'package:enetcom_app/views/welcome_admin_screen.dart';
 import 'package:enetcom_app/views/welcome_student_screen.dart';
 import 'package:enetcom_app/views/welcome_teacher_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (cu.userType == "Student") {
         prefs.setBool("isStudent", true);
         prefs.setBool("isTeacher", false);
+        prefs.setBool("isAdmin", false);
         prefs.setInt("cuid", cuid);
         print(cu.userType);
         Navigator.pushReplacement(
@@ -42,12 +44,25 @@ class _LoginScreenState extends State<LoginScreen> {
       } else if (cu.userType == "Teacher") {
         prefs.setBool("isTeacher", true);
         prefs.setBool("isStudent", false);
+        prefs.setBool("isAdmin", false);
         prefs.setInt("cuid", cuid);
         print(cu.userType);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const WelcomeTeacherScreen(),
+          ),
+        );
+      } else if (cu.userType == "Admin") {
+        prefs.setBool("isAdmin", true);
+        prefs.setBool("isTeacher", false);
+        prefs.setBool("isStudent", false);
+        prefs.setInt("cuid", cuid);
+        print(cu.userType);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const WelcomeAdminScreen(),
           ),
         );
       } else {

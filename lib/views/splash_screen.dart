@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/views/for_admins/admin_root_app.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
 import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
@@ -26,9 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     userController.getCurrentUser();
     featureController.fetchFeatures();
-
     startTimer();
   }
 
@@ -77,6 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var status = prefs.getBool('isLoggedIn') ?? false;
     var isTeacher = prefs.getBool('isTeacher') ?? false;
     var isStudent = prefs.getBool('isStudent') ?? false;
+    var isAdmin = prefs.getBool('isAdmin') ?? false;
 
     if (status) {
       if (isTeacher) {
@@ -95,6 +97,15 @@ class _SplashScreenState extends State<SplashScreen> {
           context,
           MaterialPageRoute(
             builder: (context) => const StudentRootApp(),
+          ),
+        );
+      } else if (isAdmin) {
+        ////// admin ROUTE
+        userController.currentUserTypeInt.value = 0;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AdminRootApp(),
           ),
         );
       }
