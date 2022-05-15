@@ -1,8 +1,11 @@
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/services/http_post_service.dart';
+import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/admin_views/posts/edit_post_screen.dart';
+import 'package:enetcom_app/views/profile_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,10 @@ class NewPostContainer extends StatelessWidget {
     Key? key,
     required this.post,
   }) : super(key: key);
+
+  // getPostOwner() async {
+  //   var postOwner = await HttpUserService.getUser(post.uid);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +92,23 @@ class _PostHeader extends StatelessWidget {
     final difference = DateTime.now().difference(createdTime);
     final dateTime = DateTime.now().subtract(difference);
     final timeAgo = timeago.format(dateTime);
+    User postOwner;
+
+    Future<User> setPostOwner() async {
+      User postOwner = await HttpUserService.getUser(post.uid);
+      return postOwner;
+    }
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () async {
+        postOwner = await setPostOwner();
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => ProfileScreen(
+                      selectedUser: postOwner,
+                    )));
+      },
       child: Row(
         children: [
           ProfileAvatar(imageUrl: post.profImage),

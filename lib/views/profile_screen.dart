@@ -13,18 +13,18 @@ import 'package:enetcom_app/views/home%20screen/widgets/create_post_container.da
 import 'package:enetcom_app/views/for_teachers/teacher_root_app.dart';
 import 'package:enetcom_app/views/widgets/profile_info_tile.dart';
 
-class CurrentProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   final User selectedUser;
-  const CurrentProfileScreen({
+  const ProfileScreen({
     Key? key,
     required this.selectedUser,
   }) : super(key: key);
 
   @override
-  _CurrentProfileScreenState createState() => _CurrentProfileScreenState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final UserController userController = Get.put(UserController());
 
   @override
