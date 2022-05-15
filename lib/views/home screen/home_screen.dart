@@ -2,10 +2,9 @@ import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
-import 'package:enetcom_app/data/data.dart';
 import 'package:enetcom_app/models/post.dart';
-import 'package:enetcom_app/models/post_model.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
+import 'package:enetcom_app/views/admin_views/widgets/post_shimmer.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/student_category_list.dart';
 import 'package:enetcom_app/views/login_screen.dart';
@@ -126,14 +125,11 @@ class HomeScreen extends StatelessWidget {
                     if (_c.isLoading.isTrue) {
                       if (_c.featureList.isEmpty) {
                         return const CarouselLoading();
-                      } else {
-                        return FeatureCarousel();
                       }
                     } else if (_c.featureList.isNotEmpty) {
                       return FeatureCarousel();
-                    } else {
-                      return Container();
                     }
+                    return Container();
                   },
                 ),
               ),
@@ -155,6 +151,9 @@ class HomeScreen extends StatelessWidget {
                         imageUrl: userController.currentUser.value.imageUrl!);
                   }
                 }),
+              ),
+              const SliverToBoxAdapter(
+                child: PostShimmer(),
               ),
               SliverToBoxAdapter(
                 child: Obx(
