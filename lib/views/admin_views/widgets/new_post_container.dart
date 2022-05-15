@@ -86,45 +86,48 @@ class _PostHeader extends StatelessWidget {
     final dateTime = DateTime.now().subtract(difference);
     final timeAgo = timeago.format(dateTime);
 
-    return Row(
-      children: [
-        ProfileAvatar(imageUrl: post.profImage),
-        const SizedBox(width: 8.0),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                post.username,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    '$timeAgo • ',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 12.0,
-                    ),
+    return GestureDetector(
+      onTap: () {},
+      child: Row(
+        children: [
+          ProfileAvatar(imageUrl: post.profImage),
+          const SizedBox(width: 8.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  post.username,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
                   ),
-                  Icon(
-                    Icons.public,
-                    color: Colors.grey[600],
-                    size: 12.0,
-                  )
-                ],
-              ),
-            ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '$timeAgo • ',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 12.0,
+                      ),
+                    ),
+                    Icon(
+                      Icons.public,
+                      color: Colors.grey[600],
+                      size: 12.0,
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.more_horiz),
-          // ignore: avoid_print
-          onPressed: () => showActions(context),
-        ),
-      ],
+          IconButton(
+            icon: const Icon(Icons.more_horiz),
+            // ignore: avoid_print
+            onPressed: () => showActions(context),
+          ),
+        ],
+      ),
     );
   }
 
@@ -207,21 +210,21 @@ class _PostStats extends StatelessWidget {
             const SizedBox(width: 4.0),
             Expanded(
               child: Text(
-                '125',
+                '99',
                 style: TextStyle(
                   color: Colors.grey[600],
                 ),
               ),
             ),
             Text(
-              '${70} Comments',
+              '${99} Comments',
               style: TextStyle(
                 color: Colors.grey[600],
               ),
             ),
             const SizedBox(width: 8.0),
             Text(
-              '18 Shares',
+              '99 Shares',
               style: TextStyle(
                 color: Colors.grey[600],
               ),
