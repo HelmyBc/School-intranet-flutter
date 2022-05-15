@@ -159,6 +159,7 @@ class UserController extends GetxController {
   var currentUserClasseSubjectCourses = <Course>[].obs;
   var currentUserClasseSubjectTds = <Td>[].obs;
   var currentUserPosts = <Post>[].obs;
+  var selectedUserPosts = <Post>[].obs;
 
   @override
   void onInit() {
@@ -182,6 +183,12 @@ class UserController extends GetxController {
   void getCurrentUserPosts() async {
     currentUserPosts.value =
         await HttpUserService.fetchUserPosts(currentUser.value.id!);
+  }
+
+  //FOR USERS PROFILES
+  void getSelectedUserPosts(User user) async {
+    selectedUserPosts.clear();
+    selectedUserPosts.value = await HttpUserService.fetchUserPosts(user.id!);
   }
 
   //For classroom student screen

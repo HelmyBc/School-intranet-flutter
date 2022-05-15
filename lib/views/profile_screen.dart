@@ -1,5 +1,8 @@
 import 'package:avatar_view/avatar_view.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
+import 'package:enetcom_app/models/post.dart';
+import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
+import 'package:enetcom_app/views/admin_views/widgets/post_shimmer.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
 import 'package:enetcom_app/views/widgets/shimmer_widget.dart';
 import 'package:enetcom_app/views/widgets/user_profile_info_tile.dart';
@@ -30,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    userController.getSelectedUserPosts(widget.selectedUser);
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -140,26 +144,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              // Obx(
-              //   () {
-              //     if (user.isLoading.value) {
-              //       return const Center(child: CircularProgressIndicator());
-              //     } else {
-              //       return ListView.builder(
-              //         shrinkWrap: true,
-              //         physics: const ScrollPhysics(),
-              //         itemBuilder: (BuildContext context, int index) {
-              //           final Post post =
-              //               userController.selectedUserPosts[index];
-              //           return NewPostContainer(post: post);
-              //         },
-              //         itemCount: widget.selectedUserPosts.length,
-              //       );
-              //     }
-              //   },
-              // ),
-              // PostContainer(post: posts[0]),
-              // PostContainer(post: posts[4]),
+              Obx(
+                () {
+                  if (userController.isLoading.value) {
+                    return const PostShimmer();
+                  } else {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const ScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        final Post post =
+                            userController.selectedUserPosts[index];
+                        return NewPostContainer(post: post);
+                      },
+                      itemCount: userController.selectedUserPosts.length,
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
