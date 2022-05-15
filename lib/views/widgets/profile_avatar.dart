@@ -7,12 +7,14 @@ class ProfileAvatar extends StatelessWidget {
   final String imageUrl;
   final bool isActive;
   final bool hasBorder;
+  final double raduis;
 
   const ProfileAvatar({
     Key? key,
     required this.imageUrl,
     this.isActive = false,
     this.hasBorder = false,
+    this.raduis = 20,
   }) : super(key: key);
 
   @override
@@ -21,27 +23,8 @@ class ProfileAvatar extends StatelessWidget {
       onTap: () {},
       child: Stack(
         children: [
-          // CircleAvatar(
-          //   radius: 20.0,
-          //   backgroundColor: Palette.facebookBlue,
-          //   child: CircleAvatar(
-          //     radius: hasBorder ? 17.0 : 20.0,
-          //     backgroundColor: Colors.grey[200],
-          //     backgroundImage: AssetImage(imageUrl),
-          //   ),
-          // ),
-          // CircleAvatar(
-          //   child: ClipOval(
-          //     child: Image.network(
-          //       imageUrl,
-          //       width:20,
-          //       height: 20,
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
           AvatarView(
-            radius: 20,
+            radius: raduis,
             borderColor: Colors.grey,
             avatarType: AvatarType.CIRCLE,
             backgroundColor: Colors.red,
@@ -55,7 +38,6 @@ class ProfileAvatar extends StatelessWidget {
               size: 18,
             ),
           ),
-          
           isActive
               ? Positioned(
                   bottom: 0.0,

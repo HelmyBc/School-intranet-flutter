@@ -4,7 +4,7 @@ import 'package:enetcom_app/models/classe.dart';
 import 'package:enetcom_app/models/user.dart';
 import 'package:enetcom_app/views/current_profile_screen.dart';
 import 'package:enetcom_app/views/for_students/classroom_student_screen.dart';
-import 'package:enetcom_app/views/for_students/user_dashboard.dart';
+import 'package:enetcom_app/views/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
