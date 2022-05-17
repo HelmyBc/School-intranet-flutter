@@ -55,7 +55,26 @@ class NewPostContainer extends StatelessWidget {
               ],
             ),
           ),
-          // ignore: unnecessary_null_comparison
+  //         FutureBuilder(
+  //   // Paste your image URL inside the htt.get method as a parameter
+  //   future: http.get(
+  //       "https://random.dog/3f62f2c1-e0cb-4077-8cd9-1ca76bfe98d5.jpg"),
+  //   builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
+  //     switch (snapshot.connectionState) {
+  //       case ConnectionState.none:
+  //         return Text('Press button to start.');
+  //       case ConnectionState.active:
+  //       case ConnectionState.waiting:
+  //         return CircularProgressIndicator();
+  //       case ConnectionState.done:
+  //         if (snapshot.hasError)
+  //           return Text('Error: ${snapshot.error}');
+  //         // when we get the data from the http call, we give the bodyBytes to Image.memory for showing the image
+  //         return Image.memory(snapshot.data.bodyBytes);
+  //     }
+  //     return null; // unreachable
+  //   },
+  // );
           if (post.imageUrl == null || post.imageUrl!.isEmpty)
             const SizedBox.shrink()
           else
