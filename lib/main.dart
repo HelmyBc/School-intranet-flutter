@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage("assets/images/enetcom_logo.png"), context);
     return GetMaterialApp(
       title: 'ENETCom',
       debugShowCheckedModeBanner: false,

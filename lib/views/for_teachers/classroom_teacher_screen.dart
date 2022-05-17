@@ -27,16 +27,7 @@ class ClassroomTeacherScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => TeacherRootApp()));
-          },
-        ),
+        automaticallyImplyLeading: false,
         backgroundColor: Palette.scaffold,
         title: const Image(
             image: ExactAssetImage("assets/images/enetcom_logo.png"),

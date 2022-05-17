@@ -1,3 +1,4 @@
+import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/td.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,8 +31,27 @@ class TdTile extends StatelessWidget {
           MaterialPageRoute<dynamic>(
             builder: (_) => const PDF().cachedFromUrl(
               td.pdfUrl,
-              placeholder: (progress) => Center(child: Text('$progress %')),
-              errorWidget: (error) => Center(child: Text(error.toString())),
+              placeholder: (progress) => Scaffold(
+                  backgroundColor: Palette.scaffold,
+                  body: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'PDF is loading,please wait...\n$progress %',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ))),
+              errorWidget: (error) => Scaffold(
+                  backgroundColor: Palette.scaffold,
+                  body: Center(
+                      child: Text(error.toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 30.0,
+                          )))),
             ),
           ),
         );
