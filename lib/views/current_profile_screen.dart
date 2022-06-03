@@ -53,21 +53,7 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
           ),
           systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.dark),
-          leading: GestureDetector(
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              iconSize: 30.0,
-              color: Colors.black,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => userController.currentUserTypeInt.value == 1
-                      ? const TeacherRootApp()
-                      : const StudentRootApp(),
-                ),
-              ),
-            ),
-          ),
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Palette.mainWhite,
           actions: [
