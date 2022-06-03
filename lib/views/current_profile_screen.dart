@@ -57,11 +57,6 @@ class _CurrentProfileScreenState extends State<CurrentProfileScreen> {
           elevation: 0,
           backgroundColor: Palette.mainWhite,
           actions: [
-            // CircleButton(
-            //   icon: Icons.done,
-            //   iconColor: Palette.mainBlack,
-            //   toScreen: const NavScreen(),
-            // )
             Container(
               margin:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
