@@ -1,0 +1,65 @@
+"filename", "language", "Dart", "Kotlin", "XML", "comment", "blank", "total"
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\kotlin\com\example\enetcom_app\MainActivity.kt", "Kotlin", 0, 4, 0, 0, 3, 7
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\facebook.svg", "XML", 0, 0, -1, 0, 0, -1
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\google_plus.svg", "XML", 0, 0, -46, -1, -1, -48
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\twitter.svg", "XML", 0, 0, -46, -1, -1, -48
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\feature_controller.dart", "Dart", 0, 0, 0, -2, 0, -2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\user_controller.dart", "Dart", 12, 0, 0, 117, 18, 147
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\data\data.dart", "Dart", -9, 0, 0, 59, -1, 49
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\main.dart", "Dart", 1, 0, 0, -2, -1, -2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\feature.dart", "Dart", 0, 0, 0, -23, 0, -23
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\feature_model.dart", "Dart", 0, 0, 0, -10, -2, -12
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\post_model.dart", "Dart", -19, 0, 0, 19, 2, 2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_feature_service.dart", "Dart", 0, 0, 0, -2, 0, -2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_user_service.dart", "Dart", 23, 0, 0, 1, 5, 29
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\add_feature_screen.dart", "Dart", 387, 0, 0, 3, 19, 409
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\admin_dashboard.dart", "Dart", 164, 0, 0, 47, 1, 212
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\feature_container.dart", "Dart", 142, 0, 0, 16, 11, 169
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\new_post_container.dart", "Dart", 19, 0, 0, 22, 2, 43
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\post_shimmer.dart", "Dart", 105, 0, 0, 1, 5, 111
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\student_card.dart", "Dart", 20, 0, 0, 0, 2, 22
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\current_profile_screen.dart", "Dart", 67, 0, 0, 1, 2, 70
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\edit_profile_screen.dart", "Dart", 198, 0, 0, 15, 7, 220
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_admins\admin_root_app.dart", "Dart", 167, 0, 0, 0, 10, 177
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\classroom_student_screen.dart", "Dart", 26, 0, 0, 21, 0, 47
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\course_tile.dart", "Dart", 99, 0, 0, 2, 5, 106
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\student_root_app.dart", "Dart", 167, 0, 0, 0, 10, 177
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\student_subject_screen.dart", "Dart", 284, 0, 0, 4, 6, 294
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\student_subject_tile.dart", "Dart", 104, 0, 0, 0, 6, 110
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\td_tile.dart", "Dart", 98, 0, 0, 2, 5, 105
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\classroom_teacher_screen.dart", "Dart", -12, 0, 0, 0, 0, -12
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\subject_screen.dart", "Dart", 2, 0, 0, -57, -2, -57
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\teacher_root_app.dart", "Dart", 165, 0, 0, 0, 9, 174
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\teacher_subjects_screen.dart", "Dart", 0, 0, 0, -60, 1, -59
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\upload_course_screen.dart", "Dart", -2, 0, 0, 0, 0, -2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\create_post_screen.dart", "Dart", -3, 0, 0, -6, 0, -9
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\create_post_screen_old.dart", "Dart", 0, 0, 0, -250, -10, -260
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\home_screen.dart", "Dart", 38, 0, 0, -5, 1, 34
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\carousel_loading.dart", "Dart", -1, 0, 0, 0, 0, -1
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\course_tile.dart", "Dart", 2, 0, 0, 0, 0, 2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\create_post_container.dart", "Dart", 3, 0, 0, 0, 1, 4
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\empty_content.dart", "Dart", 51, 0, 0, 1, 3, 55
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\student_category_list.dart", "Dart", 38, 0, 0, 0, 5, 43
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\subject_tile.dart", "Dart", 9, 0, 0, -4, 1, 6
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\td_tile.dart", "Dart", 2, 0, 0, 0, 0, 2
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\teacher_category_list.dart", "Dart", 38, 0, 0, 0, 5, 43
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\login_screen.dart", "Dart", 11, 0, 0, 0, -1, 10
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\profile_screen.dart", "Dart", 164, 0, 0, 2, 6, 172
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\splash_screen.dart", "Dart", 35, 0, 0, 1, 2, 38
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\student_root_app.dart", "Dart", 0, 0, 0, 0, -1, -1
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\teacher_root_app.dart", "Dart", -163, 0, 0, 0, -9, -172
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\user_dashboard.dart", "Dart", 133, 0, 0, 1, 4, 138
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\users_screen.dart", "Dart", 15, 0, 0, -5, 0, 10
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\welcome_admin_screen.dart", "Dart", 110, 0, 0, 0, 4, 114
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\welcome_student_screen.dart", "Dart", 1, 0, 0, 0, 0, 1
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\build_menu_item_box.dart", "Dart", 47, 0, 0, 0, 2, 49
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\category_list.dart", "Dart", -38, 0, 0, 0, -5, -43
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\post_container.dart", "Dart", -260, 0, 0, -7, -14, -281
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\profile_avatar.dart", "Dart", 1, 0, 0, -19, -1, -19
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\profile_image_widget.dart", "Dart", -72, 0, 0, 90, 1, 19
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\profile_info_tile.dart", "Dart", 1, 0, 0, 0, 0, 1
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\shimmer_widget.dart", "Dart", 30, 0, 0, 0, 4, 34
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\user_card_container.dart", "Dart", -16, 0, 0, 16, 0, 0
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\user_profile_info_tile.dart", "Dart", 149, 0, 0, 0, 6, 155
+"c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\widgets.dart", "Dart", -1, 0, 0, 0, 0, -1
+"Total", "-", 2532, 4, -93, -13, 125, 2555

@@ -51,11 +51,11 @@ class ClasseTile extends StatelessWidget {
           ),
         ),
         const Positioned(
-          left: 10,
+          left: 0,
           top: 5,
           child: Image(
-            height: 100,
-            image: AssetImage('assets/images/classroom.png'),
+            height: 70,
+            image: AssetImage('assets/images/class.png'),
           ),
         ),
         Container(

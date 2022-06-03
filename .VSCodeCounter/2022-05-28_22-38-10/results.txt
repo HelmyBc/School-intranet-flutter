@@ -1,0 +1,300 @@
+Date : 2022-05-28 22:38:10
+Directory : c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app
+Total : 213 files,  31374 codes, 1614 comments, 1085 blanks, all 34073 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Dart       |        138 |     15,604 |      1,444 |        985 |     18,033 |
+| XML        |         58 |     15,301 |         70 |         38 |     15,409 |
+| JSON       |          4 |        219 |          0 |          3 |        222 |
+| Groovy     |          3 |         90 |          3 |         22 |        115 |
+| HTML       |          1 |         79 |         17 |          6 |        102 |
+| YAML       |          2 |         51 |         79 |         18 |        148 |
+| Swift      |          1 |         12 |          0 |          2 |         14 |
+| Properties |          2 |          8 |          1 |          2 |         11 |
+| Markdown   |          2 |          5 |          0 |          5 |         10 |
+| Kotlin     |          1 |          4 |          0 |          3 |          7 |
+| C++        |          1 |          1 |          0 |          1 |          2 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                              | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                 |        213 |     31,374 |      1,614 |      1,085 |     34,073 |
+| android                                                                                                           |         14 |        205 |         53 |         36 |        294 |
+| android\app                                                                                                       |         10 |        163 |         52 |         25 |        240 |
+| android\app\src                                                                                                   |          8 |         68 |         49 |         12 |        129 |
+| android\app\src\debug                                                                                             |          1 |          4 |          3 |          1 |          8 |
+| android\app\src\main                                                                                              |          6 |         60 |         43 |         10 |        113 |
+| android\app\src\main\kotlin                                                                                       |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\kotlin\com                                                                                   |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\kotlin\com\example                                                                           |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\kotlin\com\example\enetcom_app                                                               |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\res                                                                                          |          4 |         26 |         32 |          6 |         64 |
+| android\app\src\main\res\drawable                                                                                 |          1 |          4 |          7 |          2 |         13 |
+| android\app\src\main\res\drawable-v21                                                                             |          1 |          4 |          7 |          2 |         13 |
+| android\app\src\main\res\values                                                                                   |          1 |          9 |          9 |          1 |         19 |
+| android\app\src\main\res\values-night                                                                             |          1 |          9 |          9 |          1 |         19 |
+| android\app\src\profile                                                                                           |          1 |          4 |          3 |          1 |          8 |
+| android\gradle                                                                                                    |          1 |          5 |          1 |          1 |          7 |
+| android\gradle\wrapper                                                                                            |          1 |          5 |          1 |          1 |          7 |
+| assets                                                                                                            |         49 |     15,176 |         19 |         27 |     15,222 |
+| assets\category                                                                                                   |         34 |      4,305 |         10 |         18 |      4,333 |
+| assets\icons                                                                                                      |          8 |        358 |          6 |          7 |        371 |
+| assets\images                                                                                                     |          7 |     10,513 |          3 |          2 |     10,518 |
+| ios                                                                                                               |          7 |        222 |          2 |          9 |        233 |
+| ios\Runner                                                                                                        |          7 |        222 |          2 |          9 |        233 |
+| ios\Runner\Assets.xcassets                                                                                        |          3 |        148 |          0 |          4 |        152 |
+| ios\Runner\Assets.xcassets\AppIcon.appiconset                                                                     |          1 |        122 |          0 |          1 |        123 |
+| ios\Runner\Assets.xcassets\LaunchImage.imageset                                                                   |          2 |         26 |          0 |          3 |         29 |
+| ios\Runner\Base.lproj                                                                                             |          2 |         61 |          2 |          2 |         65 |
+| lib                                                                                                               |        137 |     15,590 |      1,434 |        978 |     18,002 |
+| lib\config                                                                                                        |          2 |         50 |          2 |         12 |         64 |
+| lib\controllers                                                                                                   |          9 |        280 |        166 |         63 |        509 |
+| lib\data                                                                                                          |          1 |        198 |        113 |          6 |        317 |
+| lib\models                                                                                                        |         14 |        516 |         72 |         97 |        685 |
+| lib\services                                                                                                      |         12 |        932 |         77 |        114 |      1,123 |
+| lib\theme                                                                                                         |          1 |         26 |          0 |          4 |         30 |
+| lib\utils                                                                                                         |          1 |         20 |          0 |          3 |         23 |
+| lib\views                                                                                                         |         96 |     13,539 |      1,004 |        675 |     15,218 |
+| lib\views\admin_views                                                                                             |         31 |      6,129 |        291 |        281 |      6,701 |
+| lib\views\admin_views\classes                                                                                     |          3 |        658 |          1 |         30 |        689 |
+| lib\views\admin_views\department                                                                                  |          3 |        458 |          1 |         26 |        485 |
+| lib\views\admin_views\posts                                                                                       |          3 |        489 |         40 |         26 |        555 |
+| lib\views\admin_views\students                                                                                    |          3 |        796 |          5 |         31 |        832 |
+| lib\views\admin_views\subjects                                                                                    |          3 |        684 |         77 |         39 |        800 |
+| lib\views\admin_views\teachers                                                                                    |          3 |        791 |          4 |         34 |        829 |
+| lib\views\admin_views\widgets                                                                                     |          9 |      1,237 |         55 |         58 |      1,350 |
+| lib\views\for_admins                                                                                              |          1 |        167 |          0 |         10 |        177 |
+| lib\views\for_students                                                                                            |          6 |        886 |         31 |         40 |        957 |
+| lib\views\for_teachers                                                                                            |          9 |      1,547 |        341 |         90 |      1,978 |
+| lib\views\home screen                                                                                             |         15 |      1,746 |         37 |         85 |      1,868 |
+| lib\views\home screen\menu                                                                                        |          1 |         98 |          4 |          5 |        107 |
+| lib\views\home screen\widgets                                                                                     |         12 |      1,071 |         27 |         58 |      1,156 |
+| lib\views\widgets                                                                                                 |         21 |      1,262 |        157 |         91 |      1,510 |
+| test                                                                                                              |          1 |         14 |         10 |          7 |         31 |
+| web                                                                                                               |          2 |        114 |         17 |          7 |        138 |
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                          | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\README.md                                                           | Markdown   |          2 |          0 |          3 |          5 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\analysis_options.yaml                                               | YAML       |          3 |         23 |          4 |         30 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\build.gradle                                            | Groovy     |         56 |          3 |         13 |         72 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\google-services.json                                    | JSON       |         39 |          0 |          0 |         39 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\debug\AndroidManifest.xml                           | XML        |          4 |          3 |          1 |          8 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\AndroidManifest.xml                            | XML        |         30 |         11 |          1 |         42 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\kotlin\com\example\enetcom_app\MainActivity.kt | Kotlin     |          4 |          0 |          3 |          7 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\res\drawable-v21\launch_background.xml         | XML        |          4 |          7 |          2 |         13 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\res\drawable\launch_background.xml             | XML        |          4 |          7 |          2 |         13 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\res\values-night\styles.xml                    | XML        |          9 |          9 |          1 |         19 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\main\res\values\styles.xml                          | XML        |          9 |          9 |          1 |         19 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\app\src\profile\AndroidManifest.xml                         | XML        |          4 |          3 |          1 |          8 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\build.gradle                                                | Groovy     |         26 |          0 |          5 |         31 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\gradle.properties                                           | Properties |          3 |          0 |          1 |          4 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\gradle\wrapper\gradle-wrapper.properties                    | Properties |          5 |          1 |          1 |          7 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\android\settings.gradle                                             | Groovy     |          8 |          0 |          4 |         12 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\absence.svg                                         | XML        |        563 |          0 |          1 |        564 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\absent.svg                                          | XML        |        183 |          0 |          1 |        184 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\all.svg                                             | XML        |         10 |          0 |          1 |         11 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\art.svg                                             | XML        |         56 |          1 |          1 |         58 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\business.svg                                        | XML        |         67 |          1 |          1 |         69 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\catchup.svg                                         | XML        |         63 |          1 |          1 |         65 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\class.svg                                           | XML        |        520 |          0 |          1 |        521 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\class_group.svg                                     | XML        |         33 |          0 |          0 |         33 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\coding.svg                                          | XML        |         58 |          1 |          1 |         60 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\cooking.svg                                         | XML        |          4 |          0 |          1 |          5 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\course.svg                                          | XML        |         34 |          0 |          0 |         34 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\design.svg                                          | XML        |        106 |          1 |          1 |        108 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\diploma.svg                                         | XML        |         26 |          0 |          0 |         26 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\education.svg                                       | XML        |         59 |          1 |          1 |         61 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\exam.svg                                            | XML        |        111 |          1 |          1 |        113 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\exams.svg                                           | XML        |         32 |          0 |          0 |         32 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\finance.svg                                         | XML        |         77 |          1 |          1 |         79 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\menu0.svg                                           | XML        |        359 |          0 |          1 |        360 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\menu1.svg                                           | XML        |         13 |          0 |          0 |         13 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\menu11.svg                                          | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\menu2.svg                                           | XML        |         13 |          0 |          0 |         13 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\menu3.svg                                           | XML        |         13 |          0 |          0 |         13 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\music.svg                                           | XML        |         49 |          1 |          1 |         51 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\pdf-file-10147.svg                                  | XML        |         17 |          0 |          0 |         17 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\stage.svg                                           | XML        |         14 |          0 |          0 |         14 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\stage1.svg                                          | XML        |         22 |          0 |          0 |         22 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\student.svg                                         | XML        |         33 |          0 |          0 |         33 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\student1.svg                                        | XML        |         49 |          0 |          0 |         49 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\tiemtable0.svg                                      | XML        |        589 |          0 |          1 |        590 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\time.svg                                            | XML        |        589 |          0 |          1 |        590 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\timetable.svg                                       | XML        |          6 |          1 |          0 |          7 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\timetable1.svg                                      | XML        |         30 |          0 |          0 |         30 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\timetable3.svg                                      | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\category\tp.svg                                              | XML        |        505 |          0 |          1 |        506 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\group.svg                                              | XML        |         79 |          1 |          1 |         81 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\home.svg                                               | XML        |         51 |          1 |          1 |         53 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\logout.svg                                             | XML        |          9 |          0 |          1 |         10 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\logoutdoor.svg                                         | XML        |         57 |          1 |          1 |         59 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\menu.svg                                               | XML        |         56 |          1 |          1 |         58 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\notification.svg                                       | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\profile.svg                                            | XML        |         56 |          1 |          1 |         58 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\icons\profile1.svg                                           | XML        |         49 |          1 |          1 |         51 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\chat.svg                                              | XML        |        134 |          1 |          0 |        135 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\classroom_student.svg                                 | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\coming.svg                                            | XML        |      5,073 |          0 |          1 |      5,074 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\coming_soon.svg                                       | XML        |      5,073 |          0 |          1 |      5,074 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\login.svg                                             | XML        |        151 |          1 |          0 |        152 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\signup.svg                                            | XML        |         80 |          1 |          0 |         81 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\assets\images\teacher.svg                                           | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\AppDelegate.swift                                        | Swift      |         12 |          0 |          2 |         14 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\Assets.xcassets\AppIcon.appiconset\Contents.json         | JSON       |        122 |          0 |          1 |        123 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\Assets.xcassets\LaunchImage.imageset\Contents.json       | JSON       |         23 |          0 |          1 |         24 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\Assets.xcassets\LaunchImage.imageset\README.md           | Markdown   |          3 |          0 |          2 |          5 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\Base.lproj\LaunchScreen.storyboard                       | XML        |         36 |          1 |          1 |         38 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\Base.lproj\Main.storyboard                               | XML        |         25 |          1 |          1 |         27 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\ios\Runner\Runner-Bridging-Header.h                                 | C++        |          1 |          0 |          1 |          2 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\config\palette.dart                                             | Dart       |         34 |          2 |          8 |         44 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\config\styles.dart                                              | Dart       |         16 |          0 |          4 |         20 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\classe_controller.dart                              | Dart       |         24 |          1 |          4 |         29 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\course_controller.dart                              | Dart       |         24 |          1 |          4 |         29 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\department_controller.dart                          | Dart       |         24 |          1 |          4 |         29 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\feature_controller.dart                             | Dart       |         26 |          0 |          4 |         30 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\post_controller.dart                                | Dart       |         24 |          1 |          4 |         29 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\student_controller.dart                             | Dart       |         24 |         14 |          7 |         45 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\subject_controller.dart                             | Dart       |         24 |          1 |          4 |         29 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\teacher_controller.dart                             | Dart       |         24 |          1 |          4 |         29 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\controllers\user_controller.dart                                | Dart       |         86 |        146 |         28 |        260 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\data\data.dart                                                  | Dart       |        198 |        113 |          6 |        317 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\main.dart                                                       | Dart       |         29 |          0 |          4 |         33 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\attachment.dart                                          | Dart       |         25 |          0 |          7 |         32 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\classe.dart                                              | Dart       |         38 |          0 |          8 |         46 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\course.dart                                              | Dart       |         37 |          0 |          7 |         44 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\department.dart                                          | Dart       |         25 |         12 |          7 |         44 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\feature.dart                                             | Dart       |         37 |          0 |          7 |         44 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\file_model.dart                                          | Dart       |         18 |          9 |          8 |         35 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\post.dart                                                | Dart       |         45 |          2 |          7 |         54 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\post_model.dart                                          | Dart       |          0 |         19 |          5 |         24 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\student.dart                                             | Dart       |         62 |         21 |          9 |         92 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\subject.dart                                             | Dart       |         41 |          0 |          7 |         48 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\td.dart                                                  | Dart       |         37 |          0 |          7 |         44 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\teacher.dart                                             | Dart       |         68 |          8 |          8 |         84 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\user.dart                                                | Dart       |         73 |          1 |          7 |         81 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\models\user_model.dart                                          | Dart       |         10 |          0 |          3 |         13 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\helper_function.dart                                   | Dart       |         11 |          0 |          3 |         14 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_attachment_service.dart                           | Dart       |          0 |         57 |         10 |         67 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_classe_service.dart                               | Dart       |         81 |          1 |          9 |         91 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_course_service.dart                               | Dart       |         73 |          1 |          9 |         83 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_department_service.dart                           | Dart       |         73 |          1 |         10 |         84 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_feature_service.dart                              | Dart       |         73 |          1 |          9 |         83 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_post_service.dart                                 | Dart       |         77 |          3 |          9 |         89 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_student_service.dart                              | Dart       |         94 |          1 |          9 |        104 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_subject_service.dart                              | Dart       |         81 |          1 |          9 |         91 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_td_service.dart                                   | Dart       |         73 |          1 |          9 |         83 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_teacher_service.dart                              | Dart       |        108 |          3 |         10 |        121 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\services\http_user_service.dart                                 | Dart       |        188 |          7 |         18 |        213 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\theme\color.dart                                                | Dart       |         26 |          0 |          4 |         30 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\utils\utils.dart                                                | Dart       |         20 |          0 |          3 |         23 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\add_feature_screen.dart                       | Dart       |        387 |          3 |         19 |        409 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\admin_dashboard.dart                          | Dart       |        301 |        104 |          7 |        412 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\admin_grid.dart                               | Dart       |        258 |          0 |          3 |        261 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\classes\add_classe_screen.dart                | Dart       |        293 |          0 |         16 |        309 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\classes\classe_dashboard.dart                 | Dart       |        135 |          0 |          4 |        139 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\classes\update_classe_screen.dart             | Dart       |        230 |          1 |         10 |        241 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\department\add_department_screen.dart         | Dart       |        158 |          0 |         12 |        170 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\department\department_dashboard.dart          | Dart       |        129 |          0 |          4 |        133 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\department\update_department_screen.dart      | Dart       |        171 |          1 |         10 |        182 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\posts\create_post_screen.dart                 | Dart       |        236 |         29 |         13 |        278 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\posts\edit_post_screen.dart                   | Dart       |        157 |         11 |          8 |        176 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\posts\post_dashboard.dart                     | Dart       |         96 |          0 |          5 |        101 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\students\add_student_screen.dart              | Dart       |        422 |          1 |         17 |        440 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\students\student_dashboard.dart               | Dart       |         95 |          0 |          5 |        100 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\students\update_student_screen.dart           | Dart       |        279 |          4 |          9 |        292 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\subjects\add_subject_screen.dart              | Dart       |        328 |         65 |         20 |        413 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\subjects\subject_dashboard.dart               | Dart       |        128 |          0 |          4 |        132 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\subjects\update_subject_screen.dart           | Dart       |        228 |         12 |         15 |        255 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\teachers\add_teacher_screen.dart              | Dart       |        386 |          2 |         20 |        408 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\teachers\teacher_dashboard.dart               | Dart       |         98 |          0 |          5 |        103 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\teachers\update_teacher_screen.dart           | Dart       |        307 |          2 |          9 |        318 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\test_screen.dart                              | Dart       |         70 |          1 |          8 |         79 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\classe_card.dart                      | Dart       |         97 |          0 |          3 |        100 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\department_card.dart                  | Dart       |        103 |          0 |          3 |        106 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\feature_container.dart                | Dart       |        142 |         16 |         11 |        169 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\new_post_container.dart               | Dart       |        302 |         28 |         21 |        351 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\post_shimmer.dart                     | Dart       |        105 |          1 |          5 |        111 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\student_card.dart                     | Dart       |        143 |          2 |          5 |        150 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\subject_card.dart                     | Dart       |        106 |          0 |          4 |        110 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\teacher_card.dart                     | Dart       |        123 |          0 |          3 |        126 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\admin_views\widgets\user_card.dart                        | Dart       |        116 |          8 |          3 |        127 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\coming_soon_screen.dart                                   | Dart       |         50 |          2 |          3 |         55 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\current_profile_screen.dart                               | Dart       |        219 |         10 |          8 |        237 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\edit_profile_screen.dart                                  | Dart       |        388 |         15 |         15 |        418 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_admins\admin_root_app.dart                            | Dart       |        167 |          0 |         10 |        177 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\classroom_student_screen.dart                | Dart       |        134 |         23 |          8 |        165 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\course_tile.dart                             | Dart       |         99 |          2 |          5 |        106 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\student_root_app.dart                        | Dart       |        167 |          0 |         10 |        177 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\student_subject_screen.dart                  | Dart       |        284 |          4 |          6 |        294 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\student_subject_tile.dart                    | Dart       |        104 |          0 |          6 |        110 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_students\td_tile.dart                                 | Dart       |         98 |          2 |          5 |        105 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\add_teacher_subject_screen.dart              | Dart       |        164 |          5 |         15 |        184 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\add_teacher_subjects_screen.dart             | Dart       |          0 |        120 |         11 |        131 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\classroom_teacher_screen.dart                | Dart       |        120 |         48 |          5 |        173 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\edit_course_screen.dart                      | Dart       |          0 |        144 |         12 |        156 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\subject_screen.dart                          | Dart       |        348 |          3 |          6 |        357 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\teacher_root_app.dart                        | Dart       |        165 |          0 |          9 |        174 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\teacher_subjects_screen.dart                 | Dart       |        181 |          5 |          6 |        192 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\upload_course_screen.dart                    | Dart       |        286 |          8 |         13 |        307 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\for_teachers\upload_td_screen.dart                        | Dart       |        283 |          8 |         13 |        304 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\create_post_screen.dart                       | Dart       |        381 |          5 |         17 |        403 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\home_screen.dart                              | Dart       |        196 |          1 |          5 |        202 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\menu\menu_screen.dart                         | Dart       |         98 |          4 |          5 |        107 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\carousel_loading.dart                 | Dart       |         33 |          0 |          3 |         36 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\carousel_slider_data_found.dart       | Dart       |         97 |          0 |          6 |        103 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\classe_tile.dart                      | Dart       |         87 |          3 |          3 |         93 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\course_tile.dart                      | Dart       |        122 |          7 |          6 |        135 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\create_post_container.dart            | Dart       |         93 |          3 |          5 |        101 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\empty_content.dart                    | Dart       |         51 |          1 |          3 |         55 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\feature_carousel.dart                 | Dart       |        231 |          6 |          8 |        245 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\student_category_list.dart            | Dart       |         38 |          0 |          5 |         43 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\subject_tile.dart                     | Dart       |        101 |          0 |          5 |        106 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\td_tile.dart                          | Dart       |        123 |          7 |          6 |        136 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\teacher_category_list.dart            | Dart       |         38 |          0 |          5 |         43 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\home screen\widgets\upload_box.dart                       | Dart       |         57 |          0 |          3 |         60 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\login_screen.dart                                         | Dart       |        243 |         12 |         10 |        265 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\people_screen.dart                                        | Dart       |          0 |         97 |          4 |        101 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\profile_screen.dart                                       | Dart       |        164 |          2 |          6 |        172 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\splash_screen.dart                                        | Dart       |        109 |          3 |         10 |        122 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\students_screen.dart                                      | Dart       |         63 |          3 |          4 |         70 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\user_dashboard.dart                                       | Dart       |        133 |          1 |          4 |        138 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\users_screen.dart                                         | Dart       |         70 |          2 |          4 |         76 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\welcome_admin_screen.dart                                 | Dart       |        110 |          0 |          4 |        114 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\welcome_student_screen.dart                               | Dart       |        116 |          0 |          3 |        119 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\welcome_teacher_screen.dart                               | Dart       |        137 |          0 |          3 |        140 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\already_have_an_account_acheck.dart               | Dart       |         33 |          0 |          4 |         37 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\appbar_widget.dart                                | Dart       |         38 |          0 |          3 |         41 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\bottombar_item.dart                               | Dart       |         47 |          0 |          3 |         50 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\build_header_box.dart                             | Dart       |         96 |          0 |          2 |         98 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\build_menu_item_box.dart                          | Dart       |         47 |          0 |          2 |         49 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\category_box.dart                                 | Dart       |         57 |          1 |          5 |         63 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\circle_button.dart                                | Dart       |         31 |          0 |          3 |         34 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\custom_tab_bar.dart                               | Dart       |         44 |          1 |          3 |         48 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\online_bar_widget.dart                            | Dart       |         75 |          0 |          6 |         81 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\or_divider.dart                                   | Dart       |         37 |          1 |          4 |         42 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\profile_avatar.dart                               | Dart       |         58 |          0 |          5 |         63 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\profile_image_widget.dart                         | Dart       |          0 |        105 |          7 |        112 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\profile_info_tile.dart                            | Dart       |        153 |         29 |          7 |        189 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\rounded_button.dart                               | Dart       |         38 |          2 |          5 |         45 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\shimmer_widget.dart                               | Dart       |         30 |          0 |          4 |         34 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\student_card_container.dart                       | Dart       |        121 |          1 |          6 |        128 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\student_tile.dart                                 | Dart       |         59 |          0 |          3 |         62 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\text_field_widget_state.dart                      | Dart       |         54 |          0 |          6 |         60 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\user_card_container.dart                          | Dart       |         87 |         17 |          6 |        110 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\user_profile_info_tile.dart                       | Dart       |        149 |          0 |          6 |        155 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\lib\views\widgets\widgets.dart                                      | Dart       |          8 |          0 |          1 |          9 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\pubspec.yaml                                                        | YAML       |         48 |         56 |         14 |        118 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\test\widget_test.dart                                               | Dart       |         14 |         10 |          7 |         31 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\web\index.html                                                      | HTML       |         79 |         17 |          6 |        102 |
+| c:\Users\Lenovo\Documents\Dev\PFA\enetcom_app\web\manifest.json                                                   | JSON       |         35 |          0 |          1 |         36 |
+| Total                                                                                                             |            |     31,374 |      1,614 |      1,085 |     34,073 |
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
