@@ -1,3 +1,9 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 import 'package:enetcom_app/config/palette.dart';
 import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/models/post.dart';
@@ -7,12 +13,6 @@ import 'package:enetcom_app/services/http_user_service.dart';
 import 'package:enetcom_app/views/admin_views/posts/edit_post_screen.dart';
 import 'package:enetcom_app/views/profile_screen.dart';
 import 'package:enetcom_app/views/widgets/profile_avatar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-import 'package:timeago/timeago.dart' as timeago;
 
 class NewPostContainer extends StatelessWidget {
   final Post post;
@@ -22,12 +22,15 @@ class NewPostContainer extends StatelessWidget {
     required this.post,
   }) : super(key: key);
 
-  // getPostOwner() async {
-  //   var postOwner = await HttpUserService.getUser(post.uid);
-  // }
-
   @override
   Widget build(BuildContext context) {
+    // User postOwner;
+
+    // Future<User> setPostOwner() async {
+    //   User postOwner = await HttpUserService.getUser(post.uid);
+    //   return postOwner;
+    // }
+
     return Container(
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -49,32 +52,14 @@ class NewPostContainer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _PostHeader(post: post),
+                _PostHeader(
+                  post: post,
+                ),
                 const SizedBox(height: 4.0),
                 Text(post.description),
               ],
             ),
           ),
-          //         FutureBuilder(
-          //   // Paste your image URL inside the htt.get method as a parameter
-          //   future: http.get(
-          //       "https://random.dog/3f62f2c1-e0cb-4077-8cd9-1ca76bfe98d5.jpg"),
-          //   builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
-          //     switch (snapshot.connectionState) {
-          //       case ConnectionState.none:
-          //         return Text('Press button to start.');
-          //       case ConnectionState.active:
-          //       case ConnectionState.waiting:
-          //         return CircularProgressIndicator();
-          //       case ConnectionState.done:
-          //         if (snapshot.hasError)
-          //           return Text('Error: ${snapshot.error}');
-          //         // when we get the data from the http call, we give the bodyBytes to Image.memory for showing the image
-          //         return Image.memory(snapshot.data.bodyBytes);
-          //     }
-          //     return null; // unreachable
-          //   },
-          // );
           if (post.imageUrl == null || post.imageUrl!.isEmpty)
             const SizedBox.shrink()
           else
@@ -84,7 +69,6 @@ class NewPostContainer extends StatelessWidget {
                 image: NetworkImage(post.imageUrl!),
               ),
             ),
-
           const SizedBox(height: 10.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -162,10 +146,11 @@ class _PostHeader extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.more_horiz),
-            // ignore: avoid_print
-            onPressed: () => showActions(context),
-          ),
+              icon: const Icon(Icons.more_horiz),
+              onPressed: () {
+                // postOwner = await setPostOwner();
+                showActions(context);
+              }),
         ],
       ),
     );
@@ -179,6 +164,7 @@ class _PostHeader extends StatelessWidget {
       builder: (BuildContext context) => CupertinoActionSheet(
         title: const Text('Select An Option'),
         actions: <Widget>[
+          // postOwner.id == post.id
           CupertinoActionSheetAction(
             child: const Text('Edit description'),
             onPressed: () {
@@ -187,14 +173,12 @@ class _PostHeader extends StatelessWidget {
               postController.editingPost.add(post);
 
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditPostScreen(
-                          post: post,
-                        )),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditPostScreen(post: post)));
             },
           ),
+          // : null as CupertinoActionSheet,
           CupertinoActionSheetAction(
             child: const Text('delete post'),
             onPressed: () {

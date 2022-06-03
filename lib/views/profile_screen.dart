@@ -1,4 +1,5 @@
 import 'package:avatar_view/avatar_view.dart';
+import 'package:enetcom_app/controllers/post_controller.dart';
 import 'package:enetcom_app/controllers/user_controller.dart';
 import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
@@ -30,6 +31,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final UserController userController = Get.put(UserController());
+  final PostController postController = Get.put(PostController());
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       physics: const ScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         final Post post =
-                            userController.selectedUserPosts[index];
+                            postController.postList.reversed.toList()[index];
                         return NewPostContainer(post: post);
                       },
                       itemCount: userController.selectedUserPosts.length,
