@@ -193,7 +193,7 @@ class _AddFeatureScreenState extends State<AddFeatureScreen> {
                   }
                 }
                 else{
-                const snackBar= SnackBar(content: Text("An ima, title, descrition are required!"));
+                const snackBar= SnackBar(content: Text("An image, title, and descrition are required!"));
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
               },

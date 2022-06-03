@@ -2,7 +2,6 @@ import 'package:enetcom_app/controllers/feature_controller.dart';
 import 'package:enetcom_app/services/http_feature_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:enetcom_app/models/feature.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -142,9 +141,9 @@ class _FeatureHeader extends StatelessWidget {
           //   },
           // ),
           CupertinoActionSheetAction(
-            child: const Text('delete post'),
+            child: const Text('delete feature'),
             onPressed: () {
-              Navigator.pop(context, 'delete post');
+              Navigator.pop(context, 'delete feature');
               HttpFeatureService.deleteFeature(feature.id);
               featureController.fetchFeatures();
               const snackBar =

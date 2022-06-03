@@ -321,6 +321,7 @@ class AdminDashboard extends StatelessWidget {
 
   Future loadData() async {
     await Future.delayed(const Duration(milliseconds: 600));
+    featureController.fetchFeatures();
     studentController.fetchStudents();
     teacherController.fetchTeachers();
     departmentController.fetchDepartments();
