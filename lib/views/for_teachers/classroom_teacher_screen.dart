@@ -14,16 +14,11 @@ class ClassroomTeacherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserController userController = Get.put(UserController());
-    //final ClasseController classeController = Get.put(ClasseController());
-    //final SubjectController subjectController = Get.put(SubjectController());
-
-    // User currentUser = User(email: "", password: "");
     userController.getCurrentUser();
     userController.getCurrentUserClasses();
     User currentUser = userController.currentUser.value;
     print(userController.currentUserClasseSubjectCourses);
     userController.onInit();
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -66,25 +61,6 @@ class ClassroomTeacherScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-              //   child: TextButton(
-              //     onPressed: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (_) => AddTeacherSubjectsScreen()));
-              //     },
-              //     child: const Text(
-              //       "Edit subjects",
-              //       style: TextStyle(
-              //         color: Colors.blue,
-              //         fontSize: 18.0,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           buildHeaderBox(
@@ -146,27 +122,8 @@ class ClassroomTeacherScreen extends StatelessWidget {
             }
           }),
           const SizedBox(height: 70.0),
-          // ClassroomTile(
-          //   title: "Intelligence Artificielle",
-          // ),
-          // ClassroomTile(
-          //   title: "Traitement d'image",
-          // ),
-          // ClassroomTile(
-          //   title: "Statistiques et probabilite",
-          // ),
-          // ClassroomTile(
-          //   title: "Developpement web",
-          // ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(context,
-      //         MaterialPageRoute(builder: (_) => AddTeacherSubjectsScreen()));
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }

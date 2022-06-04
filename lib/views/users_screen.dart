@@ -28,7 +28,7 @@ class UsersScreen extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            const SizedBox(height: 16),
+            //const SizedBox(height: 8),
             const Padding(
               padding: EdgeInsets.all(10.0),
               child: Align(
@@ -44,7 +44,7 @@ class UsersScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            //const SizedBox(height: 8),
             Expanded(
               child: Obx(() {
                 if (userController.isLoading.value) {

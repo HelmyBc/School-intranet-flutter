@@ -54,24 +54,6 @@ class ClassroomStudentScreen extends StatelessWidget {
             ],
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.start,
-        //     children: const [
-        //       Expanded(
-        //         child: Text(
-        //           "My class subjects",
-        //           style: TextStyle(
-        //             color: Colors.black,
-        //             fontSize: 20.0,
-        //             fontWeight: FontWeight.bold,
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
         Obx(() {
           if (userController.isLoading.value) {
             return const Center(child: CircularProgressIndicator());

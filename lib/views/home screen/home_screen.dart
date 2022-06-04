@@ -6,6 +6,7 @@ import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:enetcom_app/views/admin_views/widgets/post_shimmer.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/shimmer_feature.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/student_category_list.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/teacher_category_list.dart';
@@ -27,8 +28,8 @@ class HomeScreen extends StatelessWidget {
   bool _isLoading = true;
   @override
   Widget build(BuildContext context) {
-    print(userController.currentUserType.value);
     userController.getCurrentUser();
+    featureController.fetchFeatures();
     if ((featureController.featureList != null ||
             featureController.featureList != []) &&
         userController.isLoading.value == false) {
@@ -131,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                       } else if (_c.featureList.isNotEmpty) {
                         return FeatureCarousel();
                       }
-                      return Container();
+                      return const CarouselLoading();
                     },
                   ),
                 ),
@@ -164,7 +165,8 @@ class HomeScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const ScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            final Post post = postController.postList.reversed.toList()[index];
+                            final Post post = postController.postList.reversed
+                                .toList()[index];
                             return NewPostContainer(post: post);
                           },
                           itemCount: postController.postList.length,

@@ -5,6 +5,7 @@ import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:enetcom_app/views/admin_views/widgets/post_shimmer.dart';
 import 'package:enetcom_app/views/for_students/student_root_app.dart';
+import 'package:enetcom_app/views/home%20screen/widgets/empty_content.dart';
 import 'package:enetcom_app/views/widgets/shimmer_widget.dart';
 import 'package:enetcom_app/views/widgets/user_profile_info_tile.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,14 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               icon: const Icon(Icons.arrow_back),
               iconSize: 30.0,
               color: Colors.black,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => userController.currentUserTypeInt.value == 1
-                      ? const TeacherRootApp()
-                      : const StudentRootApp(),
-                ),
-              ),
+              onPressed: () => Navigator.pop(context),
             ),
           ),
           elevation: 0,
@@ -127,19 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 14.0),
                 child: Text(
-                  "Create a post",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ),
-              CreatePostContainer(imageUrl: widget.selectedUser.imageUrl),
-              const SizedBox(height: 10),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0, left: 14.0),
-                child: Text(
-                  "My posts",
+                  "Posts",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
@@ -156,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       physics: const ScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         final Post post =
-                            postController.postList.reversed.toList()[index];
+                            userController.selectedUserPosts.reversed.toList()[index];
                         return NewPostContainer(post: post);
                       },
                       itemCount: userController.selectedUserPosts.length,
@@ -164,6 +146,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                 },
               ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.93,
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Center(
+                  child: Column(
+                    children: const [
+                      Image(
+                          image:
+                              ExactAssetImage("assets/images/empty_folder.png"),
+                          //height: 60.0,
+                          width: 200.0,
+                          alignment: FractionalOffset.center),
+                      SizedBox(height: 15.0),
+                      Text(
+                        "No posts yet or no more posts.",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 70.0),
             ],
           ),
         ),

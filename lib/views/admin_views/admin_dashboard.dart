@@ -197,7 +197,8 @@ class AdminDashboard extends StatelessWidget {
                         physics: const ScrollPhysics(),
                         //controller: controller,
                         itemBuilder: (BuildContext context, int index) {
-                          final Post post = postController.postList[index];
+                          final Post post =
+                              postController.postList.reversed.toList()[index];
                           return NewPostContainer(post: post);
                         },
                         itemCount: postController.postList.length,
@@ -253,8 +254,9 @@ class AdminDashboard extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const ScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
-                        final Feature feature =
-                            featureController.featureList[index];
+                        final Feature feature = featureController
+                            .featureList.reversed
+                            .toList()[index];
                         return FeatureContainer(feature: feature);
                       },
                       itemCount: featureController.featureList.length,
@@ -266,55 +268,6 @@ class AdminDashboard extends StatelessWidget {
             ]),
           ),
         ]),
-        // body: RefreshIndicator(
-        //   onRefresh: () async => loadData(),
-        //   child: ListView(
-        //     children: [
-        //       Column(
-        //         children: [
-        //           const SizedBox(height: 10.0),
-        //           //_buildRegionTabBar(),
-        //           const SizedBox(height: 10.0),
-        //           Container(
-        //             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        //             child: AdminGrid(),
-        //           ),
-        //           Container(
-        //             padding: const EdgeInsets.symmetric(
-        //                 vertical: 10.0, horizontal: 20.0),
-        //             child: const Text(
-        //               "View/Delete Posts",
-        //               style: TextStyle(
-        //                 fontWeight: FontWeight.bold,
-        //                 color: Colors.black,
-        //                 fontSize: 20.0,
-        //               ),
-        //             ),
-        //           ),
-        //           Obx(
-        //             () {
-        //               if (postController.isLoading.value) {
-        //                 return const Center(child: CircularProgressIndicator());
-        //               } else {
-        //                 return ListView.builder(
-        //                   shrinkWrap: true,
-        //                   physics: const ScrollPhysics(),
-        //                   //controller: controller,
-        //                   itemBuilder: (BuildContext context, int index) {
-        //                     final Post post = postController.postList[index];
-        //                     return NewPostContainer(post: post);
-        //                   },
-        //                   itemCount: postController.postList.length,
-        //                 );
-        //               }
-        //             },
-        //           ),
-        //           const SizedBox(height: 20),
-        //         ],
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

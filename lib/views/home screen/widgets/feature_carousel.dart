@@ -31,10 +31,6 @@ class _FeatureCarouselState extends State<FeatureCarousel> {
                 ),
                 fit: BoxFit.cover,
               ),
-              // Image.network(
-              //   feature.imageUrl,
-              //   fit: BoxFit.cover,
-              // ),
               borderRadius: BorderRadius.circular(15.0)),
         )
         .toList();

@@ -24,12 +24,6 @@ class NewPostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // User postOwner;
-
-    // Future<User> setPostOwner() async {
-    //   User postOwner = await HttpUserService.getUser(post.uid);
-    //   return postOwner;
-    // }
 
     return Container(
       margin: const EdgeInsets.all(10.0),
@@ -178,7 +172,6 @@ class _PostHeader extends StatelessWidget {
                       builder: (context) => EditPostScreen(post: post)));
             },
           ),
-          // : null as CupertinoActionSheet,
           CupertinoActionSheetAction(
             child: const Text('delete post'),
             onPressed: () {
