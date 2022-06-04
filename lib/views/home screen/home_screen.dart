@@ -6,7 +6,6 @@ import 'package:enetcom_app/models/post.dart';
 import 'package:enetcom_app/views/admin_views/widgets/new_post_container.dart';
 import 'package:enetcom_app/views/admin_views/widgets/post_shimmer.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/carousel_loading.dart';
-import 'package:enetcom_app/views/home%20screen/widgets/shimmer_feature.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/student_category_list.dart';
 import 'package:enetcom_app/views/login_screen.dart';
 import 'package:enetcom_app/views/home%20screen/widgets/teacher_category_list.dart';
